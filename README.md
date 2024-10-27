@@ -10,7 +10,7 @@ https://github.com/sfxcode/nuxt3-primevue-starter
 - Stored in repository at Github
 - Build and Deployed at Netlify
 - App server accesses data from mysql database 'buffalorugby' at Dreamhost ISP
-- App uploads and stores images at 'media.buffalorugby.org' at Dreamhost
+- App uploads and retrieves images from 'media.buffalorugby.org' at Dreamhost
 
 # Project setup and usage
 
@@ -38,18 +38,18 @@ yarn dev
 
 ## Use VSCode github feature to commit/push to repository
 
-- github repository "rastridge/newnuxt312"
+- github repository "rastridge/newnuxt3132"
 
 ## Change to the repository triggers Netlify build
 
 Netlify site "buffalorugby"
 
-- site sourced from github repository "rastridge/newnuxt312"
+- site sourced from github repository "rastridge/newnuxt3132"
 - All ENV variables must be registered
 - All redirects from old website URLs handled by \_redirect file
-- Dreamhost buffalorugby is DNS only - No web hosting
+- Dreamhost buffalorugby.org is DNS only - No web hosting
 - Set up Netlify custom external domain for site 'buffalorugby.org' via Dreamhost
-- while maintaining ssh and email and 'media.buffalorugby.org' on domain buffalorugby.org at Dreamhost
+- Maintain ssh and email and 'media.buffalorugby.org' on domain buffalorugby.org at Dreamhost
 
 ```
 https://superchlorine.com/2021/01/how-to-set-up-netify-custom-domain-via-dreamhost/
@@ -89,7 +89,7 @@ Setup
 DANGER - all images are stored in 'public' - DO NOT OVERWRITE
 
 - Upload js server '~/Code/brc.org.nuxt3/nuxt3-brc-media-api' to dreamhost
-- enable Proxy server on media.buffalorugby.org
+- Enable Proxy server on media.buffalorugby.org
 
 ```
 alias shell='ssh rastridge@vps30249.dreamhostps.com'
@@ -104,3 +104,5 @@ pm2 ecosystem.config.js
 ```
 
 - cronjob to restart servers using 'pm2 resurrect'
+
+- for some reason permissions on public folder go bad "Access forbidden" and Dreamhost support needs to fix them.
