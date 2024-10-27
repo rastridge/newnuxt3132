@@ -40,16 +40,26 @@ yarn dev
 
 - github repository "rastridge/newnuxt3132"
 
+```
+https://github.com/rastridge/newnuxt3132
+```
+
 ## Change to the repository triggers Netlify build
 
 Netlify site "buffalorugby"
+
+- Paid service
+
+```
+https://app.netlify.com/teams/rastridge/sites
+```
 
 - site sourced from github repository "rastridge/newnuxt3132"
 - All ENV variables must be registered
 - All redirects from old website URLs handled by \_redirect file
 - Dreamhost buffalorugby.org is DNS only - No web hosting
 - Set up Netlify custom external domain for site 'buffalorugby.org' via Dreamhost
-- Maintain ssh and email and 'media.buffalorugby.org' on domain buffalorugby.org at Dreamhost
+- Maintain DNS for email and media subdomain for buffalorugby.org at Dreamhost Domain configuration
 
 ```
 https://superchlorine.com/2021/01/how-to-set-up-netify-custom-domain-via-dreamhost/
