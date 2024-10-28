@@ -11,7 +11,7 @@
       <div class="topsectionitem mb-2">
         <Card>
           <template #content>
-            <h5>Paypal</h5>
+            <h5>Buffalo Rugby Alumni Fund Paypal</h5>
             <form
               action="https://www.paypal.com/donate"
               method="post"
