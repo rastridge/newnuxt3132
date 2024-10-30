@@ -12,6 +12,9 @@
         <Card>
           <template #content>
             <h5>Buffalo Rugby Alumni Fund Paypal</h5>
+
+            <!-- <div id="paypal-container-NAXW32K2UMGBG"></div> -->
+
             <form
               action="https://www.paypal.com/donate"
               method="post"
@@ -247,6 +250,21 @@
 </template>
 
 <script setup>
+  /*   useHead({
+    scripts: [
+      {
+        src: 'https://www.paypal.com/sdk/js?client-id=BAA05u52gdduz3li2kQXGAKs0fy2sGXql6ypVAAmMU1ELe_4g-w_QIZC1abqCTBJdYOPwmEoyIbxWyj9NY&components=hosted-buttons&enable-funding=venmo&currency=USD',
+        defer: true,
+      },
+    ],
+  }) */
+
+  /*
+paypal.HostedButtons({
+    hostedButtonId: "NAXW32K2UMGBG",
+  }).render("#paypal-container-NAXW32K2UMGBG")
+*/
+
   const { $dayjs } = useNuxtApp()
   const number = ref(0)
   const total = ref(0)
