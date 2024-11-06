@@ -6,9 +6,6 @@
   //
   const route = useRoute()
   const id = route.params.id
-  //if(id.length() <=4 ) {'attempting to pass actual account_id'}
-  // account_id follows the 'I'
-  const account_id = ref(id.substring(id.lastIndexOf('I') + 1, id.length))
 
   //
   // Update Account form action
@@ -29,7 +26,7 @@
     </Head>
     <common-header title="Update Membership" />
     <register-update-form
-      :id="account_id"
+      :id="id"
       @submitted="onSubmit"
     />
   </div>

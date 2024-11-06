@@ -102,6 +102,7 @@
 
 <script setup>
   import { getNode } from '@formkit/core'
+  import { navigateTo } from 'nuxt/app'
   const { getCountries, setRegions } = useLocations()
   const saving = ref(false)
   const state = ref(null)
@@ -120,24 +121,27 @@
   //
   // Initialize Edit form
   //
-  const { data: formdata } = await useFetch(
-    `/accounts/getupdateinfo${props.id}`,
-    {
-      key: props.id,
-      method: 'get',
-    },
-  )
-  state.value = formdata.value
-  //
-  // create coutry and region options formatted for Formkit
-  const justCountries = ref(getCountries())
-  // justCountries.value = getCountries()
+  if (props.id.length < 16) {
+    navigateTo('/')
+  } else {
+    const { data: formdata } = await useFetch(
+      `/accounts/getupdateinfo/${props.id}`,
+      {
+        key: props.id,
+        method: 'get',
+      },
+    )
+    state.value = formdata.value
+    //
+    // create coutry and region options formatted for Formkit
+    const justCountries = ref(getCountries())
+    // justCountries.value = getCountries()
 
-  const justRegions = ref(setRegions(state.value.account_addr_country))
-  // set regions for initial country
-  // justRegions.value = setRegions(state.value.account_addr_country)
+    const justRegions = ref(setRegions(state.value.account_addr_country))
+    // set regions for initial country
+    // justRegions.value = setRegions(state.value.account_addr_country)
 
-  /* 	//
+    /* 	//
 	// progress modal
 	//
 	const displayModal = ref(true)
@@ -148,25 +152,26 @@
 		displayModal.value = false
 	} */
 
-  //
-  // form handlers
-  //
-  const submitForm = (state) => {
-    saving.value = true
-    emit('submitted', state)
-  }
+    //
+    // form handlers
+    //
+    const submitForm = (state) => {
+      saving.value = true
+      emit('submitted', state)
+    }
 
-  // FormKit stuff
-  // Region depends on country
-  onMounted(() => {
-    // Use the IDs of the inputs you want to get
-    const countryNode = getNode('account_addr_country')
-    // const stateNode = getNode('account_addr_state')
+    // FormKit stuff
+    // Region depends on country
+    onMounted(() => {
+      // Use the IDs of the inputs you want to get
+      const countryNode = getNode('account_addr_country')
+      // const stateNode = getNode('account_addr_state')
 
-    // Here we are listening for the 'commit' event
-    countryNode.on('commit', ({ payload }) => {
-      // We update the value of the regions
-      justRegions.value = setRegions(payload)
+      // Here we are listening for the 'commit' event
+      countryNode.on('commit', ({ payload }) => {
+        // We update the value of the regions
+        justRegions.value = setRegions(payload)
+      })
     })
-  })
+  }
 </script>
