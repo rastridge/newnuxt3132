@@ -10,6 +10,11 @@
     <div
       class="my-simple-card-style flex flex-column md:flex-row flex-wrap align-items-center md:align-items-start justify-content-center"
     >
+      <nuxt-link
+        to="https://www.paypal.com/donate/?hosted_button_id=A5QYZFLSHHK5E"
+        >Paypal</nuxt-link
+      >
+
       <Card
         v-for="item in payments"
         :key="item.id"

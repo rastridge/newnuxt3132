@@ -1,9 +1,9 @@
 import { accountsService } from '~/server/services/accountsService'
 
 export default defineEventHandler(async (event) => {
-  if (okProtectedEndpoint(event)) {
-    const body = await readBody(event)
-    return accountsService.editOne(body)
+  const id = event.context.params.id
+  if (id.length() < 3) {
+    return accountsService.getOne(id)
   } else {
     return 'restricted'
   }

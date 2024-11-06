@@ -1,12 +1,13 @@
 <script setup>
   import { useAlertStore } from '~/stores/alertStore'
   const alert = useAlertStore()
-  const { onSubmitEdit } = useSubmit()
+  const { onSubmitUpdate } = useSubmit()
   //
   //
   const route = useRoute()
   const id = route.params.id
-  // account_id follows the digit 4
+  //if(id.length() <=4 ) {'attempting to pass actual account_id'}
+  // account_id follows the 'I'
   const account_id = ref(id.substring(id.lastIndexOf('I') + 1, id.length))
 
   //
@@ -14,7 +15,7 @@
   //
   const onSubmit = async function (form_state) {
     alert.clear()
-    await onSubmitEdit('accounts', form_state)
+    await onSubmitUpdate('accounts', form_state)
     if (alert.message === null) {
       navigateTo(`/update/thankyou`)
     }
