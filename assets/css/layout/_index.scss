@@ -1,4 +1,4 @@
-@import 'main';
-@import 'myquill';
-@import './primevue/myprimeflex';
-@import '../formkit/myformkit';
+@use 'main';
+@use 'myquill';
+@use 'primevue/myprimeflex';
+@use '../formkit/myformkit';
