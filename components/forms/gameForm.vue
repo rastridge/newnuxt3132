@@ -144,7 +144,7 @@
   <div class="my-form-style">
     <div
       v-if="
-        edit_form ||
+        !edit_form ||
         (edit_form && $dayjs().isBefore($dayjs.unix(state.date_ut)))
       "
     >
