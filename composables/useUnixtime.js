@@ -15,10 +15,7 @@ export default function useUnixtime() {
   }
 
   // const formatUnixDate = (ut) => dayjs.unix(ut).format('ddd MMMM D YYYY')
-  const formatUnixDate = (ut) => {
-    const d = dayjs.unix(ut).format('ddd MMM D, YYYY')
-    return d
-  }
+  const formatUnixDate = (ut) => dayjs.unix(ut).format('ddd MMM D, YYYY')
 
   // const formatUnixTime = async (ut) => dayjs.unix(ut).format('h:mm A')
   const formatUnixTime = (ut) => dayjs.unix(ut).format('h:mm A')
