@@ -110,7 +110,7 @@
       <FormKit
         label="Comment"
         name="comment"
-        type="text"
+        type="textarea"
       />
       <!-- occasion input-->
       <FormKit
@@ -338,6 +338,7 @@
   const auth = useAuthStore()
   const { $dayjs } = useNuxtApp()
   const saving = ref(false)
+  const { convertToFormkitDate, convertToFormkitTime } = useUnixtime()
 
   //
   // Outgoing
@@ -472,8 +473,12 @@
     state.value = game.value
     // convert date and time from unix time for FormKit inputs
     // for a day when date / time fields are dropped from the DB
-    state.value.date = $dayjs.unix(state.value.date_ut).format('YYYY-MM-DD')
-    state.value.time = $dayjs.unix(state.value.date_ut).format('HH:mm')
+
+    /*  state.value.date = $dayjs.unix(state.value.date_ut).format('YYYY-MM-DD')
+    state.value.time = $dayjs.unix(state.value.date_ut).format('HH:mm') */
+
+    state.value.date = convertToFormkitDate(state.value.date_ut)
+    state.value.time = convertToFormkitTime(state.value.date_ut)
 
     // needs to be carried over because its not used in the form
     state.value.opponent_id = game.value.opponent_id
@@ -520,8 +525,12 @@
     state.value.venue = 'Delaware Park'
     state.value.comment = ''
     state.value.date_ut = $dayjs().unix()
+    state.value.date = convertToFormkitDate($dayjs().unix())
+    state.value.time = convertToFormkitTime($dayjs().unix())
+    /*
     state.value.date = $dayjs().format('YYYY-MM-DD')
     state.value.time = $dayjs().format('13:00')
+    */
     state.value.occasion = ''
     state.value.ptsFor = ''
     state.value.ptsAgn = ''
@@ -582,7 +591,7 @@
     data.value.map((old) => {
       const n = {}
       n.label =
-        $dayjs.unix(old.date_ut).format('YYYY-MM-DD') +
+        convertToFormkitDate(old.date_ut) +
         ' - ' +
         old.opponent_name +
         ' Game level ' +

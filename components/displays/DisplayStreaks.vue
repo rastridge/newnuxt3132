@@ -3,11 +3,6 @@
     <p class="my-text-style mt-1">Streaks</p>
     <table class="nowrap">
       <tbody>
-        <tr>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
         <tr
           v-for="item in historystreaks"
           :key="item.StartDate"
@@ -15,8 +10,11 @@
           <td>{{ item.result }}</td>
           <td>{{ item.Games }}</td>
           <td>
-            {{ $dayjs.unix(item.StartDate).format('MMM D YYYY') }} ->
-            {{ $dayjs.unix(item.EndDate).format('MMM D YYYY') }}
+            {{ formatUnixDate(item.StartDate) }} ->
+            {{ formatUnixDate(item.EndDate) }}
+
+            <!-- {{ $dayjs.unix(item.StartDate).format('MMM D YYYY') }} ->
+            {{ $dayjs.unix(item.EndDate).format('MMM D YYYY') }} -->
           </td>
         </tr>
       </tbody>
@@ -26,6 +24,9 @@
 
 <script setup>
   const historystreaks = ref({})
+
+  const { formatUnixDate } = useUnixtime()
+
   const props = defineProps({
     opponent_id: { type: Number, required: true },
   })

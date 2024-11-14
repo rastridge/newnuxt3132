@@ -64,7 +64,10 @@
               header="Date"
             >
               <template #body="slotProps">
-                {{ $dayjs.unix(slotProps.data.date_ut).format('YYYY M D') }}
+                {{ formatUnixDate(slotProps.data.date_ut) }}
+
+                <!--                 {{ $dayjs.unix(slotProps.data.date_ut).format('YYYY M D') }}
+ -->
               </template>
             </Column>
           </div>
@@ -144,6 +147,8 @@
   import { usePlacemarkStore } from '~/stores/placemarkStore'
   const placemark = usePlacemarkStore()
   const { $dayjs } = useNuxtApp()
+  const { formatUnixDate } = useUnixtime()
+
   //
   // Incoming
   //

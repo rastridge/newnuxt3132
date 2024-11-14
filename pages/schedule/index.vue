@@ -43,13 +43,28 @@
                     <span
                       class="text-sm md:text-md lg:text-lg font-bold text-white"
                     >
-                      {{ $dayjs.unix(item.date_ut).format('ddd MMMM D YYYY')
-                      }}<br />
+                      {{ formatUnixDate(item.date_ut) }}
+                      <br />
+                      {{ formatUnixTime(item.date_ut) }}
+
+                      ET
+                    </span>
+                    <br />
+                  </div>
+
+                  <!--  <div class="flex align-items-end border-soli">
+                    <span
+                      class="text-sm md:text-md lg:text-lg font-bold text-white"
+                    >
+                      {{ $dayjs.unix(item.date_ut).format('ddd MMMM D YYYY') }}
+
+                      <br />
                       {{ $dayjs.unix(item.date_ut).format('h:mm A') }}
+
                       EDT
                       <br />
                     </span>
-                  </div>
+                  </div> -->
 
                   <div class="flex align-items-center border-soli">
                     <span class="font-semibold"
@@ -185,6 +200,10 @@
   const { $dayjs } = useNuxtApp()
   const placemark = usePlacemarkStore()
   const { getGameLevelCode, getResultCode } = useGames()
+  const { formatUnixDate, formatUnixTime } = useUnixtime()
+
+  // const d = ref(formatUnixDate(filteredData.value[0].date_ut))
+  // const d = ref('hello')
   // Initialize year select
   //
   const startyear = 1966
