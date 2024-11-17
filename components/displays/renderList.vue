@@ -65,9 +65,6 @@
             >
               <template #body="slotProps">
                 {{ formatUnixDate(slotProps.data.date_ut) }}
-
-                <!--                 {{ $dayjs.unix(slotProps.data.date_ut).format('YYYY M D') }}
- -->
               </template>
             </Column>
           </div>

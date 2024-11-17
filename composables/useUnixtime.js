@@ -14,16 +14,12 @@ export default function useUnixtime() {
     return dt
   }
 
-  // const formatUnixDate = (ut) => dayjs.unix(ut).format('ddd MMMM D YYYY')
   const formatUnixDate = (ut) => dayjs.unix(ut).format('ddd MMM D, YYYY')
 
-  // const formatUnixTime = async (ut) => dayjs.unix(ut).format('h:mm A')
   const formatUnixTime = (ut) => dayjs.unix(ut).format('h:mm A')
 
-  // const formatUnixDate = (ut) => dayjs.unix(ut).format('ddd MMMM D YYYY')
   const convertToFormkitDate = (ut) => dayjs.unix(ut).format('YYYY-MM-DD')
 
-  // const formatUnixTime = async (ut) => dayjs.unix(ut).format('h:mm A')
   const convertToFormkitTime = (ut) => dayjs.unix(ut).format('HH:mm')
 
   return {

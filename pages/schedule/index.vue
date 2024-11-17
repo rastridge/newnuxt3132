@@ -52,20 +52,6 @@
                     <br />
                   </div>
 
-                  <!--  <div class="flex align-items-end border-soli">
-                    <span
-                      class="text-sm md:text-md lg:text-lg font-bold text-white"
-                    >
-                      {{ $dayjs.unix(item.date_ut).format('ddd MMMM D YYYY') }}
-
-                      <br />
-                      {{ $dayjs.unix(item.date_ut).format('h:mm A') }}
-
-                      EDT
-                      <br />
-                    </span>
-                  </div> -->
-
                   <div class="flex align-items-center border-soli">
                     <span class="font-semibold"
                       >{{ getGameLevelCode(item) }} Side
@@ -227,7 +213,6 @@
 
     // date and time from unix time
     // data.value.date_ut
-    data.value.combined = $dayjs.unix(data.value.date_ut)
     return data.value
   }
 

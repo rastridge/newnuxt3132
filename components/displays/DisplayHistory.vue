@@ -13,8 +13,6 @@
           >
             <td>
               {{ formatUnixDate(item.date_ut) }}
-              <!--               {{ $dayjs.unix(item.date_ut).format('ddd MMM D YYYY') }}
- -->
             </td>
             <td>
               {{ getGameLevelCode(item) }}

@@ -9,15 +9,10 @@
             <tr v-if="stats1">
               <td>
                 {{ formatUnixDate(stats1.date_ut) }}
-                <!-- 								{{ $dayjs.unix(stats1.date_ut).format('ddd, MMM D') }}
- -->
-
                 &nbsp;&nbsp;&nbsp;{{ stats1.venue }}
               </td>
 
               <td v-if="direction !== 'Last'">
-                <!--                 {{ $dayjs.unix(stats1.date_ut).format('h:mm a') }}
- -->
                 {{ formatUnixTime(stats1.date_ut) }}
               </td>
             </tr>
@@ -36,16 +31,12 @@
 
             <tr v-if="stats2">
               <td>
-                <!--                 {{ $dayjs.unix(stats2.date_ut).format('ddd, MMM D') }}
- -->
                 {{ formatUnixDate(stats2.date_ut) }}
 
                 &nbsp;&nbsp;&nbsp;{{ stats2.venue }}
               </td>
 
               <td v-if="direction !== 'Last'">
-                <!--                 {{ $dayjs.unix(stats2.date_ut).format('h:mm a') }}
- -->
                 {{ formatUnixTime(stats2.date_ut) }}
               </td>
             </tr>

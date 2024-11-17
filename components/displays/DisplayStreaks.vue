@@ -12,9 +12,6 @@
           <td>
             {{ formatUnixDate(item.StartDate) }} ->
             {{ formatUnixDate(item.EndDate) }}
-
-            <!-- {{ $dayjs.unix(item.StartDate).format('MMM D YYYY') }} ->
-            {{ $dayjs.unix(item.EndDate).format('MMM D YYYY') }} -->
           </td>
         </tr>
       </tbody>

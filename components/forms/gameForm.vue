@@ -474,9 +474,6 @@
     // convert date and time from unix time for FormKit inputs
     // for a day when date / time fields are dropped from the DB
 
-    /*  state.value.date = $dayjs.unix(state.value.date_ut).format('YYYY-MM-DD')
-    state.value.time = $dayjs.unix(state.value.date_ut).format('HH:mm') */
-
     state.value.date = convertToFormkitDate(state.value.date_ut)
     state.value.time = convertToFormkitTime(state.value.date_ut)
 
