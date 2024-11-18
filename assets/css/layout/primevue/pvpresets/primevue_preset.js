@@ -1,14 +1,15 @@
 const pvPreset = {
   dropdown: {
     root: {
-      class: 'shadow-2 md:shadow-4 m-1 p-1 border-1 border-round-lg',
+      class:
+        'shadow-2 md:shadow-4 m-1 p-2 border-1 border-round-lg surface-400',
     },
+    input: { class: 'text-lg md:text-2xl lg:text-3xl font-semibold' },
     item: { class: 'text-sm md:text-lg  font-semibold' },
-    input: { class: 'text-sm md:text-lg  font-semibold' },
   },
   listbox: {
     root: {
-      class: 'shadow-4 m-1 p-1 border-1 border-round-lg',
+      class: 'shadow-4 m-1 p-1 border-1 border-round-lg surface-400',
     },
     item: { class: 'text-sm md:text-lg  font-semibold' },
     input: { class: 'text-sm md:text-lg  font-semibold' },
@@ -82,7 +83,7 @@ const pvPreset = {
     root: {
       style: {
         'background-color': '#transparent',
-        'border-radius': '10px',
+        'border-radius': '25px',
       },
     },
     menu: {
@@ -100,7 +101,7 @@ const pvPreset = {
       style: {
         'background-color': '#transparent',
       },
-      class: 'text-xs md:text-sm lg:text-base p-1',
+      class: 'text-xs md:text-sm lg:text-base p-2',
     },
   },
 }
