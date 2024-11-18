@@ -12,7 +12,7 @@
       <div class="topsectionitem">
         <select-season
           :startyear="startyear"
-          :currentyear="season"
+          :currentyear="season_year"
           class="mb-3"
           @submitted="onSubmit"
         />
@@ -127,16 +127,18 @@
       <template #header>
         <div>
           <span class="text-lg font-semibold"
-            >{{ info.opponent_name }} -
+            >{{ game_info.opponent_name }} -
             {{
-              $dayjs.unix(info.date_ut).format('MMMM DD, YYYY @ ddd h:mm A')
+              $dayjs
+                .unix(game_info.date_ut)
+                .format('MMMM DD, YYYY @ ddd h:mm A')
             }}</span
           >
           <h6 class="m-2 text-xl" />
         </div>
       </template>
       <div class="m-1 p-1 text-sm">
-        <display-game-info :item="info" />
+        <display-game-info :item="game_info" />
         <display-roster :players="players" />
       </div>
       <template #footer>
@@ -188,19 +190,21 @@
   const { getGameLevelCode, getResultCode } = useGames()
   const { formatUnixDate, formatUnixTime } = useUnixtime()
 
-  // const d = ref(formatUnixDate(filteredData.value[0].date_ut))
-  // const d = ref('hello')
   // Initialize year select
   //
   const startyear = 1966
-  // set to season by year
+
+  // set to season_year determined by currrent date
+  //
   placemark.initSeason()
-  const season = ref(placemark.getSeason)
-  // getSeason games
+  const season_year = ref(placemark.getSeasonYear)
+
+  //
+  // getSeasonGames
   //
   const games = ref([])
-  const getSeason = async (season) => {
-    const url = `/game_player_stats/getseason/${season}`
+  const getSeasonGames = async (season_year) => {
+    const url = `/game_player_stats/getseason/${season_year}`
     const { data, error } = await useFetch(url, {
       method: 'get',
     })
@@ -210,15 +214,20 @@
         statusMessage: `Could not get data from ${url}`,
       })
     }
-
-    // date and time from unix time
-    // data.value.date_ut
     return data.value
   }
 
   // initial games
   //
-  games.value = await getSeason(season.value)
+  games.value = await getSeasonGames(season_year.value)
+
+  // get season_year from dropdown
+  // get games for that season
+  //
+  const onSubmit = async (s) => {
+    season_year.value = s
+    games.value = await getSeasonGames(s)
+  }
 
   // set gametype after drop down choice
   //
@@ -227,14 +236,7 @@
     gametype.value = value
   }
 
-  // get season from dropdown
-  //
-  const onSubmit = async (s) => {
-    season.value = s
-    games.value = await getSeason(s)
-  }
-
-  // filter by game type
+  // filter season games by game type
   //
   const filteredData = computed(() => {
     return games.value.filter((d) => {
@@ -246,11 +248,14 @@
     })
   })
 
-  // game info modal
   //
-  const info = ref(null)
+  //
+  // game info Modal
+  //
+
   const players = ref(null)
-  const getPlayers = async (game_id) => {
+
+  const getThePlayers = async (game_id) => {
     const url = `/game_player_stats/players/${game_id}`
     const { data, error } = await useFetch(url, {
       method: 'get',
@@ -265,15 +270,19 @@
     }
   }
 
-  const getOne = async (id) => {
+  const game_info = ref(null)
+
+  const getTheInfo = async (id) => {
     const url = `/game_player_stats/${id}`
     const { data } = await useFetch(url, {
       method: 'get',
     })
 
-    info.value = data.value
+    game_info.value = data.value
   }
+
   const displayGameModal = ref(false)
+
   const openModal = () => {
     displayGameModal.value = true
   }
@@ -281,14 +290,15 @@
     displayGameModal.value = false
   }
   const showGame = async (id) => {
-    await getOne(id)
-    await getPlayers(id)
+    await getTheInfo(id)
+    await getThePlayers(id)
     openModal()
   }
   //
-  // history modal
   //
-  const opponent_id = ref(null)
+  // history Modal
+  //
+  const opponent_id = ref('')
   const displayHistoryModal = ref(false)
 
   const openHistoryModal = () => {
