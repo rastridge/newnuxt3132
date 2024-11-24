@@ -35,5 +35,5 @@
 </script>
 
 <style lang="scss">
-  @use '~/assets/css/layout';
+  @use '~/assets/css';
 </style>

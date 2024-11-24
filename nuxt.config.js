@@ -48,7 +48,7 @@ export default defineNuxtConfig({
 
   primevue: {
     importPT: {
-      from: './assets/css/layout/primevue/pvpresets/primevue_preset.js',
+      from: './assets/css/primevue/pvpresets/primevue_preset.js',
     },
   },
 
