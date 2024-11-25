@@ -1037,7 +1037,7 @@ async function getSuggestions() {
 }
 
 async function getMemberTypes() {
-  const sql = `SELECT * FROM inbrc_member_types WHERE 1`
+  const sql = `SELECT * FROM inbrc_member_types WHERE 1 ORDER BY member_type`
   const membertypes = await doDBQueryBuffalorugby(sql)
   return membertypes
 }

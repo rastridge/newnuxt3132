@@ -268,7 +268,7 @@
   state.value.account_addr_country = 'US'
   state.value.member_show_addr = '1'
   state.value.member_type_id = '2'
-  state.value.member_type2_id = '0'
+  state.value.member_type2_id = '14'
   state.value.member_admin_type_id = '0'
   state.value.member_admin_type2_id = '0'
   state.value.member_prev_club = 'None'
