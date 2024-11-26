@@ -131,7 +131,6 @@
           { label: 'No', value: 0 },
         ]"
       />
-      state
       <!--  <pre>{{ state }}</pre>
       <br />
       local_state
