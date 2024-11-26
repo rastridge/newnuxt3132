@@ -2,7 +2,7 @@
   <div class="my-form-style">
     <display-alert />
     <FormKit
-      v-model="state"
+      v-model="local_state"
       type="form"
       :config="{ validationVisibility: 'live' }"
       submit-label="Submit member"
@@ -76,12 +76,11 @@
         validation="required"
       />
       <input-telephone
-        :tnumber="state.account_addr_phone"
-        @update="(t) => (state.account_addr_phone = t.value)"
+        :tnumber="local_state.account_addr_phone"
+        @update="(t) => (local_state.account_addr_phone = t.value)"
       />
 
       <FormKit
-        v-model="state.member_prev_club"
         type="text"
         label="Previous Club(s)"
         name="member_prev_club"
@@ -132,6 +131,11 @@
           { label: 'No', value: 0 },
         ]"
       />
+      state
+      <!--  <pre>{{ state }}</pre>
+      <br />
+      local_state
+      <pre>{{ local_state }}</pre> -->
       <FormKit
         type="select"
         label="Member type"
@@ -189,15 +193,15 @@
         />
         <!-- show image file  -->
         <div
-          v-if="state.member_pic_path"
+          v-if="local_state.member_pic_path"
           class="card flex justify-content-start mb-2"
         >
           <label
             >Current image filepath is<br />
-            {{ state.member_pic_path }}</label
+            {{ local_state.member_pic_path }}</label
           >
           <Image
-            :src="state.member_pic_path"
+            :src="local_state.member_pic_path"
             alt="Image"
             width="72"
           />
@@ -238,7 +242,7 @@
   import { useAlertStore } from '~/stores/alertStore'
   const auth = useAuthStore()
   const alert = useAlertStore()
-  const { $dayjs } = useNuxtApp()
+  // const { $dayjs } = useNuxtApp()
   const { getCountries, setRegions } = useLocations()
   const { getMemberAdminTypeOptions, getMemberTypeOptions } = useMembertypes()
   const saving = ref(false)
@@ -251,54 +255,36 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const local_state = ref({ ...props.state })
 
-  //
-  // initialize form for add
-  //
-  const state = ref({})
-  state.value.member_year = $dayjs().format('YYYY')
-  // state.value.account_addr_phone = '+1716'
-  state.value.account_addr_phone = null
-  state.value.member_show_phone = '1'
-  state.value.account_addr_state = 'NY'
-  state.value.account_addr_street_ext = ''
-  state.value.account_addr_country = 'US'
-  state.value.member_show_addr = '1'
-  state.value.member_type_id = '2'
-  state.value.member_type2_id = '14'
-  state.value.member_admin_type_id = '0'
-  state.value.member_admin_type2_id = '0'
-  state.value.member_prev_club = 'None'
-  state.value.newsletter_recipient = '1'
-  state.value.mail_recipient = '0'
-  state.value.sms_recipient = '1'
+  // const edit_form = props.id !== '0'
+  // const edit_form = false
 
   //
   // EDIT if there is an id - ADD if not
   //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data } = await useFetch(`/accounts/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-  }
+  // if (edit_form) {
+  //   //
+  //   // Initialize Edit form
+  //   //
+  //   const { data } = await useFetch(`/accounts/${props.id}`, {
+  //     key: props.id,
+  //     method: 'get',
+  //     headers: {
+  //       authorization: auth.user.token,
+  //     },
+  //   })
+  //   local_state.value = data.value
+  // }
 
   //
   // Formkit preparations
   //
   // create coutry and region options formatted for Formkit
   const justCountries = ref(getCountries())
-  const justRegions = ref(setRegions(state.value.account_addr_country))
+  const justRegions = ref(setRegions(local_state.value.account_addr_country))
   // get member types for options formatted for Formkit
   const memberAdminTypeOptions = await getMemberAdminTypeOptions()
   const memberTypeOptions = await getMemberTypeOptions()
@@ -365,7 +351,7 @@
       closeProgressModal()
       image.value = data.imageUrl
       // console.log('IN handle image.value = ', image.value)
-      state.value.member_pic_path = data.imageUrl
+      local_state.value.member_pic_path = data.imageUrl
     } else {
       alert.error(
         'Illegal dimensons ' +
@@ -380,8 +366,8 @@
   //
   // form handlers
   //
-  const submitForm = (state) => {
+  const submitForm = (local_state) => {
     saving.value = true
-    emit('submitted', state)
+    emit('submitted', { ...local_state })
   }
 </script>

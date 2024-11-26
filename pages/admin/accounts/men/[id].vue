@@ -1,5 +1,7 @@
 <script setup>
   import { useAlertStore } from '~/stores/alertStore'
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -11,6 +13,20 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // Initialize Edit form
+  //
+  const state = ref({})
+  const { data } = await useFetch(`/accounts/${id}`, {
+    key: id,
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+  state.value = data.value
+
   //
   // Accounts form action
   //
@@ -33,9 +49,16 @@
         <display-admin-header title="Edit Member Account" />
       </div>
       <accounts-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
+      <!--
+      <accounts-form
+        :id="id"
+        :state="state"
+        @submitted="onSubmit"
+      />
+ -->
     </div>
   </div>
 </template>
