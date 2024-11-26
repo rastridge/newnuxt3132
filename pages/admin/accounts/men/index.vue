@@ -47,6 +47,7 @@
         @deleteItem="deleteItem"
       />
     </div>
+
     <Dialog
       v-model:visible="visible"
       modal
