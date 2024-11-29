@@ -29,23 +29,41 @@
   //
   // initialize form for add
   //
-  const state = ref({})
-  state.value.member_year = $dayjs().format('YYYY')
-  state.value.account_addr_phone = '+1716'
-  // state.value.account_addr_phone = null
-  state.value.member_show_phone = '1'
-  state.value.account_addr_state = 'NY'
-  state.value.account_addr_street_ext = ''
-  state.value.account_addr_country = 'US'
-  state.value.member_show_addr = '1'
-  state.value.member_type_id = '2'
-  state.value.member_type2_id = '14'
-  state.value.member_admin_type_id = '0'
-  state.value.member_admin_type2_id = '0'
-  state.value.member_prev_club = 'None'
-  state.value.newsletter_recipient = '1'
-  state.value.mail_recipient = '0'
-  state.value.sms_recipient = '1'
+  // const state = ref({})
+  const state = {
+    member_year: $dayjs().format('YYYY'),
+    account_addr_phone: '+1716',
+    // account_addr_phone: null
+    member_show_phone: '1',
+    account_addr_state: 'NY',
+    account_addr_street_ext: '',
+    account_addr_country: 'US',
+    member_show_addr: '1',
+    member_type_id: '2',
+    member_type2_id: '14',
+    member_admin_type_id: '0',
+    member_admin_type2_id: '0',
+    member_prev_club: 'None',
+    newsletter_recipient: '1',
+    mail_recipient: '0',
+    sms_recipient: '1',
+  }
+  /*   state.value.member_year = $dayjs().format('YYYY')
+    state.value.account_addr_phone = '+1716'
+    // state.value.account_addr_phone = null
+    state.value.member_show_phone = '1'
+    state.value.account_addr_state = 'NY'
+    state.value.account_addr_street_ext = ''
+    state.value.account_addr_country = 'US'
+    state.value.member_show_addr = '1'
+    state.value.member_type_id = '2'
+    state.value.member_type2_id = '14'
+    state.value.member_admin_type_id = '0'
+    state.value.member_admin_type2_id = '0'
+    state.value.member_prev_club = 'None'
+    state.value.newsletter_recipient = '1'
+    state.value.mail_recipient = '0'
+    state.value.sms_recipient = '1' */
   //
   // Accounts form action
   //

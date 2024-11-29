@@ -1,6 +1,7 @@
 <template>
   <div class="my-form-style">
     <display-alert />
+    <!-- state = {{ state }} -->
     <FormKit
       v-model="local_state"
       type="form"

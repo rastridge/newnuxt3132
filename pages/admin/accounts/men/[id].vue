@@ -15,20 +15,20 @@
   const id = route.params.id
 
   //
-  // Initialize Edit form
+  // Initialize Edit form state
   //
-  const state = ref({})
-  const { data } = await useFetch(`/accounts/${id}`, {
+  // const state = ref({})
+  const { data: state } = await useFetch(`/accounts/${id}`, {
     key: id,
     method: 'get',
     headers: {
       authorization: auth.user.token,
     },
   })
-  state.value = data.value
+  // state.value = data.value
 
   //
-  // Accounts form action
+  // Accounts form submit action
   //
   const onSubmit = async function (form_state) {
     alert.clear()
@@ -44,6 +44,7 @@
     <Head>
       <Title>Edit Member Account</Title>
     </Head>
+    <!-- state = {{ state }} -->
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <display-admin-header title="Edit Member Account" />
@@ -52,13 +53,6 @@
         :state="state"
         @submitted="onSubmit"
       />
-      <!--
-      <accounts-form
-        :id="id"
-        :state="state"
-        @submitted="onSubmit"
-      />
- -->
     </div>
   </div>
 </template>
