@@ -219,16 +219,17 @@ async function sendNewsletter({
   )
   // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
-  const r = await sendNewsletters(
+  const success = await sendNewsletters(
     recipients,
     newsletter_subject,
     newsletter_body_html,
     newsletter_id,
   )
 
-  // log the email send
+  // log the email send only if sendNewsletters is "success"
   //
-  const sql2 = `UPDATE inbrc_newsletters
+  if (success) {
+    const sql2 = `UPDATE inbrc_newsletters
 								SET
 									newsletter_sent = NOW(),
 									newsletter_send = NOW(),
@@ -239,8 +240,9 @@ async function sendNewsletter({
 								WHERE
 									newsletter_id = ${newsletter_id}`
 
-  await doDBQueryBuffalorugby(sql2)
-  return r
+    await doDBQueryBuffalorugby(sql2)
+  }
+  return success
 }
 //
 //

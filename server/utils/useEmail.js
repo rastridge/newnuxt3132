@@ -1,5 +1,21 @@
+// NEW
+// https://stackoverflow.com/questions/6158933/how-is-an-http-post-request-made-in-node-js/71991867#71991867
+//see In Node.js 18
+
+// Make a post Request.
+/*     fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({ title: 'foo', body: 'bar', userId: 1 }),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+  })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch(error => {
+          console.log(error)
+      })
+ */
+
 import querystring from 'querystring'
-import https from 'https'
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
@@ -17,7 +33,6 @@ export default function useEmail() {
       newsletter_body_html,
       newsletter_subject,
     ) {
-      // console.log('recipient = ', recipient)
       // this should work if and when email works
       const TRACKING = `${HOSTING}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
       const TRACKINGPIXEL = `<img src="${TRACKING}" height="1" width="1"  />`
@@ -294,25 +309,24 @@ export default function useEmail() {
       return email
     }
 
-    let sentlist = []
     let email = ''
-
     let i = 0
+    let success = true
     do {
       email = await composeEmailHelper(
         recipientss[i],
         newsletter_body_html,
         newsletter_subject,
       )
-      await sendEmail(email.to, email.subject, email.message)
-      sentlist.push(email.to)
+      success = await sendEmail(email.to, email.subject, email.message)
       i++
-    } while (i < recipientss.length)
+    } while (i < recipientss.length && success)
 
-    return sentlist
+    return success
   }
 
   function sendEmail(to, subject, message) {
+    //data
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
       subject: subject,
@@ -323,36 +337,22 @@ export default function useEmail() {
       body_text: '',
       isTransactional: true,
     })
-
-    const post_options = {
-      hostname: 'api.elasticemail.com',
-      path: '/v2/email/send',
-      port: '443',
+    let success = true
+    fetch('https://api.elasticemail.com/v2/email/send', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': post_data.length,
-      },
-    }
-
-    let result = ''
-    const post_req = https.request(post_options, function (res) {
-      res.setEncoding('utf8')
-      res.on('data', function () {
-        // result = chunk
-        const { statusMessage } = res
-        // console.log(' statusMessage = ', statusMessage)
-        result = statusMessage
-      })
-      res.on('error', function (e) {
-        result = 'Error: ' + e.message
-      })
+      body: post_data,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     })
+      .then((response) => response.json())
+      // .then((json) => console.log('json= ', json))
+      .then((json) => {
+        success = json.success
+      })
+      .catch((error) => {
+        console.log('error = ', error)
+      })
 
-    post_req.write(post_data)
-    post_req.end()
-
-    return result
+    return success
   }
 
   return {
