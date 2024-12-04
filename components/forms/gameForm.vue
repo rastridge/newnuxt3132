@@ -532,7 +532,7 @@
     state.value.ptsFor = ''
     state.value.ptsAgn = ''
 
-    // players
+    // initialize players - any new older games will have room for 23 players
     for (let i = 0; i < 23; i++) {
       players.value.push({
         position_id: i + 1,

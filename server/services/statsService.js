@@ -4,32 +4,32 @@ const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby } = useDBConnection()
 
 export const statsService = {
-	getAll,
-	getOne,
-	addOne,
-	editOne,
-	getYear,
-	getSeason,
-	getAdjacent,
-	getPrevious,
-	getGameTypes,
-	getPlayerStats,
-	getGameCount,
-	getPlayerGames,
-	getRosterStats,
-	getTeamStats,
-	getTeamStatsTotal,
-	getPlayers,
-	getHistory,
-	getHistoryTotals,
-	getHistoryStreaks,
-	getHistoryCurrentStreak,
-	deleteOne,
-	changeStatus,
+  getAll,
+  getOne,
+  addOne,
+  editOne,
+  getYear,
+  getSeason,
+  getAdjacent,
+  getPrevious,
+  getGameTypes,
+  getPlayerStats,
+  getGameCount,
+  getPlayerGames,
+  getRosterStats,
+  getTeamStats,
+  getTeamStatsTotal,
+  getPlayers,
+  getHistory,
+  getHistoryTotals,
+  getHistoryStreaks,
+  getHistoryCurrentStreak,
+  deleteOne,
+  changeStatus,
 }
 
 async function getHistoryTotals(id) {
-	const sql = `SELECT
+  const sql = `SELECT
 								COUNT(game_id) as game_count,
 								SUM(IF(ptsFor>ptsAgn,1,0)) as wins,
 								SUM(IF(ptsFor<ptsAgn,1,0)) as losses,
@@ -46,12 +46,12 @@ async function getHistoryTotals(id) {
 								AND deleted = 0
 								AND Status = 1`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats[0]
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats[0]
 }
 
 async function getHistoryStreaks(id) {
-	const sql1 = `SELECT
+  const sql1 = `SELECT
 									date_ut,
 									result,
 									(
@@ -73,7 +73,7 @@ async function getHistoryStreaks(id) {
 								ORDER BY
 									date_ut ASC`
 
-	const sql = `SELECT
+  const sql = `SELECT
 								result,
 								MIN(date_ut) as StartDate,
 								MAX(date_ut) as EndDate,
@@ -83,12 +83,12 @@ async function getHistoryStreaks(id) {
 								HAVING COUNT(*) > 1
 								ORDER BY Min(date_ut)`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 async function getHistoryCurrentStreak(id) {
-	/* 	const sql1 = `SELECT
+  /* 	const sql1 = `SELECT
 									date,
 									date_ut,
 									result,
@@ -111,7 +111,7 @@ async function getHistoryCurrentStreak(id) {
 								ORDER BY
 									date_ut ASC`
  */
-	/* 	const sql2 = `SELECT result,
+  /* 	const sql2 = `SELECT result,
 								MIN(date_ut) as StartDate,
 								MAX(date_ut) as EndDate,
 								COUNT(*) as Games
@@ -140,7 +140,7 @@ async function getHistoryCurrentStreak(id) {
 								ORDER BY Min(date_ut)`
 
 								 */
-	const sql = `SELECT TOP 1 *
+  const sql = `SELECT TOP 1 *
 								FROM (SELECT result,
 								MIN(date_ut) as StartDate,
 								MAX(date_ut) as EndDate,
@@ -174,12 +174,12 @@ async function getHistoryCurrentStreak(id) {
 									AND
 									opponent_id = ${id}`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 async function getHistory(id) {
-	const sql = `SELECT
+  const sql = `SELECT
 			o.opponent_name,
 			g.date_ut,
 			g.venue,
@@ -201,13 +201,13 @@ async function getHistory(id) {
 		ORDER BY
 			g.date_ut ASC`
 
-	const games = await doDBQueryBuffalorugby(sql)
-	return games
+  const games = await doDBQueryBuffalorugby(sql)
+  return games
 }
 
 async function getAll(sort = 'DESC') {
-	const sql =
-		`SELECT
+  const sql =
+    `SELECT
 				game_id,
 				game_id as id,
 				o.opponent_name,
@@ -240,12 +240,12 @@ async function getAll(sort = 'DESC') {
 			ORDER BY
 				date_ut ` + sort
 
-	const games = await doDBQueryBuffalorugby(sql)
-	return games
+  const games = await doDBQueryBuffalorugby(sql)
+  return games
 }
 
 async function getPrevious(date_ut) {
-	const sql = `SELECT
+  const sql = `SELECT
 						g.game_id,
 						o.opponent_name,
 						g.date_ut,
@@ -261,14 +261,14 @@ async function getPrevious(date_ut) {
 					ORDER BY
 						date_ut DESC
 					LIMIT 10`
-	const games = await doDBQueryBuffalorugby(sql)
-	return games
+  const games = await doDBQueryBuffalorugby(sql)
+  return games
 }
 
 async function getYear(year) {
-	const YEAR2 = parseInt(year) + 1
+  const YEAR2 = parseInt(year) + 1
 
-	const sql = `SELECT
+  const sql = `SELECT
 				game_id,
 				game_id as id,
 				o.opponent_name as title,
@@ -303,14 +303,14 @@ async function getYear(year) {
 			ORDER BY
 				dt DESC`
 
-	const games = await doDBQueryBuffalorugby(sql)
-	return games
+  const games = await doDBQueryBuffalorugby(sql)
+  return games
 }
 
 async function getSeason(year1) {
-	const YEAR2 = parseInt(year1) + 1
-	// Unix Epoch
-	let sql = `SELECT
+  const YEAR2 = parseInt(year1) + 1
+  // Unix Epoch
+  let sql = `SELECT
 								game_id,
 								game_id as id,
 								o.opponent_name,
@@ -348,13 +348,13 @@ async function getSeason(year1) {
 
 								AND ( FROM_UNIXTIME(g.date_ut,'%Y') = ${year1} OR FROM_UNIXTIME(g.date_ut,'%Y') = ${YEAR2} )
 								AND date_ut > UNIX_TIMESTAMP(CONCAT("${year1}","${CONFIG.SEASON_DIVIDE_DATE}")) AND  date_ut <= UNIX_TIMESTAMP(CONCAT("${YEAR2}","${CONFIG.SEASON_DIVIDE_DATE}"))
-			
+
 							ORDER BY
 								g.date_ut DESC`
-	const games1 = await doDBQueryBuffalorugby(sql)
+  const games1 = await doDBQueryBuffalorugby(sql)
 
-	// Negative Unix Epoch Special case
-	sql = `SELECT
+  // Negative Unix Epoch Special case
+  sql = `SELECT
 						game_id,
 						game_id as id,
 						o.opponent_name,
@@ -399,8 +399,8 @@ async function getSeason(year1) {
 								),
 								INTERVAL 9 HOUR
 						)
-						) = ${year1}  
-						OR 
+						) = ${year1}
+						OR
 						YEAR(
 								DATE_ADD(
 										DATE_ADD(
@@ -410,14 +410,14 @@ async function getSeason(year1) {
 										INTERVAL 9 HOUR
 								)
 						) = ${YEAR2}
-					) 
+					)
 							AND DATE_ADD(
 									DATE_ADD(
 											FROM_UNIXTIME(0),
 											INTERVAL g.date_ut SECOND
 									),
 									INTERVAL 9 HOUR
-							) > '${year1 + CONFIG.SEASON_DIVIDE_DATE}' 
+							) > '${year1 + CONFIG.SEASON_DIVIDE_DATE}'
 								AND DATE_ADD(
 									DATE_ADD(
 											FROM_UNIXTIME(0),
@@ -428,32 +428,32 @@ async function getSeason(year1) {
 
 					ORDER BY
 							g.date_ut ASC`
-	// console.log('sql= ', sql)
-	const games2 = await doDBQueryBuffalorugby(sql)
+  // console.log('sql= ', sql)
+  const games2 = await doDBQueryBuffalorugby(sql)
 
-	// console.log('games1 ', games1.length)
-	// console.log(' games2 ', games2.length)
-	const games = games1.concat(games2)
-	// console.log(' games ', games.length)
+  // console.log('games1 ', games1.length)
+  // console.log(' games2 ', games2.length)
+  const games = games1.concat(games2)
+  // console.log(' games ', games.length)
 
-	return games
+  return games
 }
 
 async function getGameTypes() {
-	const sql = `SELECT
+  const sql = `SELECT
 				game_type,
 				game_type_id
 			FROM
 				inbrc_stats_game_types
 			WHERE 1`
 
-	const gametypes = await doDBQueryBuffalorugby(sql)
-	return gametypes
+  const gametypes = await doDBQueryBuffalorugby(sql)
+  return gametypes
 }
 
 // unix time
 async function getOne(id) {
-	const sql = `SELECT
+  const sql = `SELECT
 									g.game_id,
 									g.opponent_id,
 									o.opponent_name,
@@ -479,24 +479,24 @@ async function getOne(id) {
 									g.game_id = ${id}
 									AND g.game_type_id = t.game_type_id`
 
-	const games = await doDBQueryBuffalorugby(sql)
-	return games[0]
+  const games = await doDBQueryBuffalorugby(sql)
+  return games[0]
 }
 
 /* get adjacent games */
 async function getAdjacent(direction) {
-	let FILTER = ''
-	let FILTER2 = ''
+  let FILTER = ''
+  let FILTER2 = ''
 
-	if (direction === 'Next') {
-		FILTER = '>='
-		FILTER2 = 'ASC'
-	} else {
-		FILTER = '<='
-		FILTER2 = 'DESC'
-	}
+  if (direction === 'Next') {
+    FILTER = '>='
+    FILTER2 = 'ASC'
+  } else {
+    FILTER = '<='
+    FILTER2 = 'DESC'
+  }
 
-	const sql = `SELECT
+  const sql = `SELECT
 					o.opponent_name,
 					referee,
 					venue,
@@ -517,13 +517,13 @@ async function getAdjacent(direction) {
 				ORDER BY
 					date_ut ${FILTER2}
 				LIMIT 2`
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 // Needs work
 async function getRosterStats() {
-	const sql = `SELECT
+  const sql = `SELECT
 								IF(
 									MONTH(g.date) > 7 AND MONTH(date) <= 12,
 									YEAR(g.date),
@@ -560,12 +560,12 @@ async function getRosterStats() {
 								yr
 							DESC`
 
-	const roster_count = await doDBQueryBuffalorugby(sql)
-	return roster_count
+  const roster_count = await doDBQueryBuffalorugby(sql)
+  return roster_count
 }
 
 async function getPlayers(id) {
-	const sql = `SELECT
+  const sql = `SELECT
 								position_id,
 								player_id,
 								a1.member_firstname pfn,
@@ -591,19 +591,19 @@ async function getPlayers(id) {
 							ORDER BY
 								position_id asc`
 
-	const players = await doDBQueryBuffalorugby(sql)
-	return players
+  const players = await doDBQueryBuffalorugby(sql)
+  return players
 }
 
 async function getGameCount(gametype, account_id) {
-	let FILTER = ''
-	if (gametype == '7') {
-		FILTER = ' = 7'
-	} else {
-		FILTER = ' <> 7'
-	}
+  let FILTER = ''
+  if (gametype == '7') {
+    FILTER = ' = 7'
+  } else {
+    FILTER = ' <> 7'
+  }
 
-	const sql = `SELECT
+  const sql = `SELECT
     CONCAT(
         a.member_firstname,
         ' ',
@@ -615,27 +615,27 @@ FROM
     inbrc_accounts a,
     inbrc_stats_games g
 WHERE
-    (p.player_id = a.account_id) 
-    AND(p.game_id = g.game_id) 
-    AND(g.game_type_id ${FILTER} ) 
-    AND(g.game_type_id <> 8) 
+    (p.player_id = a.account_id)
+    AND(p.game_id = g.game_id)
+    AND(g.game_type_id ${FILTER} )
+    AND(g.game_type_id <> 8)
     AND(a.account_id = ${account_id})
 		AND g.Status = 1
 		AND g.deleted = 0`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats[0].gamecount
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats[0].gamecount
 }
 
 async function getPlayerStats(id) {
-	let FILTER = ''
-	if (id == '7') {
-		FILTER = ' = 7'
-	} else {
-		FILTER = ' <> 7'
-	}
+  let FILTER = ''
+  if (id == '7') {
+    FILTER = ' = 7'
+  } else {
+    FILTER = ' <> 7'
+  }
 
-	const sql = `SELECT
+  const sql = `SELECT
 								a.member_year AS year,
 								m.member_type,
 								IF(a.member_type_id = '2', TRUE, FALSE) AS isactive,
@@ -672,21 +672,21 @@ async function getPlayerStats(id) {
 							ORDER BY
 								games desc`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 async function getTeamStats(gt) {
-	let FILTER = ''
-	if (gt === '7') {
-		FILTER = 'AND game_type_id = 7'
-	} else if (gt === '0') {
-		// all 15s
-		FILTER = 'AND game_type_id <> 7'
-	}
-	// do not include scrimmages game_type-id 8
+  let FILTER = ''
+  if (gt === '7') {
+    FILTER = 'AND game_type_id = 7'
+  } else if (gt === '0') {
+    // all 15s
+    FILTER = 'AND game_type_id <> 7'
+  }
+  // do not include scrimmages game_type-id 8
 
-	const sql = `SELECT
+  const sql = `SELECT
 								COUNT(game_id) as game_count,
 								IF(
 									MONTH(date) > 7 AND MONTH(date) <= 12,
@@ -719,19 +719,19 @@ async function getTeamStats(gt) {
 							ORDER BY
 								season ASC`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 async function getTeamStatsTotal(gt) {
-	let FILTER = ''
-	if (gt === '7') {
-		FILTER = 'AND game_type_id = 7'
-	} else if (gt === '0') {
-		FILTER = 'AND game_type_id <> 7'
-	}
+  let FILTER = ''
+  if (gt === '7') {
+    FILTER = 'AND game_type_id = 7'
+  } else if (gt === '0') {
+    FILTER = 'AND game_type_id <> 7'
+  }
 
-	const sql = `SELECT
+  const sql = `SELECT
 								COUNT(game_id) as game_count,
 								SUM(IF(ptsFor>ptsAgn,1,0)) as wins,
 								SUM(IF(ptsFor<ptsAgn,1,0)) as losses,
@@ -745,12 +745,12 @@ async function getTeamStatsTotal(gt) {
 								AND Status = 1
 								AND deleted = 0`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats[0]
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats[0]
 }
 
 async function getPlayerGames(id) {
-	const sql = `SELECT
+  const sql = `SELECT
 					a.member_lastname,
 					a.member_firstname,
 					o.opponent_name,
@@ -790,30 +790,30 @@ async function getPlayerGames(id) {
 				ORDER BY
 					g.date_ut DESC`
 
-	const stats = await doDBQueryBuffalorugby(sql)
-	return stats
+  const stats = await doDBQueryBuffalorugby(sql)
+  return stats
 }
 
 async function addOne({
-	opponent_id,
-	referee,
-	venue,
-	comment,
-	date,
-	date_ut,
-	game_type_id,
-	game_level,
-	occasion,
-	ptsFor,
-	ptsAgn,
-	players,
+  opponent_id,
+  referee,
+  venue,
+  comment,
+  date,
+  date_ut,
+  game_type_id,
+  game_level,
+  occasion,
+  ptsFor,
+  ptsAgn,
+  players,
 }) {
-	const conn = await getConnectionBuffalorugby()
+  const conn = await getConnectionBuffalorugby()
 
-	try {
-		await conn.query('START TRANSACTION')
+  try {
+    await conn.query('START TRANSACTION')
 
-		let sql = `INSERT INTO inbrc_stats_games 
+    let sql = `INSERT INTO inbrc_stats_games
 								SET
 								opponent_id = ?,
 								referee = ?,
@@ -830,27 +830,27 @@ async function addOne({
 								deleted = 0,
 								created_dt = NOW(),
 								modified_dt = NOW()`
-		let inserts = []
-		inserts.push(
-			opponent_id,
-			referee,
-			venue,
-			comment,
-			date,
-			date_ut,
-			game_type_id,
-			game_level,
-			occasion,
-			ptsFor,
-			ptsAgn
-		)
-		sql = mysql.format(sql, inserts)
-		const [rows] = await conn.execute(sql)
-		const game_id = rows.insertId
+    let inserts = []
+    inserts.push(
+      opponent_id,
+      referee,
+      venue,
+      comment,
+      date,
+      date_ut,
+      game_type_id,
+      game_level,
+      occasion,
+      ptsFor,
+      ptsAgn,
+    )
+    sql = mysql.format(sql, inserts)
+    const [rows] = await conn.execute(sql)
+    const game_id = rows.insertId
 
-		// add records for 23 players
-		for (let i = 0; i < 23; i++) {
-			sql = `INSERT INTO inbrc_stats_player SET
+    // add records for 23 players
+    for (let i = 0; i < 23; i++) {
+      sql = `INSERT INTO inbrc_stats_player SET
 									game_id = ${game_id},
 									position_id = ?,
 									player_id = ?,
@@ -866,54 +866,54 @@ async function addOne({
 									deleted = 0,
 									modified_dt = NOW(),
 									created_dt = NOW()`
-			inserts = []
-			inserts.push(
-				players[i].position_id,
-				players[i].player_id,
-				players[i].replaced_by,
-				players[i].tries,
-				players[i].assists,
-				players[i].conv,
-				players[i].penk,
-				players[i].dgoal,
-				players[i].yellow,
-				players[i].red
-			)
-			sql = mysql.format(sql, inserts)
+      inserts = []
+      inserts.push(
+        players[i].position_id,
+        players[i].player_id,
+        players[i].replaced_by,
+        players[i].tries,
+        players[i].assists,
+        players[i].conv,
+        players[i].penk,
+        players[i].dgoal,
+        players[i].yellow,
+        players[i].red,
+      )
+      sql = mysql.format(sql, inserts)
 
-			await conn.execute(sql)
-		}
+      await conn.execute(sql)
+    }
 
-		await conn.query('COMMIT')
-		await conn.end()
-		return `commit game_id = ${game_id}`
-	} catch (e) {
-		await conn.query('ROLLBACK')
-		await conn.end()
-		return 'rollback' + e
-	}
+    await conn.query('COMMIT')
+    await conn.end()
+    return `commit game_id = ${game_id}`
+  } catch (e) {
+    await conn.query('ROLLBACK')
+    await conn.end()
+    return 'rollback' + e
+  }
 }
 
 async function editOne({
-	game_id,
-	opponent_id,
-	referee,
-	venue,
-	date,
-	date_ut,
-	game_type_id,
-	game_level,
-	comment,
-	occasion,
-	ptsFor,
-	ptsAgn,
-	players,
+  game_id,
+  opponent_id,
+  referee,
+  venue,
+  date,
+  date_ut,
+  game_type_id,
+  game_level,
+  comment,
+  occasion,
+  ptsFor,
+  ptsAgn,
+  players,
 }) {
-	const conn = await getConnectionBuffalorugby()
-	try {
-		await conn.query('START TRANSACTION')
+  const conn = await getConnectionBuffalorugby()
+  try {
+    await conn.query('START TRANSACTION')
 
-		let sql = `UPDATE inbrc_stats_games SET
+    let sql = `UPDATE inbrc_stats_games SET
 								opponent_id = ?,
 								referee = ?,
 								venue = ?,
@@ -929,28 +929,28 @@ async function editOne({
 							WHERE
 								game_id = ?`
 
-		let inserts = []
-		inserts.push(
-			opponent_id,
-			referee,
-			venue,
-			comment,
-			date,
-			date_ut,
-			game_type_id,
-			game_level,
-			occasion,
-			ptsFor,
-			ptsAgn,
-			game_id
-		)
-		sql = mysql.format(sql, inserts)
-		await conn.execute(sql)
+    let inserts = []
+    inserts.push(
+      opponent_id,
+      referee,
+      venue,
+      comment,
+      date,
+      date_ut,
+      game_type_id,
+      game_level,
+      occasion,
+      ptsFor,
+      ptsAgn,
+      game_id,
+    )
+    sql = mysql.format(sql, inserts)
+    await conn.execute(sql)
 
-		// update records for 23 players
-		for (let i = 0; i < 23; i++) {
-			sql = `UPDATE inbrc_stats_player SET
-					
+    // update records for 22 or 23 players
+    for (let i = 0; i < players.length; i++) {
+      sql = `UPDATE inbrc_stats_player SET
+
 					player_id = ?,
 					replaced_by = ?,
 					tries = ?,
@@ -964,62 +964,62 @@ async function editOne({
 				WHERE
 					game_id = ? && position_id = ?`
 
-			inserts = []
-			inserts.push(
-				players[i].player_id,
-				players[i].replaced_by,
-				players[i].tries,
-				players[i].assists,
-				players[i].conv,
-				players[i].penk,
-				players[i].dgoal,
-				players[i].yellow,
-				players[i].red,
-				game_id,
-				players[i].position_id
-			)
+      inserts = []
+      inserts.push(
+        players[i].player_id,
+        players[i].replaced_by,
+        players[i].tries,
+        players[i].assists,
+        players[i].conv,
+        players[i].penk,
+        players[i].dgoal,
+        players[i].yellow,
+        players[i].red,
+        game_id,
+        players[i].position_id,
+      )
 
-			sql = mysql.format(sql, inserts)
-			await conn.execute(sql)
-		}
-		await conn.query('COMMIT')
-		await conn.end()
-		return `commit game_id = ${game_id}`
-	} catch (e) {
-		await conn.query('ROLLBACK')
-		await conn.end()
-		return 'ROLLBACK' + e
-	}
+      sql = mysql.format(sql, inserts)
+      await conn.execute(sql)
+    }
+    await conn.query('COMMIT')
+    await conn.end()
+    return `commit game_id = ${game_id}`
+  } catch (e) {
+    await conn.query('ROLLBACK')
+    await conn.end()
+    return 'ROLLBACK ' + e
+  }
 }
 
 async function deleteOne(id) {
-	const conn = await getConnectionBuffalorugby()
+  const conn = await getConnectionBuffalorugby()
 
-	try {
-		await conn.query('START TRANSACTION')
+  try {
+    await conn.query('START TRANSACTION')
 
-		let sql = `UPDATE inbrc_stats_games SET deleted = 1, deleted_dt = NOW() WHERE game_id = ${id}`
-		await conn.execute(sql)
+    let sql = `UPDATE inbrc_stats_games SET deleted = 1, deleted_dt = NOW() WHERE game_id = ${id}`
+    await conn.execute(sql)
 
-		sql = `UPDATE inbrc_stats_player SET deleted = 1, deleted_dt = NOW() WHERE game_id = ${id}`
-		await conn.execute(sql)
+    sql = `UPDATE inbrc_stats_player SET deleted = 1, deleted_dt = NOW() WHERE game_id = ${id}`
+    await conn.execute(sql)
 
-		await conn.query('COMMIT')
-		await conn.end()
-		return 'COMMIT'
-	} catch (e) {
-		await conn.query('ROLLBACK')
-		await conn.end()
-		return 'ROLLBACK' + e
-	}
+    await conn.query('COMMIT')
+    await conn.end()
+    return 'COMMIT'
+  } catch (e) {
+    await conn.query('ROLLBACK')
+    await conn.end()
+    return 'ROLLBACK' + e
+  }
 }
 
 async function changeStatus({ id, status }) {
-	const sql =
-		`UPDATE inbrc_stats_games SET status = "` +
-		status +
-		`" WHERE game_id = ${id}`
-	const players = await doDBQueryBuffalorugby(sql)
+  const sql =
+    `UPDATE inbrc_stats_games SET status = "` +
+    status +
+    `" WHERE game_id = ${id}`
+  const players = await doDBQueryBuffalorugby(sql)
 
-	return players
+  return players
 }
