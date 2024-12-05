@@ -94,34 +94,14 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
-  //
-  // Initialize Add form
-  //
-  const state = ref({})
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data: archive_data } = await useFetch(`/archive/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = archive_data.value
-
-    // Format for Primevue calendar / neessary?
-    state.value.archive_date = $dayjs(archive_data.value.archive_date).format(
-      'YYYY-MM-DD',
-    )
-  }
+  // Format for Primevue calendar
+  state.value.archive_date = $dayjs(state.value.archive_date).format(
+    'YYYY-MM-DD',
+  )
 
   //
   // progress modal

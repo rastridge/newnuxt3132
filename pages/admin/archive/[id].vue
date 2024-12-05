@@ -1,4 +1,6 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -11,6 +13,15 @@
   const route = useRoute()
   const id = route.params.id
 
+  //
+  // Initialize Edit form
+  //
+  const { data: state } = await useFetch(`/archive/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
   //
   // archives form action
   //
@@ -30,7 +41,7 @@
         <display-admin-header title="Edit archive Item" />
       </div>
       <archive-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

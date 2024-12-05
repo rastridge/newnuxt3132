@@ -108,29 +108,15 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
-
   //
   // Initialize Add form
   //
-  const state = ref({})
+  const state = ref({ ...props.state })
   //
   // edit if there is an id - add if not
   //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data: clubhouse_data } = await useFetch(`/clubhouse/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = clubhouse_data.value
-  }
 
   //
   // progress modal

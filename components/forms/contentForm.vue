@@ -69,10 +69,8 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
   const saving = ref(false)
-  const { $dayjs } = useNuxtApp()
+
   // Outgoing
   //
   const emit = defineEmits(['submitted'])
@@ -80,9 +78,9 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
   //
   // incoming from inputBody component
@@ -99,39 +97,12 @@
   }
 
   //
-  // Initialize form
+  // Change to make images responsive
   //
-
-  const state = ref({})
-
-  state.value.content_body = 'Add content here'
-  const dt = $dayjs()
-  state.value.content_release_dt = dt.format('YYYY-MM-DD')
-  state.value.content_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    // get user with id === props.id
-    const { data: content_data } = await useFetch(`/content/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-
-    state.value = content_data.value
-
-    //
-    // Insert to make images responsive
-    //
-    state.value.content_body = state.value.content_body.replace(
-      /\<img/g,
-      '<img width="100%"',
-    )
-  }
+  state.value.content_body = state.value.content_body.replace(
+    /\<img/g,
+    '<img width="100%"',
+  )
 
   //
   // form handlers
