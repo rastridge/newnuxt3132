@@ -1,5 +1,9 @@
 <script setup>
   import { useAlertStore } from '~/stores/alertStore'
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
+  const { $dayjs } = useNuxtApp()
+
   definePageMeta({
     middleware: ['auth'],
   })
@@ -12,6 +16,19 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // Initialize Edit form
+  //
+  const { data: state } = await useFetch(`/accounts_flag/${id}`, {
+    key: id,
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+  // adjust date for formkit date input
+  state.value.member_dob = $dayjs(state.value.member_dob).format('YYYY-MM-DD')
 
   //
   // Accounts form action
@@ -36,6 +53,7 @@
       </div>
       <accounts-flag-form
         :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

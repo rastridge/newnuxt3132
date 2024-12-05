@@ -83,7 +83,6 @@
   const member_type_id = ref(placemark.getMemberTypeId)
   const page = ref(placemark.getPage)
 
-  // const member_type_id = ref(9)
   //
   // Initialize values for Renderlist
   //
@@ -125,7 +124,7 @@
     placemark.setPage(0)
     page.value = 0
   })
-  // Save current member_type_id after changes - Placemarks
+  // Save current alpha after changes - Placemarks
   watch(alpha, (newalpha) => {
     placemark.setAlpha(newalpha)
     placemark.setPage(0)

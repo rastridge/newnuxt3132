@@ -5,6 +5,7 @@ export const usePlacemarkStore = defineStore('placemark', {
     year: 0,
     season_year: 0,
     membertypeid: 2,
+    flagmembertypeid: 11,
     gametypeid: 1,
   }),
 
@@ -12,6 +13,7 @@ export const usePlacemarkStore = defineStore('placemark', {
     getPage: (state) => state.page,
     getAlpha: (state) => state.alpha,
     getMemberTypeId: (state) => state.membertypeid,
+    getFlagMemberTypeId: (state) => state.flagmembertypeid,
     getGameTypeId: (state) => state.gametypeid,
     getYear: (state) => state.year,
     getSeasonYear: (state) => state.season_year,
@@ -46,6 +48,9 @@ export const usePlacemarkStore = defineStore('placemark', {
     },
     setMemberTypeId(id) {
       this.membertypeid = id
+    },
+    setFlagMemberTypeId(id) {
+      this.flagmembertypeid = id
     },
     setGameTypeId(id) {
       this.gametypeid = id

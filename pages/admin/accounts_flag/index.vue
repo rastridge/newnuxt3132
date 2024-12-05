@@ -12,7 +12,6 @@
         <p class="my-header-style">Member type</p>
         <Dropdown
           v-model="member_type_id"
-          class="mb-2"
           :options="memberTypeOptions"
           optionLabel="label"
           optionValue="value"
@@ -46,14 +45,12 @@
           scrollable
           scrollHeight="600px"
           dataKey="account_id"
-          :loading="loading"
           paginator
           :rows="10"
           :rowsPerPageOptions="[5, 10, 20, 50]"
           paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
         >
           <template #empty> No members found </template>
-          <template #loading> Loading data. Please wait. </template>
           <template #header>
             <div style="text-align: left">
               <Button
@@ -159,10 +156,8 @@
   //
   // initial testing values
   //
-  const member_type_id = ref(placemark.getMemberTypeId)
+  const member_type_id = ref(placemark.getFlagMemberTypeId)
   const page = ref(placemark.getPage)
-
-  // const member_type_id = ref(placemark.getMemberTypeId)
 
   //
   // Initialize values for Renderlist
@@ -192,7 +187,7 @@
   })
 
   watch(member_type_id, (newid) => {
-    placemark.setMemberTypeId(newid)
+    placemark.setFlagMemberTypeId(newid)
     placemark.setPage(0)
     page.value = 0
   })
@@ -202,9 +197,9 @@
   //
 
   const memberTypeOptions = [
-    { label: 'Active', value: 11 },
-    { label: 'Alumni', value: 15 },
-    { label: 'Pending', value: 12 },
+    { label: 'Active Flag', value: 11 },
+    { label: 'Alumni Flag', value: 15 },
+    { label: 'Pending Flag', value: 12 },
   ]
 
   //

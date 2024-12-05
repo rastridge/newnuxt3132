@@ -17,7 +17,6 @@
   //
   // Initialize Edit form state
   //
-  // const state = ref({})
   const { data: state } = await useFetch(`/accounts/${id}`, {
     key: id,
     method: 'get',
@@ -25,7 +24,6 @@
       authorization: auth.user.token,
     },
   })
-  // state.value = data.value
 
   //
   // Accounts form submit action

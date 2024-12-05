@@ -242,7 +242,6 @@
   import { useAlertStore } from '~/stores/alertStore'
   const auth = useAuthStore()
   const alert = useAlertStore()
-  // const { $dayjs } = useNuxtApp()
   const { getCountries, setRegions } = useLocations()
   const { getMemberAdminTypeOptions, getMemberTypeOptions } = useMembertypes()
   const saving = ref(false)
@@ -258,26 +257,6 @@
     state: { type: Object, required: true },
   })
   const local_state = ref({ ...props.state })
-
-  // const edit_form = props.id !== '0'
-  // const edit_form = false
-
-  //
-  // EDIT if there is an id - ADD if not
-  //
-  // if (edit_form) {
-  //   //
-  //   // Initialize Edit form
-  //   //
-  //   const { data } = await useFetch(`/accounts/${props.id}`, {
-  //     key: props.id,
-  //     method: 'get',
-  //     headers: {
-  //       authorization: auth.user.token,
-  //     },
-  //   })
-  //   local_state.value = data.value
-  // }
 
   //
   // Formkit preparations

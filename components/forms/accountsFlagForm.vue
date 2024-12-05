@@ -1,8 +1,6 @@
 <template>
-  <!---  	<p v-if="!state">
-		<ProgressBar mode="indeterminate" style="height: 6px"></ProgressBar>Loading
-	</p>--->
   <div class="my-form-style">
+    <display-alert />
     <FormKit
       v-model="state"
       type="form"
@@ -10,8 +8,6 @@
       submit-label="Submit member"
       @submit="submitForm"
     >
-      <display-alert />
-
       <FormKit
         label="First Name"
         name="member_firstname"
@@ -174,11 +170,9 @@
 
 <script setup>
   import { getNode } from '@formkit/core'
-  import { useAuthStore } from '~/stores/authStore'
   import { useAlertStore } from '~/stores/alertStore'
-  const auth = useAuthStore()
   const alert = useAlertStore()
-  const { $dayjs } = useNuxtApp()
+  // const { $dayjs } = useNuxtApp()
   const { getCountries, setRegions } = useLocations()
   const saving = ref(false)
 
@@ -190,51 +184,9 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-
-  const edit_form = props.id !== '0'
-
-  //
-  // initialize form for add
-  //
-  const state = ref({})
-
-  state.value.member_year = $dayjs().format('YYYY')
-  state.value.account_addr_phone = null
-  state.value.account_addr_state = 'NY'
-  state.value.account_addr_street_ext = ''
-  state.value.account_addr_country = 'US'
-  state.value.member_type_id = '11'
-
-  state.value.newsletter_recipient = '1'
-  state.value.mail_recipient = '0'
-  state.value.sms_recipient = '1'
-  state.value.member_type_id = '11'
-
-  //
-  // EDIT if there is an id - ADD if not
-  //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data } = await useFetch(`/accounts_flag/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-  }
-
-  // form handlers
-  //
-  const submitForm = (state) => {
-    saving.value = true
-    emit('submitted', state)
-  }
+  const state = ref({ ...props.state })
 
   // errors
   const errors = computed(() => {
@@ -247,9 +199,6 @@
   const justCountries = ref(getCountries())
   const justRegions = ref(setRegions(state.value.account_addr_country))
 
-  // adjust date for formkit date input
-  state.value.member_dob = $dayjs(state.value.member_dob).format('YYYY-MM-DD')
-
   // Region depends on country
   onMounted(() => {
     // Use the IDs of the inputs you want to get
@@ -261,4 +210,11 @@
       justRegions.value = setRegions(payload)
     })
   })
+
+  // form handlers
+  //
+  const submitForm = (local_state) => {
+    saving.value = true
+    emit('submitted', { ...local_state })
+  }
 </script>
