@@ -1,11 +1,13 @@
 <template>
   <div class="my-form-style">
+    <!-- Edit -->
     <h6
-      v-if="props.id !== '0'"
+      v-if="id"
       class="text-left my-text-style font-semibold"
     >
       Contributor {{ state.contribution_name }}
     </h6>
+    <!-- add -->
     <div
       v-else
       class="mb-2"
@@ -102,20 +104,18 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
 
-  const state = ref({})
-
+  const state = ref({ ...props.state })
+  const id = state.value.contribution_id
   // Add form
   //
   // autocomplete
   //
-  const suggestions = ref([])
   const selectedItem = ref('')
   const filteredNames = ref([])
-
+  const suggestions = ref([])
   const previous = ref(null)
 
   const search = (event) => {
@@ -146,44 +146,19 @@
     previous.value = data.value
   }
 
+  state.value.contribution_showName =
+    state.value.contribution_showName === 1 ? true : false
+  state.value.contribution_showAmount =
+    state.value.contribution_showAmount === 1 ? true : false
   //
-  if (edit_form) {
-    // edit
-    //
-    const { data } = await useFetch(`/contributions/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-    // Format for Formkit calendar? ??
-    /* 		state.value.contribution_date = $dayjs(data.value.contribution_date).format(
-			'YYYY-MM-DD'
-		) */
-    state.value.contribution_showName = data.value.contribution_showName
-      ? true
-      : false
-    state.value.contribution_showAmount = data.value.contribution_showAmount
-      ? true
-      : false
-  } else {
-    //
-    // get suggestions
+
+  // if add get suggestions
+  if (!id) {
     const { data } = await useFetch(`/accounts/suggestions`, {
-      key: props.id,
       method: 'get',
     })
     suggestions.value = data.value
-    //
-    // initialize add form
-    //
-    state.value.contribution_date = $dayjs().format('YYYY-MM-DD')
-    state.value.contribution_showName = true
-    state.value.contribution_showAmount = true
   }
-
   //
   // form handlers
   //

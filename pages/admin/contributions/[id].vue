@@ -1,4 +1,7 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
+
   definePageMeta({
     middleware: ['auth'],
   })
@@ -9,6 +12,13 @@
   const route = useRoute()
   const id = route.params.id
 
+  //
+  const { data: state } = await useFetch(`/contributions/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
   //
   // content form action
   //
@@ -29,7 +39,7 @@
         <display-admin-header title="Edit Contributions" />
       </div>
       <contributions-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

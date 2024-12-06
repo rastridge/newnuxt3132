@@ -1,28 +1,41 @@
 <script setup>
-	definePageMeta({
-		middleware: ['auth'],
-	})
-	const { onSubmitAdd } = useSubmit()
+  definePageMeta({
+    middleware: ['auth'],
+  })
+  const { $dayjs } = useNuxtApp()
+  const { onSubmitAdd } = useSubmit()
 
-	//
-	// content form action
-	//
-	const onSubmit = async function (form_state) {
-		await onSubmitAdd('contributions', form_state)
-		navigateTo(`/admin/contributions`)
-	}
+  //
+  // initialize add form
+  //
+  const state = {
+    contribution_id: '',
+    contribution_date: $dayjs().format('YYYY-MM-DD'),
+    contribution_showName: true,
+    contribution_showAmount: true,
+  }
+  //
+  // content form action
+  //
+  const onSubmit = async function (form_state) {
+    await onSubmitAdd('contributions', form_state)
+    navigateTo(`/admin/contributions`)
+  }
 </script>
 
 <template>
-	<div>
-		<Head>
-			<Title>Add Contribution</Title>
-		</Head>
-		<div class="topsectioncenter">
-			<div class="topsectionitem">
-				<display-admin-header title="Add Contributions" />
-			</div>
-			<contributions-form @submitted="onSubmit" />
-		</div>
-	</div>
+  <div>
+    <Head>
+      <Title>Add Contribution</Title>
+    </Head>
+    <div class="topsectioncenter">
+      <div class="topsectionitem">
+        <display-admin-header title="Add Contributions" />
+      </div>
+      <contributions-form
+        :state="state"
+        @submitted="onSubmit"
+      />
+    </div>
+  </div>
 </template>

@@ -22,7 +22,7 @@
 
   const { onSubmitAdd } = useSubmit()
 
-  // initial ize form data
+  // initialize form data
   const state = {}
   //
   // archives form action
