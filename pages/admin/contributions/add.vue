@@ -11,8 +11,8 @@
   const state = {
     contribution_id: '',
     contribution_date: $dayjs().format('YYYY-MM-DD'),
-    contribution_showName: true,
-    contribution_showAmount: true,
+    contribution_showName: 1,
+    contribution_showAmount: 1,
   }
   //
   // content form action

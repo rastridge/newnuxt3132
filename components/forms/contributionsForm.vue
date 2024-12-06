@@ -13,13 +13,16 @@
       class="mb-2"
     >
       <p class="font-semibold">Contributor name</p>
-      <AutoComplete
+      state.account_id = {{ state.account_id }}
+      <input-name-autocomplete @setaccountid="SetAccountId" />
+
+      <!--       <AutoComplete
         v-model="selectedItem"
         optionLabel="title"
         :suggestions="filteredNames"
         @complete="search"
         @item-select="getPrevious"
-      />
+      /> -->
     </div>
     <FormKit
       v-model="state"
@@ -109,16 +112,9 @@
 
   const state = ref({ ...props.state })
   const id = state.value.contribution_id
-  // Add form
-  //
-  // autocomplete
-  //
-  const selectedItem = ref('')
-  const filteredNames = ref([])
-  const suggestions = ref([])
-  const previous = ref(null)
 
-  const search = (event) => {
+  // helper for autocomplete
+  /*  const search = (event) => {
     if (!event.query.trim().length) {
       filteredNames.value = [...suggestions.value]
     } else {
@@ -131,21 +127,20 @@
         )
       })
     }
-  }
+  } */
 
-  const getPrevious = async () => {
-    const { data } = await useFetch(
-      `/contributions/previous/${selectedItem.value.account_id}`,
-      {
-        method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
+  // get previous donations
+  const getPrevious = async (id) => {
+    const { data } = await useFetch(`/contributions/previous/${id}`, {
+      method: 'get',
+      headers: {
+        authorization: auth.user.token,
       },
-    )
+    })
     previous.value = data.value
   }
 
+  // format for formkit
   state.value.contribution_showName =
     state.value.contribution_showName === 1 ? true : false
   state.value.contribution_showAmount =
@@ -153,17 +148,22 @@
   //
 
   // if add get suggestions
-  if (!id) {
+  /*   if (!id) {
     const { data } = await useFetch(`/accounts/suggestions`, {
       method: 'get',
     })
     suggestions.value = data.value
+  } */
+  //
+  // autocomplete handler
+  //
+  const SetAccountId = async function (id) {
+    state.value.account_id = id
+    await getPrevious(id)
   }
-  //
-  // form handlers
-  //
+
   const submitForm = async (state) => {
-    state.account_id = selectedItem.value.account_id
+    // state.account_id = selectedItem.value.account_id
     saving.value = true
     emit('submitted', state)
   }
