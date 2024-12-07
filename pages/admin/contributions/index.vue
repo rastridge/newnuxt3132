@@ -85,10 +85,6 @@
     })
   })
 
-  /* 	deleteItem(id) {
-			filteredData = filteredData.filter((u) => u.id !== id)
-		}, */
-
   //
   // Renderlist actions
   //

@@ -188,23 +188,6 @@
   const deleteDialog = ref(false)
 
   //
-  // React to change in Incoming data
-  //
-  /*   watch(props.data, () => {
-    alert('props data change')
-    current.value = props.page
-    _data.value = props.data
-  }) */
-
-  // const _data = computed(() => props.data)
-
-  /*   watchEffect(() => {
-    alert('watchEffect props.data ' + props.data)
-    current.value = props.page
-    _data.value = props.data
-  }) */
-
-  //
   // Change status in local data and database
   //
   const changeStatus = ({ id, status }) => {
@@ -225,7 +208,7 @@
     deleteDialog.value = true
   }
   const confirmedDelete = (id) => {
-    _data.value = _data.value.filter((u) => u.contribution_id !== id)
+    _data.value = _data.value.filter((u) => u.id !== id)
 
     // deletion confirmed
     // close confirm dialog
