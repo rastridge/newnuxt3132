@@ -13,16 +13,7 @@
       class="mb-2"
     >
       <p class="font-semibold">Contributor name</p>
-      state.account_id = {{ state.account_id }}
       <input-name-autocomplete @setaccountid="SetAccountId" />
-
-      <!--       <AutoComplete
-        v-model="selectedItem"
-        optionLabel="title"
-        :suggestions="filteredNames"
-        @complete="search"
-        @item-select="getPrevious"
-      /> -->
     </div>
     <FormKit
       v-model="state"
@@ -113,23 +104,8 @@
   const state = ref({ ...props.state })
   const id = state.value.contribution_id
 
-  // helper for autocomplete
-  /*  const search = (event) => {
-    if (!event.query.trim().length) {
-      filteredNames.value = [...suggestions.value]
-    } else {
-      filteredNames.value = suggestions.value.filter((suggestion) => {
-        return (
-          suggestion.title
-            .toLowerCase()
-            // .startsWith(event.query.toLowerCase())
-            .includes(event.query.toLowerCase())
-        )
-      })
-    }
-  } */
-
   // get previous donations
+  const previous = ref(null)
   const getPrevious = async (id) => {
     const { data } = await useFetch(`/contributions/previous/${id}`, {
       method: 'get',
@@ -147,16 +123,6 @@
     state.value.contribution_showAmount === 1 ? true : false
   //
 
-  // if add get suggestions
-  /*   if (!id) {
-    const { data } = await useFetch(`/accounts/suggestions`, {
-      method: 'get',
-    })
-    suggestions.value = data.value
-  } */
-  //
-  // autocomplete handler
-  //
   const SetAccountId = async function (id) {
     state.value.account_id = id
     await getPrevious(id)

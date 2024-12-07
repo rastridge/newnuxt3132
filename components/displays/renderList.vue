@@ -190,11 +190,19 @@
   //
   // React to change in Incoming data
   //
-  watchEffect(() => {
-    // alert('watchEffect current.value ' + current.value)
+  /*   watch(props.data, () => {
+    alert('props data change')
     current.value = props.page
     _data.value = props.data
-  })
+  }) */
+
+  // const _data = computed(() => props.data)
+
+  /*   watchEffect(() => {
+    alert('watchEffect props.data ' + props.data)
+    current.value = props.page
+    _data.value = props.data
+  }) */
 
   //
   // Change status in local data and database
@@ -217,6 +225,8 @@
     deleteDialog.value = true
   }
   const confirmedDelete = (id) => {
+    _data.value = _data.value.filter((u) => u.contribution_id !== id)
+
     // deletion confirmed
     // close confirm dialog
     deleteDialog.value = false
