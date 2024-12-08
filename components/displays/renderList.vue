@@ -18,7 +18,7 @@
       <div class="my-renderlist-styles">
         <DataTable
           ref="dataTableRef"
-          :value="_data"
+          :value="data"
           striped-rows
           class="p-datatable-sm p-datatable-generic my-text-style"
           responsiveLayout="scroll"
@@ -58,7 +58,7 @@
             field="title"
             header="Name"
           ></Column>
-          <div v-if="_data.length && typeof _data[0].date_ut !== 'undefined'">
+          <div v-if="data.length && typeof data[0].date_ut !== 'undefined'">
             <Column
               field="date_ut"
               header="Date"
@@ -167,7 +167,10 @@
   //
   // make local copy of input data
   //
-  const _data = ref([...props.data])
+  const datalocal = ref([])
+  watch(() => {
+    datalocal.value = [...props.data]
+  })
 
   //
   // Initial settings for pagination
@@ -193,8 +196,8 @@
   const changeStatus = ({ id, status }) => {
     status = status ? 0 : 1
     // in browser
-    const pos = _data.value.findIndex((u) => u.id === id)
-    _data.value[pos].status = status
+    const pos = datalocal.value.findIndex((u) => u.id === id)
+    datalocal.value[pos].status = status
     // in DB
     emit('changeStatus', { id, status })
   }
@@ -208,7 +211,7 @@
     deleteDialog.value = true
   }
   const confirmedDelete = (id) => {
-    _data.value = _data.value.filter((u) => u.id !== id)
+    datalocal.value = datalocal.value.filter((u) => u.id !== id)
 
     // deletion confirmed
     // close confirm dialog

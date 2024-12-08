@@ -22,7 +22,6 @@
           placeholder="Select a member type"
         />
       </div>
-
       <div class="topsectionitem">
         <FormKit
           v-model="alpha"
@@ -72,13 +71,14 @@
   definePageMeta({
     middleware: ['auth'],
   })
-  const placemark = usePlacemarkStore()
   const { getAll, deleteOne, changeStatusOne } = useFetchAll()
   const { getMemberTypeOptions } = useMembertypes()
 
   //
   // get initial values
   //
+  const placemark = usePlacemarkStore()
+
   const alpha = ref(placemark.getAlpha)
   const member_type_id = ref(placemark.getMemberTypeId)
   const page = ref(placemark.getPage)
@@ -96,18 +96,19 @@
   const { data: accounts } = await getAll('accounts')
 
   //
-  // Filter members
+  // Filter accounts by member type
   //
   const filteredData = computed(() => {
     let temp = []
-    // by member type
+    // filter by member type
     temp = accounts.value.filter(function (d) {
       return (
         d.member_type_id === member_type_id.value ||
         d.member_type2_id === member_type_id.value
       )
     })
-    //by initial letter
+
+    // filter by initial letter
     if (alpha.value !== '1') {
       return temp.filter(function (d) {
         return d.member_lastname[0].toUpperCase() === alpha.value
@@ -115,8 +116,9 @@
     }
     return temp
   })
-
-  // Save current member_type_id after changes - Placemarks
+  //
+  // Set placemarks after changing member type
+  //
   watch(member_type_id, (newid) => {
     placemark.setMemberTypeId(newid)
     placemark.setAlpha('1')
@@ -124,7 +126,9 @@
     placemark.setPage(0)
     page.value = 0
   })
-  // Save current alpha after changes - Placemarks
+  //
+  // Set placemarks after changing Alpha
+  //
   watch(alpha, (newalpha) => {
     placemark.setAlpha(newalpha)
     placemark.setPage(0)
@@ -132,11 +136,13 @@
   })
 
   //
-  // Get membertype options
+  // Get membertype options for member type selector
   //
-
   const memberTypeOptions = await getMemberTypeOptions()
 
+  //
+  // Get alpha options for alpha selector
+  //
   const alphas = {
     1: 'All',
     A: 'A',
@@ -168,20 +174,26 @@
   }
 
   //
-  // Renderlist actions
-
+  // Renderlist actions - including roster check
+  //
+  // default warning dialog visibility
   const visible = ref(false)
+  //
+  // default message for found on roster
   const message = ref('')
+
   const deleteItem = async (id) => {
     const msg = await deleteOne('accounts', id)
+    // will not deleteOne if msg is not null
     if (msg.value) {
       message.value = msg.value
       visible.value = true
-    } else {
+    }
+    /* else {
       // remove from accounts
       // will trigger change in filteredData passed to renderlist
       accounts.value = accounts.value.filter((u) => u.id !== id)
-    }
+    } */
   }
 
   const changeStatus = async ({ id, status }) => {
