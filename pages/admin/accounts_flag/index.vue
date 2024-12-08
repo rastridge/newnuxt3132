@@ -150,12 +150,12 @@
     middleware: ['auth'],
   })
 
-  const placemark = usePlacemarkStore()
   const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 
   //
-  // initial testing values
+  // initial values
   //
+  const placemark = usePlacemarkStore()
   const member_type_id = ref(placemark.getFlagMemberTypeId)
   const page = ref(placemark.getPage)
 
@@ -186,6 +186,9 @@
     return temp
   })
 
+  //
+  // Set placemarks after changing member type
+  //
   watch(member_type_id, (newid) => {
     placemark.setFlagMemberTypeId(newid)
     placemark.setPage(0)
@@ -195,7 +198,6 @@
   //
   // Get membertype opyions
   //
-
   const memberTypeOptions = [
     { label: 'Active Flag', value: 11 },
     { label: 'Alumni Flag', value: 15 },
