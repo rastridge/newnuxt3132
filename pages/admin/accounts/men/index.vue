@@ -189,11 +189,6 @@
       message.value = msg.value
       visible.value = true
     }
-    /* else {
-       // remove from accounts
-       // will trigger change in filteredData passed to renderlist
-       accounts.value = accounts.value.filter((u) => u.id !== id)
-     } */
   }
 
   const changeStatus = async ({ id, status }) => {
