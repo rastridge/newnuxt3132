@@ -6,12 +6,12 @@
     middleware: ['auth'],
   })
   const { onSubmitEdit } = useSubmit()
+
   //
-  // Get content item id
+  // Get contributions by id
   //
   const route = useRoute()
   const id = route.params.id
-
   //
   const { data: state } = await useFetch(`/contributions/${id}`, {
     method: 'get',
@@ -19,8 +19,9 @@
       authorization: auth.user.token,
     },
   })
+
   //
-  // content form action
+  // contribution form action
   //
   const onSubmit = async function (form_state) {
     await onSubmitEdit('contributions', form_state)

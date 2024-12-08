@@ -15,7 +15,7 @@
     contribution_showAmount: 1,
   }
   //
-  // content form action
+  // contribution form submit action
   //
   const onSubmit = async function (form_state) {
     await onSubmitAdd('contributions', form_state)

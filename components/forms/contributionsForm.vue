@@ -12,7 +12,7 @@
       v-else
       class="mb-2"
     >
-      <p class="font-semibold">Contributor name</p>
+      <p class="font-semibold">Find contributor name</p>
       <input-name-autocomplete @setaccountid="SetAccountId" />
     </div>
     <FormKit
@@ -49,6 +49,7 @@
         name="contribution_showAmount"
         value="1"
       />
+
       <div v-if="previous">
         <h3>Previous Donations</h3>
         <table>
@@ -66,6 +67,7 @@
           </tbody>
         </table>
       </div>
+
       <FormKit
         type="textarea"
         label="Comment"
@@ -74,6 +76,7 @@
       />
       <display-cancelform :destination="'/admin/contributions'" />
     </FormKit>
+
     <p v-if="saving">
       <ProgressBar
         mode="indeterminate"
@@ -121,15 +124,16 @@
     state.value.contribution_showName === 1 ? true : false
   state.value.contribution_showAmount =
     state.value.contribution_showAmount === 1 ? true : false
-  //
 
+  //
+  // set new contribution account_id - only called during add
+  //
   const SetAccountId = async function (id) {
     state.value.account_id = id
     await getPrevious(id)
   }
 
   const submitForm = async (state) => {
-    // state.account_id = selectedItem.value.account_id
     saving.value = true
     emit('submitted', state)
   }
