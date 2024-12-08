@@ -11,7 +11,6 @@
       <div class="topsectionitem">
         <lookup-by-email />
       </div>
-
       <div class="topsectionitem">
         <p class="my-header-style">Member type</p>
         <Dropdown
@@ -23,13 +22,22 @@
         />
       </div>
       <div class="topsectionitem">
+        <p>Last name begins with</p>
+        <Dropdown
+          v-model="alpha"
+          optionLabel="label"
+          optionValue="value"
+          :options="alphas"
+        />
+      </div>
+      <!-- <div class="topsectionitem">
         <FormKit
           v-model="alpha"
           type="select"
           label="Last name begins with"
           :options="alphas"
         />
-      </div>
+      </div> -->
     </div>
 
     <div>
@@ -143,35 +151,34 @@
   //
   // Get alpha options for alpha selector
   //
-  const alphas = {
-    1: 'All',
-    A: 'A',
-    B: 'B',
-    C: 'C',
-    D: 'D',
-    E: 'E',
-    F: 'F',
-    G: 'G',
-    H: 'H',
-    I: 'I',
-    J: 'J',
-    K: 'K',
-    L: 'L',
-    M: 'M',
-    N: 'N',
-    O: 'O',
-    P: 'P',
-    Q: 'Q',
-    R: 'R',
-    S: 'S',
-    T: 'T',
-    U: 'U',
-    V: 'V',
-    W: 'W',
-    X: 'X',
-    Y: 'Y',
-    Z: 'Z',
-  }
+  const alphas = [
+    { label: 'Any', value: '1' },
+    { label: 'A', value: 'A' },
+    { label: 'B', value: 'B' },
+    { label: 'C', value: 'C' },
+    { label: 'D', value: 'D' },
+    { label: 'E', value: 'E' },
+    { label: 'F', value: 'F' },
+    { label: 'G', value: 'G' },
+    { label: 'H', value: 'H' },
+    { label: 'I', value: 'I' },
+    { label: 'J', value: 'J' },
+    { label: 'K', value: 'K' },
+    { label: 'L', value: 'L' },
+    { label: 'M', value: 'M' },
+    { label: 'N', value: 'N' },
+    { label: 'O', value: 'O' },
+    { label: 'P', value: 'P' },
+    { label: 'Q', value: 'Q' },
+    { label: 'S', value: 'S' },
+    { label: 'T', value: 'T' },
+    { label: 'U', value: 'U' },
+    { label: 'V', value: 'V' },
+    { label: 'W', value: 'W' },
+    { label: 'X', value: 'X' },
+    { label: 'Y', value: 'Y' },
+    { label: 'Z', value: 'Z' },
+  ]
 
   //
   // Renderlist actions - including roster check
@@ -190,10 +197,10 @@
       visible.value = true
     }
     /* else {
-      // remove from accounts
-      // will trigger change in filteredData passed to renderlist
-      accounts.value = accounts.value.filter((u) => u.id !== id)
-    } */
+       // remove from accounts
+       // will trigger change in filteredData passed to renderlist
+       accounts.value = accounts.value.filter((u) => u.id !== id)
+     } */
   }
 
   const changeStatus = async ({ id, status }) => {

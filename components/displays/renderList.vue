@@ -18,7 +18,7 @@
       <div class="my-renderlist-styles">
         <DataTable
           ref="dataTableRef"
-          :value="data"
+          :value="data_local"
           striped-rows
           class="p-datatable-sm p-datatable-generic my-text-style"
           responsiveLayout="scroll"
@@ -167,9 +167,9 @@
   //
   // make local copy of input data
   //
-  const datalocal = ref([])
-  watch(() => {
-    datalocal.value = [...props.data]
+  const data_local = ref([])
+  watchEffect(() => {
+    data_local.value = [...props.data]
   })
 
   //
@@ -196,8 +196,8 @@
   const changeStatus = ({ id, status }) => {
     status = status ? 0 : 1
     // in browser
-    const pos = datalocal.value.findIndex((u) => u.id === id)
-    datalocal.value[pos].status = status
+    const pos = data_local.value.findIndex((u) => u.id === id)
+    data_local.value[pos].status = status
     // in DB
     emit('changeStatus', { id, status })
   }
@@ -211,7 +211,7 @@
     deleteDialog.value = true
   }
   const confirmedDelete = (id) => {
-    datalocal.value = datalocal.value.filter((u) => u.id !== id)
+    data_local.value = data_local.value.filter((u) => u.id !== id)
 
     // deletion confirmed
     // close confirm dialog
