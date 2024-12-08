@@ -11,6 +11,7 @@
       <div class="topsectionitem">
         <lookup-by-email />
       </div>
+
       <div class="topsectionitem">
         <p class="my-header-style">Member type</p>
         <Dropdown
@@ -30,14 +31,6 @@
           :options="alphas"
         />
       </div>
-      <!-- <div class="topsectionitem">
-        <FormKit
-          v-model="alpha"
-          type="select"
-          label="Last name begins with"
-          :options="alphas"
-        />
-      </div> -->
     </div>
 
     <div>
