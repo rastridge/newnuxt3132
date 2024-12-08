@@ -7,9 +7,7 @@
       <div class="topsectionitem">
         <display-admin-header :title="app" />
       </div>
-      <!-- 			<div v-if="!contributions" class="topsectionitem">
-				<ProgressSpinner /> Loading ...
-			</div> -->
+
       <!--Select year -->
       <div class="topsectionitem">
         <select-year
@@ -48,7 +46,7 @@
   const { $dayjs } = useNuxtApp()
 
   //
-  // Initialize values for Renderlist and Select Year
+  // Initialize values for Renderlist
   //
 
   const { getAccess } = useRenderListAccess()
@@ -60,13 +58,20 @@
   // Initialize year select
   //
   const startyear = 2012
-  // const { $dayjs } = useNuxtApp()
   const year = ref(placemark.getYear)
 
   //
   // Get all contributions
   //
   const { data: contributions } = await getAll(app)
+  //
+  // filter by year
+  //
+  const filteredData = computed(() => {
+    return contributions.value.filter((d) => {
+      return parseInt($dayjs(d.dt).format('YYYY')) === year.value
+    })
+  })
 
   //
   // Select year action
@@ -78,12 +83,6 @@
     placemark.setPage(0)
     page.value = 0
   }
-
-  const filteredData = computed(() => {
-    return contributions.value.filter((d) => {
-      return parseInt($dayjs(d.dt).format('YYYY')) === year.value
-    })
-  })
 
   //
   // Renderlist actions
