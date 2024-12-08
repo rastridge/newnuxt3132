@@ -172,7 +172,6 @@
   import { getNode } from '@formkit/core'
   import { useAlertStore } from '~/stores/alertStore'
   const alert = useAlertStore()
-  // const { $dayjs } = useNuxtApp()
   const { getCountries, setRegions } = useLocations()
   const saving = ref(false)
 
