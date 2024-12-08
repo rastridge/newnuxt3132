@@ -1,3 +1,21 @@
+<template>
+  <div>
+    <Head>
+      <Title>Add Flag Account</Title>
+    </Head>
+    <div class="topsectioncenter">
+      <div class="topsectionitem">
+        <display-admin-header title="Add flag account" />
+      </div>
+
+      <accounts-flag-form
+        :state="state"
+        @submitted="onSubmit"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
   import { useAlertStore } from '~/stores/alertStore'
   definePageMeta({
@@ -17,7 +35,6 @@
     account_addr_street_ext: '',
     account_addr_country: 'US',
     member_type_id: '11',
-    // adjust date for formkit date input
     member_dob: '',
     newsletter_recipient: '1',
     mail_recipient: '0',
@@ -35,20 +52,3 @@
     }
   }
 </script>
-
-<template>
-  <div>
-    <Head>
-      <Title>Add Flag Account</Title>
-    </Head>
-    <div class="topsectioncenter">
-      <div class="topsectionitem">
-        <display-admin-header title="Add flag account" />
-      </div>
-      <accounts-flag-form
-        :state="state"
-        @submitted="onSubmit"
-      />
-    </div>
-  </div>
-</template>

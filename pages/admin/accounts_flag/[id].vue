@@ -12,14 +12,10 @@
   const { onSubmitEdit } = useSubmit()
 
   //
-  // Get account id to edit
+  // Initialize Edit form
   //
   const route = useRoute()
   const id = route.params.id
-
-  //
-  // Initialize Edit form
-  //
   const { data: state } = await useFetch(`/accounts_flag/${id}`, {
     key: id,
     method: 'get',
@@ -52,7 +48,6 @@
         <display-admin-header title="Edit flag account" />
       </div>
       <accounts-flag-form
-        :id="id"
         :state="state"
         @submitted="onSubmit"
       />
