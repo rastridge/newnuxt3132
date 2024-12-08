@@ -82,10 +82,11 @@
 <script setup>
   import { useAuthStore } from '~/stores/authStore'
   const auth = useAuthStore()
+  const { $dayjs } = useNuxtApp()
+
   const saving = ref(false)
   const error = ref(false)
 
-  const { $dayjs } = useNuxtApp()
   //
   // Outgoing
   //
@@ -104,8 +105,9 @@
   )
 
   //
-  // progress modal
+  // file upload
   //
+  // progress modal
   const displayModal = ref(false)
   const openProgressModal = () => {
     displayModal.value = true
@@ -113,7 +115,8 @@
   const closeProgressModal = () => {
     displayModal.value = false
   }
-
+  //
+  // handler
   const submitFileUpload = async (event) => {
     state.value.archive_filepath = null
     const file = event.files[0]
@@ -138,6 +141,7 @@
     closeProgressModal()
     state.value.archive_filepath = data.imageUrl
   }
+
   //
   // form handlers
   //

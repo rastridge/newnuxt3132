@@ -8,14 +8,10 @@
   const { onSubmitEdit } = useSubmit()
 
   //
-  // Get archives item id
+  // Initialize Edit form
   //
   const route = useRoute()
   const id = route.params.id
-
-  //
-  // Initialize Edit form
-  //
   const { data: state } = await useFetch(`/archive/${id}`, {
     method: 'get',
     headers: {
