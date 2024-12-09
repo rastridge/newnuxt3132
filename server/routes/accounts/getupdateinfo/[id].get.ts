@@ -3,7 +3,7 @@ import { accountsService } from '~/server/services/accountsService'
 export default defineEventHandler(async (event) => {
   const id = event.context.params.id
 
-  if (id.length < 16) {
+  if (id.length > 16) {
     throw createError({
       statusCode: 401,
       message: 'Unauthorized',
