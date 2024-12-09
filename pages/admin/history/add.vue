@@ -4,6 +4,9 @@
   })
   const { onSubmitAdd } = useSubmit()
 
+  // initialize form data
+  const state = { history_year: null }
+
   // Sponsors form action
   //
   const onSubmit = async function (state) {
@@ -21,7 +24,10 @@
       <div class="topsectionitem">
         <display-admin-header title="Add history" />
       </div>
-      <history-form @submitted="onSubmit" />
+      <history-form
+        :state="state"
+        @submitted="onSubmit"
+      />
     </div>
   </div>
 </template>
