@@ -6,6 +6,8 @@
       submit-label="Submit"
       @submit="submitForm(state)"
     >
+      <!--     disable if editing
+ -->
       <FormKit
         type="text"
         label="Year"
@@ -14,6 +16,8 @@
         validation="required|number|between:1965,2050"
         validation-visibility="live"
       />
+      <!--       // prevent add using existing history_year
+ -->
       <div
         v-if="year_exists && !edit_form"
         class="alert-danger"
@@ -93,9 +97,12 @@
 
   // Editing - year exists - can't be changed
   // null if adding
-  edit_form.value = state.value.history_year
   //
-  // test if year already exists - cant add
+  edit_form.value = state.value.history_year
+
+  //
+  // See if year already exists - cant add
+  //
   const { data: years } = await useFetch(`/history/getyears`, {
     method: 'get',
     headers: {
@@ -111,6 +118,7 @@
   //
   const submitForm = (state) => {
     if (!(year_exists.value && !edit_form.value)) {
+      // prevent add using existing history_year
       saving.value = true
       emit('submitted', state)
     }
