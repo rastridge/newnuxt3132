@@ -100,9 +100,9 @@
   const state = ref({ ...props.state })
 
   // Format for Primevue calendar
-  state.value.archive_date = $dayjs(state.value.archive_date).format(
+  /*  state.value.archive_date = $dayjs(state.value.archive_date).format(
     'YYYY-MM-DD',
-  )
+  ) */
 
   //
   // file upload

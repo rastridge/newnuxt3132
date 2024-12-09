@@ -58,9 +58,6 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
-  const { $dayjs } = useNuxtApp()
   const saving = ref(false)
 
   //
@@ -71,46 +68,10 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
-  //
-  // Initialize Add form
-  //
-  const state = ref({})
-
-  const dt = $dayjs()
-  state.value.release_dt = dt.format('YYYY-MM-DD')
-  state.value.event_dt = dt.add(7, 'day').format('YYYY-MM-DD')
-  state.value.expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data: events_data } = await useFetch(`/events/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = events_data.value
-
-    // Format for Primevue calendar
-    state.value.event_dt = $dayjs(events_data.value.event_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.release_dt = $dayjs(events_data.value.release_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.expire_dt = $dayjs(events_data.value.expire_dt).format(
-      'YYYY-MM-DD',
-    )
-  }
   //
   // form handlers
   //

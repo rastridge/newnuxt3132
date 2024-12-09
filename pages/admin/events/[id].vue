@@ -2,6 +2,7 @@
   definePageMeta({
     middleware: ['auth'],
   })
+  const auth = useAuthStore()
 
   const { onSubmitEdit } = useSubmit()
 
@@ -10,6 +11,16 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // Initialize Edit form
+  //
+  const { data: state } = await useFetch(`/events/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
 
   //
   // News form action
@@ -31,7 +42,7 @@
         <display-admin-header title="Edit Events" />
       </div>
       <events-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>
