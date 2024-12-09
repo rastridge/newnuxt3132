@@ -97,6 +97,7 @@
 <script setup>
   import { useAuthStore } from '~/stores/authStore'
   const auth = useAuthStore()
+
   const saving = ref(false)
   const error = ref(false)
 
@@ -119,6 +120,8 @@
   //
 
   //
+  // file upload
+  //
   // progress modal
   //
   const displayModal = ref(false)
@@ -129,6 +132,8 @@
     displayModal.value = false
   }
 
+  //
+  // file handler
   const submitFileUpload = async (event) => {
     state.value.clubhouse_filepath = null
     const file = event.files[0]

@@ -1,53 +1,57 @@
 <template>
-	<div>
-		<Head>
-			<Title>{{ app }} List</Title>
-		</Head>
-		<div class="topsectioncenter">
-			<div class="topsectionitem">
-				<display-admin-header :title="app" />
-			</div>
-		</div>
+  <div>
+    <Head>
+      <Title>{{ app }} List</Title>
+    </Head>
+    <div class="topsectioncenter">
+      <div class="topsectionitem">
+        <display-admin-header :title="app" />
+      </div>
+    </div>
 
-		<div>
-			<render-list
-				:data="content_data"
-				:app="app"
-				:statusable="statusable"
-				:editable="editable"
-				:deleteable="deleteable"
-				:addable="addable"
-				:viewable="viewable"
-				@changeStatus="changeStatus"
-				@deleteItem="deleteItem"
-			/>
-		</div>
-	</div>
+    <div>
+      <render-list
+        :data="content_data"
+        :app="app"
+        :statusable="statusable"
+        :editable="editable"
+        :deleteable="deleteable"
+        :addable="addable"
+        :viewable="viewable"
+        @changeStatus="changeStatus"
+        @deleteItem="deleteItem"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
-	definePageMeta({
-		middleware: ['auth'],
-	})
+  definePageMeta({
+    middleware: ['auth'],
+  })
 
-	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
-	const { getAccess } = useRenderListAccess()
+  const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 
-	//
-	// Initialize values for Renderlist
-	//
-	const app = 'content'
-	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
-	const { data: content_data } = await getAll(app)
+  //
+  // Initialize values for Renderlist
+  //
+  const { getAccess } = useRenderListAccess()
+  const app = 'content'
+  const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
-	//
-	// Renderlist actions
-	//
-	const deleteItem = async (id) => {
-		await deleteOne(app, id)
-	}
+  //
+  // Get all content
+  //
+  const { data: content_data } = await getAll(app)
 
-	const changeStatus = async ({ id, status }) => {
-		await changeStatusOne(app, { id, status })
-	}
+  //
+  // Renderlist actions
+  //
+  const deleteItem = async (id) => {
+    await deleteOne(app, id)
+  }
+
+  const changeStatus = async ({ id, status }) => {
+    await changeStatusOne(app, { id, status })
+  }
 </script>

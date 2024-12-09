@@ -7,11 +7,10 @@
 
   const { onSubmitEdit } = useSubmit()
   //
-  // Get content item id
+  // Initialize Edit form
   //
   const route = useRoute()
   const id = route.params.id
-
   const { data: state } = await useFetch(`/content/${id}`, {
     key: id,
     method: 'get',

@@ -83,12 +83,6 @@
   const state = ref({ ...props.state })
 
   //
-  // incoming from inputBody component
-  //
-  const changeState = (field) => {
-    state.value.content_body = field
-  }
-  //
   // raw html view
   //
   const peek = ref(false)
@@ -97,7 +91,13 @@
   }
 
   //
-  // Change to make images responsive
+  // incoming from inputBody component
+  //
+  const changeState = (field) => {
+    state.value.content_body = field
+  }
+  //
+  // Update html from InputBody component to make images responsive
   //
   state.value.content_body = state.value.content_body.replace(
     /\<img/g,

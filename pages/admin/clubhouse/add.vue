@@ -1,3 +1,20 @@
+<template>
+  <div>
+    <Head>
+      <Title>Add clubhouse Item</Title>
+    </Head>
+    <div class="topsectioncenter">
+      <div class="topsectionitem">
+        <display-admin-header title="Add clubhouse item" />
+      </div>
+      <clubhouse-form
+        :state="state"
+        @submitted="onSubmit"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
   definePageMeta({
     middleware: ['auth'],
@@ -15,20 +32,3 @@
     navigateTo(`/admin/clubhouse`)
   }
 </script>
-
-<template>
-  <div>
-    <Head>
-      <Title>Add clubhouse Item</Title>
-    </Head>
-    <div class="topsectioncenter">
-      <div class="topsectionitem">
-        <display-admin-header title="Add clubhouse item" />
-      </div>
-      <clubhouse-form
-        :state="state"
-        @submitted="onSubmit"
-      />
-    </div>
-  </div>
-</template>

@@ -1,28 +1,3 @@
-<script setup>
-  definePageMeta({
-    middleware: ['auth'],
-  })
-  const { $dayjs } = useNuxtApp()
-
-  const { onSubmitAdd } = useSubmit()
-
-  const dt = $dayjs()
-
-  const state = ref({
-    content_release_dt: dt.format('YYYY-MM-DD'),
-    content_expire_dt: dt.add(28, 'day').format('YYYY-MM-DD'),
-    content_body: '',
-  })
-
-  //
-  // Content form action
-  //
-  const onSubmit = async function (form_state) {
-    await onSubmitAdd('content', form_state)
-    navigateTo(`/admin/content`)
-  }
-</script>
-
 <template>
   <div>
     <Head>
@@ -39,3 +14,29 @@
     </div>
   </div>
 </template>
+
+<script setup>
+  definePageMeta({
+    middleware: ['auth'],
+  })
+  const { onSubmitAdd } = useSubmit()
+  const { $dayjs } = useNuxtApp()
+
+  //
+  // initialize form data
+  //
+  const dt = $dayjs()
+  const state = ref({
+    content_release_dt: dt.format('YYYY-MM-DD'),
+    content_expire_dt: dt.add(28, 'day').format('YYYY-MM-DD'),
+    content_body: '',
+  })
+
+  //
+  // Content form action
+  //
+  const onSubmit = async function (form_state) {
+    await onSubmitAdd('content', form_state)
+    navigateTo(`/admin/content`)
+  }
+</script>

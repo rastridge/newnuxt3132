@@ -116,7 +116,7 @@
     displayModal.value = false
   }
   //
-  // handler
+  // file handler
   const submitFileUpload = async (event) => {
     state.value.archive_filepath = null
     const file = event.files[0]
@@ -124,11 +124,10 @@
     const formData = new FormData()
     formData.append('file', file)
     openProgressModal()
+
     // Find server code in folder Nuxt3-brc-media-api
     const CONFIG = useRuntimeConfig()
-
     const url = `${CONFIG.public.MEDIA_URL}archives`
-
     const res = await fetch(url, {
       method: 'POST',
       body: formData,
