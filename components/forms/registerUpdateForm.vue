@@ -121,7 +121,7 @@
   //
   // Initialize Edit form
   //
-  if (props.id.length < 16) {
+  if (props.id.length > 16) {
     navigateTo('/')
   } else {
     const { data: formdata } = await useFetch(
@@ -135,6 +135,7 @@
     //
     // create coutry and region options formatted for Formkit
     const justCountries = ref(getCountries())
+
     // justCountries.value = getCountries()
 
     const justRegions = ref(setRegions(state.value.account_addr_country))
