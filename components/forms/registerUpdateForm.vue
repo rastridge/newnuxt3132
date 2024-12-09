@@ -4,7 +4,7 @@
       v-model="state"
       type="form"
       :config="{ validationVisibility: 'live' }"
-      submit-label="Submit member"
+      submit-label="Submit update"
       @submit="submitForm"
     >
       <display-alert />
@@ -90,6 +90,7 @@
       <display-alert />
       <display-cancelform />
     </FormKit>
+
     <p v-if="saving">
       <ProgressBar
         mode="indeterminate"
@@ -104,8 +105,9 @@
   import { getNode } from '@formkit/core'
   import { navigateTo } from 'nuxt/app'
   const { getCountries, setRegions } = useLocations()
+
   const saving = ref(false)
-  const state = ref(null)
+  // const state = ref([])
 
   //
   // Outgoing
@@ -123,56 +125,41 @@
   //
   if (props.id.length > 16) {
     navigateTo('/')
-  } else {
-    const { data: formdata } = await useFetch(
-      `/accounts/getupdateinfo/${props.id}`,
-      {
-        key: props.id,
-        method: 'get',
-      },
-    )
-    state.value = formdata.value
-    //
-    // create coutry and region options formatted for Formkit
-    const justCountries = ref(getCountries())
+  }
+  const { data: state } = await useFetch(
+    `/accounts/getupdateinfo/${props.id}`,
+    {
+      method: 'get',
+    },
+  )
+  //
+  // create country and region options formatted for Formkit
+  //
+  const justCountries = ref(getCountries())
 
-    // justCountries.value = getCountries()
+  const justRegions = ref(setRegions(state.value.account_addr_country))
+  // set regions for initial country
+  // justRegions.value = setRegions(state.value.account_addr_country)
 
-    const justRegions = ref(setRegions(state.value.account_addr_country))
-    // set regions for initial country
-    // justRegions.value = setRegions(state.value.account_addr_country)
+  // FormKit stuff
+  // Region depends on country
+  onMounted(() => {
+    // Use the IDs of the inputs you want to get
+    const countryNode = getNode('account_addr_country')
+    // const stateNode = getNode('account_addr_state')
 
-    /* 	//
-	// progress modal
-	//
-	const displayModal = ref(true)
-	// const openProgressModal = () => {
-	// 	displayModal.value = true
-	// }
-	const closeModal = () => {
-		displayModal.value = false
-	} */
-
-    //
-    // form handlers
-    //
-    const submitForm = (state) => {
-      saving.value = true
-      emit('submitted', state)
-    }
-
-    // FormKit stuff
-    // Region depends on country
-    onMounted(() => {
-      // Use the IDs of the inputs you want to get
-      const countryNode = getNode('account_addr_country')
-      // const stateNode = getNode('account_addr_state')
-
-      // Here we are listening for the 'commit' event
-      countryNode.on('commit', ({ payload }) => {
-        // We update the value of the regions
-        justRegions.value = setRegions(payload)
-      })
+    // Here we are listening for the 'commit' event
+    countryNode.on('commit', ({ payload }) => {
+      // We update the value of the regions
+      justRegions.value = setRegions(payload)
     })
+  })
+
+  //
+  // form handlers
+  //
+  const submitForm = (state) => {
+    saving.value = true
+    emit('submitted', state)
   }
 </script>

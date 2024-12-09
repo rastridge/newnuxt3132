@@ -96,6 +96,7 @@
           { label: 'No', value: 0 },
         ]"
       />
+
       <FormKit
         type="select"
         label="Show address?"
@@ -105,6 +106,7 @@
           { label: 'No', value: 0 },
         ]"
       />
+
       <FormKit
         type="select"
         label="Receive newsletter?"
@@ -132,10 +134,7 @@
           { label: 'No', value: 0 },
         ]"
       />
-      <!--  <pre>{{ state }}</pre>
-      <br />
-      local_state
-      <pre>{{ local_state }}</pre> -->
+
       <FormKit
         type="select"
         label="Member type"
@@ -144,6 +143,7 @@
         :options="memberTypeOptions"
         validation="required"
       />
+
       <FormKit
         type="select"
         label="2nd Member type"
@@ -151,6 +151,7 @@
         name="member_type2_id"
         :options="memberTypeOptions"
       />
+
       <FormKit
         type="select"
         label="Member Administrator role"
@@ -158,6 +159,7 @@
         name="member_admin_type_id"
         :options="memberAdminTypeOptions"
       />
+
       <FormKit
         type="select"
         label="2nd Member Administrator role"
@@ -165,8 +167,8 @@
         name="member_admin_type2_id"
         :options="memberAdminTypeOptions"
       />
-      <!-- wall of fame year -->
 
+      <!-- wall of fame year -->
       <FormKit
         type="number"
         label="WOF Year"
@@ -174,6 +176,7 @@
         min="1966"
         step="1"
       />
+
       <div class="my-fileupload-wrapper-style">
         <!-- wof image file upload 	-->
         <label
@@ -265,6 +268,7 @@
   // create coutry and region options formatted for Formkit
   const justCountries = ref(getCountries())
   const justRegions = ref(setRegions(local_state.value.account_addr_country))
+
   // get member types for options formatted for Formkit
   const memberAdminTypeOptions = await getMemberAdminTypeOptions()
   const memberTypeOptions = await getMemberTypeOptions()
