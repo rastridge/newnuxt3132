@@ -107,7 +107,10 @@ async function getOne(id) {
 							FROM inbrc_accounts
 							WHERE account_id = ?`
   const accounts = await doDBQueryBuffalorugby(sql, [id])
-  const account = accounts[0]
+  let account = {}
+  if (accounts.length > 0) {
+    account = accounts[0]
+  }
   return account
 }
 

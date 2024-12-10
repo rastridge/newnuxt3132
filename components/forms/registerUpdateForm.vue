@@ -103,7 +103,7 @@
 
 <script setup>
   import { getNode } from '@formkit/core'
-  import { navigateTo } from 'nuxt/app'
+  // import { navigateTo } from 'nuxt/app'
   const { getCountries, setRegions } = useLocations()
 
   const saving = ref(false)
@@ -117,21 +117,10 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
+  const state = ref({ ...props.state })
 
-  //
-  // Initialize Edit form
-  //
-  if (props.id.length > 16) {
-    navigateTo('/')
-  }
-  const { data: state } = await useFetch(
-    `/accounts/getupdateinfo/${props.id}`,
-    {
-      method: 'get',
-    },
-  )
   //
   // create country and region options formatted for Formkit
   //

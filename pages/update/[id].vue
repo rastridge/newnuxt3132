@@ -6,7 +6,30 @@
   //
   const route = useRoute()
   const id = route.params.id
+  //
+  // Test for legitimate account_id parameter
+  //
+  const hasOne = ref(true)
+  const state = ref({})
 
+  // check legitimate paramemter
+  if (id.length > 16 || id.length < 13) {
+    hasOne.value = false
+  }
+  //
+  // if legit get account data
+  //
+  if (hasOne.value) {
+    const { data } = await useFetch(`/accounts/getupdateinfo/${id}`, {
+      method: 'get',
+    })
+    state.value = data.value
+    hasOne.value = Object.keys(state.value).length !== 0
+  }
+  // if not legit account_id
+  if (!hasOne.value) {
+    navigateTo('/')
+  }
   //
   // Update Account form action
   //
@@ -25,9 +48,13 @@
       <Title>Update Your Member Info</Title>
     </Head>
     <common-header title="Update Membership" />
-    <register-update-form
-      :id="id"
-      @submitted="onSubmit"
-    />
+    <!--     dont call form if not legit
+ -->
+    <div v-if="hasOne">
+      <register-update-form
+        :state="state"
+        @submitted="onSubmit"
+      />
+    </div>
   </div>
 </template>
