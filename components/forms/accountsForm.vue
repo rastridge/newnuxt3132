@@ -209,8 +209,8 @@
             width="72"
           />
         </div>
-        <display-alert />
       </div>
+      <display-alert />
       <display-cancelform :destination="'/admin/accounts/men'" />
     </FormKit>
     <p v-if="saving">
@@ -351,8 +351,8 @@
   //
   // form handlers
   //
-  const submitForm = (local_state) => {
+  const submitForm = (state) => {
     saving.value = true
-    emit('submitted', { ...local_state })
+    emit('submitted', state)
   }
 </script>

@@ -4,7 +4,7 @@
 const { sendEmail } = useEmail()
 const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby } = useDBConnection()
-const { checkEmail } = useAccountInfo()
+const { checkEmail, checkEmailAdd } = useAccountInfo()
 
 export const accountsService = {
   getRecentUpdates,
@@ -119,10 +119,15 @@ async function getOne(id) {
 /*              addOne                     */
 /***************************************** */
 async function addOne(info) {
+  const emailExists = await checkEmailAdd(info)
+  // make sure email is lowercase
+  const lc_account_email = info.account_email.toLowerCase()
+  let msg = null // will be returned with message if email exists */
+
   const CONN = await getConnectionBuffalorugby()
   try {
     await CONN.query('START TRANSACTION')
-
+    /*
     // check for existing email
     let msg = null // will be returned with message if email exists
     let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0`
@@ -131,7 +136,7 @@ async function addOne(info) {
     const lc_account_email = info.account_email.toLowerCase()
     const emailExists = temp.find(
       (u) => u.account_email.toLowerCase() === lc_account_email,
-    )
+    ) */
 
     // If no email conflict
     //
@@ -275,6 +280,8 @@ async function addOne(info) {
 async function editOne(info) {
   const emailExists = await checkEmail(info)
   let msg = null // will be returned with message if email exists
+  // make sure email is lowercase
+  const lc_account_email = info.account_email.toLowerCase()
 
   const CONN = await getConnectionBuffalorugby()
   try {
@@ -293,9 +300,6 @@ async function editOne(info) {
     // */
 
     if (!emailExists) {
-      // make sure email is lowercase
-      const lc_account_email = info.account_email.toLowerCase()
-
       let sql = `UPDATE inbrc_accounts
 							SET
 									account_email = ?,
@@ -393,11 +397,8 @@ async function editOne(info) {
 
       sql = mysql.format(sql, inserts)
       await CONN.execute(sql)
-
-      await CONN.execute(sql)
     } else {
-      msg =
-        'Account with email ' + emailExists.account_email + ' already exists'
+      msg = 'Account with email ' + lc_account_email + ' already exists'
     }
 
     await CONN.query('COMMIT')

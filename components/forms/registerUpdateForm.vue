@@ -107,8 +107,6 @@
   const { getCountries, setRegions } = useLocations()
 
   const saving = ref(false)
-  // const state = ref([])
-
   //
   // Outgoing
   //
