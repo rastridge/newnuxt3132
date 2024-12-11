@@ -212,8 +212,8 @@
 
   // form handlers
   //
-  const submitForm = (local_state) => {
+  const submitForm = (state) => {
     saving.value = true
-    emit('submitted', { ...local_state })
+    emit('submitted', { ...state })
   }
 </script>

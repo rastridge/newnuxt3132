@@ -127,16 +127,6 @@ async function addOne(info) {
   const CONN = await getConnectionBuffalorugby()
   try {
     await CONN.query('START TRANSACTION')
-    /*
-    // check for existing email
-    let msg = null // will be returned with message if email exists
-    let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0`
-    const [rows] = await CONN.execute(sql)
-    const temp = rows
-    const lc_account_email = info.account_email.toLowerCase()
-    const emailExists = temp.find(
-      (u) => u.account_email.toLowerCase() === lc_account_email,
-    ) */
 
     // If no email conflict
     //
@@ -286,18 +276,6 @@ async function editOne(info) {
   const CONN = await getConnectionBuffalorugby()
   try {
     await CONN.query('START TRANSACTION')
-    /*
-    // check for other users with proposed email address
-    let msg = null // will be returned with message if email exists
-    let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0 AND account_id <> ${info.account_id}`
-    const [rows] = await CONN.execute(sql)
-    const temp = rows
-    const lc_account_email = info.account_email.toLowerCase()
-    const emailExists = temp.find(
-      (u) => u.account_email.toLowerCase() === lc_account_email,
-    )
-    // If no email conflict
-    // */
 
     if (!emailExists) {
       let sql = `UPDATE inbrc_accounts
