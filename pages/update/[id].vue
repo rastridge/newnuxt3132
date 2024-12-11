@@ -1,7 +1,9 @@
 <script setup>
   import { useAlertStore } from '~/stores/alertStore'
+  // import useAccountInfo from '../../server/utils/useAccountInfo'
   const alert = useAlertStore()
   const { onSubmitUpdate } = useSubmit()
+  // const { emailExists } = useAccountInfo()
   //
   //
   const route = useRoute()
@@ -23,6 +25,9 @@
     const { data } = await useFetch(`/accounts/getupdateinfo/${id}`, {
       method: 'get',
     })
+
+    // console.log('exists = ', emailExists)
+
     state.value = data.value
     hasOne.value = Object.keys(state.value).length !== 0
   }

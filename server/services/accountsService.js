@@ -4,6 +4,7 @@
 const { sendEmail } = useEmail()
 const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby } = useDBConnection()
+const { checkEmail } = useAccountInfo()
 
 export const accountsService = {
   getRecentUpdates,
@@ -272,10 +273,13 @@ async function addOne(info) {
 /*               editOne                   */
 /***************************************** */
 async function editOne(info) {
+  const emailExists = await checkEmail(info)
+  let msg = null // will be returned with message if email exists
+
   const CONN = await getConnectionBuffalorugby()
   try {
     await CONN.query('START TRANSACTION')
-
+    /*
     // check for other users with proposed email address
     let msg = null // will be returned with message if email exists
     let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0 AND account_id <> ${info.account_id}`
@@ -286,9 +290,12 @@ async function editOne(info) {
       (u) => u.account_email.toLowerCase() === lc_account_email,
     )
     // If no email conflict
-    //
+    // */
 
     if (!emailExists) {
+      // make sure email is lowercase
+      const lc_account_email = info.account_email.toLowerCase()
+
       let sql = `UPDATE inbrc_accounts
 							SET
 									account_email = ?,
@@ -389,7 +396,8 @@ async function editOne(info) {
 
       await CONN.execute(sql)
     } else {
-      msg = 'Account with email ' + info.account_email + ' already exists'
+      msg =
+        'Account with email ' + emailExists.account_email + ' already exists'
     }
 
     await CONN.query('COMMIT')
