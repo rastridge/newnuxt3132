@@ -238,6 +238,7 @@ async function addOne(info) {
         'j.qualey@yahoo.com',
         'cnrehlers@gmail.com',
         'lexmaccubbin@yahoo.com',
+        'owen.lawther26@gmail.com',
       ]
       // const email_list = ['ron.astridge@icloud.com']
 
