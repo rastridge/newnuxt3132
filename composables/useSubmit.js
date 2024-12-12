@@ -16,7 +16,7 @@ export default function useSubmit() {
     })
 
     if (data.value.message) {
-      // message if email exists
+      // message if email exists, null if not
       alert.error(data.value.message)
     }
   }
@@ -31,7 +31,7 @@ export default function useSubmit() {
     })
 
     if (data.value.message) {
-      // message if email exists
+      // message if email exists, null if not
       alert.error(data.value.message)
     }
   }
@@ -46,7 +46,7 @@ export default function useSubmit() {
     })
 
     if (data.value.message) {
-      // message if email exists
+      // message if email exists, null if not
       alert.error(data.value.message)
     }
   }
@@ -58,7 +58,7 @@ export default function useSubmit() {
     })
 
     if (data.value.message) {
-      // message if email exists
+      // message if email exists, null if not
       alert.error(data.value.message)
     }
   }

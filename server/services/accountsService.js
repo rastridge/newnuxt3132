@@ -22,11 +22,7 @@ export const accountsService = {
   getShow,
   getMemberTypes,
   getMemberAdminTypes,
-  // getOneFlag,
-  // addOneFlag,
-  // addFlagByRegister,
-  // getAllFlag,
-  // editOneFlag,
+
   lookupByEmail,
 }
 
@@ -375,7 +371,8 @@ async function editOne(info) {
       )
 
       sql = mysql.format(sql, inserts)
-      await CONN.execute(sql)
+      const result = await CONN.execute(sql)
+      console.log('result = ', result[0].info)
     } else {
       msg = 'Account with email ' + lc_account_email + ' already exists'
     }
