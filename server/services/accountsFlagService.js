@@ -203,7 +203,7 @@ async function addOne(info) {
     )
     await doDBQueryBuffalorugby(sql, inserts)
 
-    const message =
+    const success =
       '<h3>An Buffalo Rugby Club youth flag rugby account for ' +
       member_firstname +
       ' ' +
@@ -211,11 +211,11 @@ async function addOne(info) {
       '  has been created with email = ' +
       lc_account_email +
       '</h3>'
-    // console.log('message = ', message)
+
     await sendEmail(
       CONFIG.TO_FLAG,
       'Buffalo Rugby Club Flag Account Creation',
-      message,
+      success,
     )
   } else {
     msg = 'Account with email ' + lc_account_email + ' already exists'
@@ -224,44 +224,17 @@ async function addOne(info) {
   return { message: msg }
 }
 
-async function addFlagByRegister({
-  member_guardian,
-  member_dob,
-  member_gender,
-  flag_legal,
-  flag_photo,
+async function addFlagByRegister(info) {
+  // check for existing email
+  const emailExists = await checkEmailAddFlag(info)
+  // make sure email is lowercase
+  const lc_account_email = info.account_email.toLowerCase()
+  let msg = null // will be returned with message if email exists */
 
-  account_email,
-  member_firstname,
-  member_lastname,
-
-  account_addr_street,
-  account_addr_street_ext,
-  account_addr_city,
-  account_addr_state,
-  account_addr_country,
-  account_addr_postal,
-
-  member_year,
-
-  account_addr_phone,
-  member_show_phone,
-  member_show_addr,
-  newsletter_recipient,
-  mail_recipient,
-  sms_recipient,
-}) {
-  // check for other users with proposed email address
-  let sql = `select * from inbrc_accounts_flag where deleted = 0`
-  const temp = await doDBQueryBuffalorugby(sql)
-  let emailExists = temp.find(
-    (u) => u.account_email.toLowerCase() === account_email.toLowerCase(),
-  )
-  let account = []
   if (!emailExists) {
     // let hashedpassword = md5(account_remind).substring(3,11)
 
-    sql = `INSERT INTO inbrc_accounts_flag
+    const sql = `INSERT INTO inbrc_accounts_flag
 							SET
 								member_guardian = ?,
 								member_dob = ?,
@@ -295,7 +268,33 @@ async function addFlagByRegister({
 								deleted = 0,
 								created_dt = NOW(),
 								modified_dt = NOW()`
+    const {
+      member_guardian,
+      member_dob,
+      member_gender,
+      flag_legal,
+      flag_photo,
 
+      account_email,
+      member_firstname,
+      member_lastname,
+
+      account_addr_street,
+      account_addr_street_ext,
+      account_addr_city,
+      account_addr_state,
+      account_addr_country,
+      account_addr_postal,
+
+      member_year,
+
+      account_addr_phone,
+      member_show_phone,
+      member_show_addr,
+      newsletter_recipient,
+      mail_recipient,
+      sms_recipient,
+    } = info
     let inserts = []
     inserts.push(
       member_guardian,
@@ -324,10 +323,9 @@ async function addFlagByRegister({
       mail_recipient,
       sms_recipient,
     )
-    account = await doDBQueryBuffalorugby(sql, inserts)
-    account.error = ''
+    await doDBQueryBuffalorugby(sql, inserts)
 
-    const msg =
+    const success =
       '<h3>An Buffalo Rugby Club youth flag rugby account for ' +
       member_firstname +
       ' ' +
@@ -339,13 +337,13 @@ async function addFlagByRegister({
     await sendEmail(
       CONFIG.TO_FLAG,
       'Buffalo Rugby Club Flag Account Creation',
-      msg,
+      success,
     )
   } else {
-    account.error = 'Account with email ' + account_email + ' already exists'
+    msg = 'Account with email ' + lc_account_email + ' already exists'
   }
 
-  return account
+  return { message: msg }
 }
 
 /***************************************** */
@@ -447,7 +445,8 @@ async function editOne(info) {
     )
 
     await doDBQueryBuffalorugby(sql, inserts)
-    const msg =
+
+    const success =
       'The flag youth account for ' +
       member_firstname +
       ' ' +
@@ -455,18 +454,10 @@ async function editOne(info) {
       '  has been modified the email is ' +
       account_email
 
-    const email = {
-      from: CONFIG.FROM,
-      fromName: CONFIG.FROM_NAME,
-      to: CONFIG.TO_FLAG,
-      subject: 'BRC Flag Account Modification',
-      body_text: '',
-      body_html: msg,
-    }
     await sendEmail(
       CONFIG.TO_FLAG,
       'Buffalo Rugby Club Flag Account Modification',
-      msg,
+      success,
     )
   } else {
     msg = 'Account with email ' + lc_account_email + ' already exists'
