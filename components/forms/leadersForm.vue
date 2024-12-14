@@ -10,15 +10,15 @@
         type="text"
         label="Year"
         name="leaders_year"
-        :disabled="year_disabled"
-        validation="required|number|between:1965,2050"
+        :disabled="edit_form"
+        validation="required|number|between:1966,2050"
         validation-visibility="live"
       />
       <div
-        v-if="!goodyear"
+        v-if="year_exists && !edit_form"
         class="alert-danger"
       >
-        Year {{ state.leaders_year }} already exists
+        Year {{ state.leaders_year }} already exists. Cancel and try again.
       </div>
 
       <FormKit
@@ -98,15 +98,13 @@
       Saving ...
     </p>
   </div>
-  <!-- </div> -->
 </template>
 
 <script setup>
   import { useAuthStore } from '~/stores/authStore'
   const auth = useAuthStore()
   const saving = ref(false)
-  const year_disabled = ref(false)
-  const years = ref([])
+  const edit_form = ref(null)
 
   //
   // Outgoing
@@ -116,52 +114,39 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
-
+  const state = ref({ ...props.state })
   //
   // Initialize form
   //
-  const state = ref({})
+  // Editing - year exists - can't be changed
+  // null if adding
+  //
+  edit_form.value = state.value.leaders_year
 
-  const goodyear = computed(() => {
-    const year = years.value.find(
-      (u) => u.leaders_year == state.value.leaders_year,
-    )
-    return !year
+  //
+  // See if year already exists - cant add
+  //
+  const { data: years } = await useFetch(`/leaders/getyears`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
   })
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    // get opponent with id === props.id
-    const { data } = await useFetch(`/leaders/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-    // year exists - can't be changed
-    year_disabled.value = true
-  } else {
-    const { data } = await useFetch(`/leaders/getyears`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    years.value = data.value
-  }
+
+  const year_exists = computed(() =>
+    years.value.find((u) => u.leaders_year == state.value.leaders_year),
+  )
 
   //
   // form handlers
   //
 
   const submitForm = (state) => {
-    saving.value = true
-    emit('submitted', state)
+    if (!(year_exists.value && !edit_form.value)) {
+      saving.value = true
+      emit('submitted', state)
+    }
   }
 </script>

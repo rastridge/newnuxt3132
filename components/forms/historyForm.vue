@@ -13,7 +13,7 @@
         label="Year"
         name="history_year"
         :disabled="edit_form"
-        validation="required|number|between:1965,2050"
+        validation="required|number|between:1966,2050"
         validation-visibility="live"
       />
       <!--       // prevent add using existing history_year
@@ -74,7 +74,6 @@
       Saving ...
     </p>
   </div>
-  <!-- </div> -->
 </template>
 
 <script setup>

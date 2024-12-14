@@ -1,3 +1,21 @@
+<template>
+  <div>
+    <Head>
+      <Title>Edit History</Title>
+    </Head>
+
+    <div class="topsectioncenter">
+      <div class="topsectionitem">
+        <display-admin-header title="Edit history" />
+      </div>
+      <history-form
+        :state="state"
+        @submitted="onSubmit"
+      />
+    </div>
+  </div>
+</template>
+
 <script setup>
   import { useAuthStore } from '~/stores/authStore'
   const auth = useAuthStore()
@@ -25,21 +43,3 @@
     navigateTo(`/admin/history`)
   }
 </script>
-
-<template>
-  <div>
-    <Head>
-      <Title>Edit History</Title>
-    </Head>
-
-    <div class="topsectioncenter">
-      <div class="topsectionitem">
-        <display-admin-header title="Edit history" />
-      </div>
-      <history-form
-        :state="state"
-        @submitted="onSubmit"
-      />
-    </div>
-  </div>
-</template>
