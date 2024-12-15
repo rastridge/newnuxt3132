@@ -11,6 +11,14 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // assign existing data to Edit form
+  //
+  const { data: state } = await useFetch(`/newsletters/${id}`, {
+    method: 'get',
+  })
+
   //
   // Newsletters form action
   //
@@ -50,7 +58,7 @@
         <display-admin-header title="Edit Newsletter" />
       </div>
       <newsletters-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

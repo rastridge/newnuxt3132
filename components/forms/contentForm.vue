@@ -97,18 +97,18 @@
     state.value.content_body = field
   }
   //
-  // Update html from InputBody component to make images responsive
-  //
-  state.value.content_body = state.value.content_body.replace(
-    /\<img/g,
-    '<img width="100%"',
-  )
 
   //
   // form handlers
   //
   const submitForm = (state) => {
     saving.value = true
+    // Update html from InputBody component to make images responsive
+    //
+    state.value.content_body = state.value.content_body.replace(
+      /\<img/g,
+      '<img width="100%"',
+    )
     emit('submitted', state)
   }
 </script>

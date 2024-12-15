@@ -1,10 +1,21 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
   import Swal from 'sweetalert2'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
 
   const { addNewsletter } = useNewsletter()
+  //
+  // Formkit initial state
+  //
+  const state = ref({
+    newsletter_id: '',
+    newsletter_recipient_type_id: 9,
+    newsletter_body_text: '',
+    admin_user_id: auth.user.admin_user_id,
+  })
 
   //
   // Newsletters form action
@@ -44,7 +55,10 @@
       <div class="topsectionitem">
         <display-admin-header title="Add Newsletter" />
       </div>
-      <newsletters-form @submitted="onSubmit" />
+      <newsletters-form
+        :state="state"
+        @submitted="onSubmit"
+      />
     </div>
   </div>
 </template>

@@ -7,7 +7,6 @@
       submit-label="Submit"
       @submit="submitForm(state)"
     >
-      state = {{ state }}
       <FormKit
         label="News Title"
         name="news_title"

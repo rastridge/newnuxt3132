@@ -1,11 +1,11 @@
 <template>
   <div
+    v-if="state.newsletter_id"
     class="text-center font-semibold"
-    v-if="id"
   >
-    Newsletter opened count {{ newsletter_opened_cnt }}
+    Newsletter opened count {{ data.opened_cnt }}
     <br />
-    Current recipient group sent count {{ newsletter_recp_cnt }}
+    Current recipient group sent count {{ state.newsletter_recp_cnt }}
   </div>
   <div class="my-form-style">
     <FormKit
@@ -71,15 +71,15 @@
   // Incoming i
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
 
+  const state = ref({ ...props.state })
   //
   // incoming from inputBody component
   //
-  const changeState = (field) => {
-    state.value.newsletter_body_html = field
+  const changeState = (newsletter_body_html) => {
+    state.value.newsletter_body_html = newsletter_body_html
   }
 
   //
@@ -92,44 +92,6 @@
   const peek = ref(false)
   const toggle = () => {
     peek.value = !peek.value
-  }
-  //
-  // Formkit initial state
-  //
-  const state = ref({})
-  state.value.newsletter_recipient_type_id = 9
-  state.value.newsletter_id = ''
-  state.value.newsletter_body_html = ''
-  state.value.newsletter_body_text = ''
-  state.value.newsletter_subject = ''
-  state.value.admin_user_id = auth.user.admin_user_id
-
-  //
-  //
-  //
-  const newsletter_opened_cnt = ref(0)
-  const newsletter_recp_cnt = ref(0)
-  //
-  // Editing if there is an id - Adding if not
-  //
-  if (edit_form) {
-    //
-    // assign existing data to Edit form
-    //
-    const { data: news_data } = await useFetch(`/newsletters/${props.id}`, {
-      method: 'get',
-    })
-    state.value = news_data.value
-
-    //
-    // Insert to make images responsive
-    //
-    state.value.newsletter_body_html = state.value.newsletter_body_html.replace(
-      /\<img/g,
-      '<img width="100%"',
-    )
-
-    newsletter_recp_cnt.value = news_data.value.newsletter_recp_cnt
   }
 
   //
@@ -146,15 +108,14 @@
   )
 
   //
-  // get newsletter openeings
+  // get newsletter openings
   //
-  const { data: opened } = await useFetch(
-    `/newsletters/getopenedcount/${props.id}`,
+  const { data } = await useFetch(
+    `/newsletters/getopenedcount/${state.value.newsletter_id}`,
     {
       method: 'get',
     },
   )
-  newsletter_opened_cnt.value = opened.value.opened_cnt
 
   //
   // Convert for Formkit "label" "value"
@@ -178,6 +139,13 @@
   //
   const submitForm = (state) => {
     saving.value = true
+    //
+    // Insert to make images responsive
+    //
+    state.newsletter_body_html = state.newsletter_body_html.replace(
+      /\<img/g,
+      '<img width="100%"',
+    )
     emit('submitted', state)
   }
 </script>
