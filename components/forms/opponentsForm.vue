@@ -64,8 +64,6 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
   const saving = ref(false)
 
   //
@@ -76,29 +74,11 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
-
-  //
   // Initialize form
   //
-  const state = ref({})
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    // get opponent with id === props.id
-    const { data: opponents_data } = await useFetch(`/opponents/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = opponents_data.value
-  }
+  const state = ref({ ...props.state })
 
   //
   // form handlers

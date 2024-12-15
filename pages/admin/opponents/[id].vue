@@ -1,4 +1,6 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -9,6 +11,14 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  const { data: state } = await useFetch(`/opponents/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
   //
   // Opponents form action
   //
@@ -29,7 +39,7 @@
         <display-admin-header title="Edit opponent" />
       </div>
       <opponents-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

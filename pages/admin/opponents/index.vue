@@ -104,7 +104,6 @@
 
   // Opponent name autocomplete
   //
-  const suggestions_opponents = ref([])
   const filteredOpponents = ref([])
   const selectedOpponent = ref('')
   const setOpponent = () => {
@@ -113,26 +112,23 @@
 
   const search_opponents = (event) => {
     if (!event.query.trim().length) {
-      filteredOpponents.value = [...suggestions_opponents.value]
+      filteredOpponents.value = [...suggestions.value]
     } else {
-      filteredOpponents.value = suggestions_opponents.value.filter(
-        (suggestion) => {
-          return (
-            suggestion.opponent_name
-              .toLowerCase()
-              // .startsWith(event.query.toLowerCase())
-              .includes(event.query.toLowerCase())
-          )
-        },
-      )
+      filteredOpponents.value = suggestions.value.filter((suggestion) => {
+        return (
+          suggestion.opponent_name
+            .toLowerCase()
+            // .startsWith(event.query.toLowerCase())
+            .includes(event.query.toLowerCase())
+        )
+      })
     }
   }
   //
-  const { data: opps_sug } = await useFetch(`/opponents/suggestions`, {
+  const { data: suggestions } = await useFetch(`/opponents/suggestions`, {
     method: 'get',
     headers: {
       authorization: auth.user.token,
     },
   })
-  suggestions_opponents.value = opps_sug.value
 </script>
