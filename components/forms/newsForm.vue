@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-  const { $dayjs } = useNuxtApp()
+  // const { $dayjs } = useNuxtApp()
 
   const saving = ref(false)
   //
@@ -128,7 +128,8 @@
       /\<img/g,
       '<img width="100%"',
     )
-    /*     state.news_event_dt = $dayjs(state.news_event_dt).format('YYYY-MM-DD')
+    /*
+    state.news_event_dt = $dayjs(state.news_event_dt).format('YYYY-MM-DD')
     state.news_release_dt = $dayjs(state.news_release_dt).format('YYYY-MM-DD')
     state.news_expire_dt = $dayjs(state.news_expire_dt).format('YYYY-MM-DD') */
     emit('submitted', state)
