@@ -39,19 +39,23 @@
   // get all news and filter by year
   //
   import { usePlacemarkStore } from '@/stores/placemarkStore'
+  const placemark = usePlacemarkStore()
+
   //
   definePageMeta({
     middleware: ['auth'],
   })
+  const { $dayjs } = useNuxtApp()
 
-  // save places for return to table listing
-  //
+  const { getAll, deleteOne, changeStatusOne } = useFetchAll()
+
   //
   // Initialize values for Renderlist
   const app = 'news'
   const { getAccess } = useRenderListAccess()
   const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
-  const placemark = usePlacemarkStore()
+
+  // save places for return to table listing
   const page = ref(placemark.getPage)
 
   //
@@ -72,14 +76,12 @@
   //
   // Get news data
   //
-  const { getAll, deleteOne, changeStatusOne } = useFetchAll()
-  const { data: news } = await getAll(app)
+  const { data: state } = await getAll(app)
   //
   // filter by year
   //
-  const { $dayjs } = useNuxtApp()
   const filteredData = computed(() => {
-    return news.value.filter((d) => {
+    return state.value.filter((d) => {
       return parseInt($dayjs(d.dt).format('YYYY')) === year.value
     })
   })

@@ -7,6 +7,7 @@
       submit-label="Submit"
       @submit="submitForm(state)"
     >
+      state = {{ state }}
       <FormKit
         label="News Title"
         name="news_title"
@@ -71,12 +72,9 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
+  const { $dayjs } = useNuxtApp()
 
   const saving = ref(false)
-
-  const { $dayjs } = useNuxtApp()
   //
   // Outgoing
   //
@@ -85,15 +83,15 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
   //
   // incoming from inputBody component
   //
-  const changeState = (field) => {
-    state.value.news_article = field
+  const changeState = (news_article) => {
+    state.value.news_article = news_article
   }
 
   //
@@ -103,60 +101,36 @@
   const toggle = () => {
     peek.value = !peek.value
   }
-  //
-  // Initialize Add form
-  //
-  const state = ref({})
-  state.value.news_article = 'Enter news here'
-  const dt = $dayjs()
-  state.value.news_release_dt = dt.format('YYYY-MM-DD')
-  state.value.news_event_dt = dt.add(7, 'day').format('YYYY-MM-DD')
-  state.value.news_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
 
   //
-  // edit if there is an id - add if not
+  // Format for Primevue calendar
   //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data: news_data } = await useFetch(`/news/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = news_data.value
+  /*   state.value.news_event_dt = $dayjs(state.value.news_event_dt).format(
+    'YYYY-MM-DD',
+  )
+  state.value.news_release_dt = $dayjs(state.value.news_release_dt).format(
+    'YYYY-MM-DD',
+  )
+  state.value.news_expire_dt = $dayjs(state.value.news_expire_dt).format(
+    'YYYY-MM-DD',
+  ) */
 
-    //
-    // Insert to make images responsive
-    //
-    state.value.news_article = state.value.news_article.replace(
-      /\<img/g,
-      '<img width="100%"',
-    )
-    //
-    // Format for Primevue calendar
-    //
-    state.value.news_event_dt = $dayjs(news_data.value.news_event_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.news_release_dt = $dayjs(
-      news_data.value.news_release_dt,
-    ).format('YYYY-MM-DD')
-    state.value.news_expire_dt = $dayjs(news_data.value.news_expire_dt).format(
-      'YYYY-MM-DD',
-    )
-  }
   //
   // form handlers
   //
 
   const submitForm = async (state) => {
     saving.value = true
-    state.news_event_dt = $dayjs(state.news_event_dt).format('YYYY-MM-DD')
+    //
+    // Insert into quill html to make images responsive
+    //
+    state.news_article = state.news_article.replace(
+      /\<img/g,
+      '<img width="100%"',
+    )
+    /*     state.news_event_dt = $dayjs(state.news_event_dt).format('YYYY-MM-DD')
     state.news_release_dt = $dayjs(state.news_release_dt).format('YYYY-MM-DD')
-    state.news_expire_dt = $dayjs(state.news_expire_dt).format('YYYY-MM-DD')
+    state.news_expire_dt = $dayjs(state.news_expire_dt).format('YYYY-MM-DD') */
     emit('submitted', state)
   }
 </script>
