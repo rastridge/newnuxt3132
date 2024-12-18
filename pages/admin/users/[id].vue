@@ -12,7 +12,7 @@
         <display-admin-header title="Edit User" />
       </div>
       <user-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>
@@ -20,7 +20,9 @@
 </template>
 
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
   import { useAlertStore } from '~/stores/alertStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -32,6 +34,14 @@
   const route = useRoute()
   const id = route.params.id
 
+  // get user data for editing
+  const { data: state } = await useFetch(`/users/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+  state.value.password = ''
   //
   // Users form action
   //

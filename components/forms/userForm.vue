@@ -126,7 +126,7 @@
       >
         <thead>
           <tr>
-            <th class="text-right">Application</th>
+            <th class="text-left">Application</th>
             <th>Manage</th>
             <th>Create</th>
             <th>View</th>
@@ -199,9 +199,7 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
   import { useAlertStore } from '~/stores/alertStore'
-  const auth = useAuthStore()
   const alert = useAlertStore()
   const saving = ref(false)
 
@@ -209,16 +207,18 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
+  const state = ref({ ...props.state })
+  const addForm = ref(state.value.admin_user_id === '0' ? true : false)
 
+  const apps_data = ref(state.value.perms)
   //
   // outgoing
   //
   const emit = defineEmits(['submitted'])
 
   //
-  const state = ref({})
   //
   // password change input
   //
@@ -236,67 +236,19 @@
   const username_required = computed(() => state.value.admin_user_name === '')
   const email_required = computed(() => state.value.admin_user_email === '')
 
-  //
-  // get app names for access perms
-  //
-  const { data: apps_data } = await useFetch(`/users/getapps`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
-    },
-  })
-
-  //
-  // Are we Adding or editing?
-  //
-  const addForm = props.id === '0'
-  if (addForm) {
-    // Init perms for add
-    //
-    const permsArray = ref([])
-    apps_data.value.forEach((i) => {
-      permsArray.value.push({
-        admin_perm_id: 0,
-        admin_app_id: i.admin_app_id,
-        admin_app_name: i.admin_app_name,
-        admin_perm: 0,
-        admin_user_id: 0,
-      })
-    })
-    //
-    // Initialize state for add
-    //
-    state.value = {
-      admin_user_id: '',
-      admin_user_name: '',
-      admin_user_email: '',
-      password: '',
-      perms: permsArray.value,
-    }
-  } else {
-    // get user data for editing
-    const { data: form_data } = await useFetch(`/users/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = form_data.value
-    state.value.password = ''
-  }
-
   const submitForm = (state) => {
     let ok = false
     if (
       !reset.value &&
-      !addForm &&
+      !addForm.value &&
       !username_required.value &&
       !email_required.value
     ) {
       ok = true
     }
+
     if (
-      (reset.value || addForm) &&
+      (reset.value || addForm.value) &&
       !username_required.value &&
       !email_required.value &&
       !password_required.value &&
@@ -304,6 +256,7 @@
     ) {
       ok = true
     }
+
     if (ok) {
       saving.value = true
       emit('submitted', state)
