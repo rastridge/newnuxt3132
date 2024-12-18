@@ -114,8 +114,6 @@
   const alert = useAlertStore()
   const auth = useAuthStore()
   const saving = ref(false)
-  // const fileInput = ref(null)
-  // const image = ref(null)
 
   //
   // Outgoing
@@ -125,36 +123,10 @@
   // Incoming id
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
-  //
-  // Initialize form
-  //
-  const state = ref({})
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    // get opponent with id === props.id
-    const { data } = await useFetch(`/sponsors/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-    //
-    // Insert to make images responsive
-    //
-    state.value.ad_image_path = state.value.ad_image_path.replace(
-      /\<img/g,
-      '<img width="100%"',
-    )
-  }
   //
   // progress modal
   //

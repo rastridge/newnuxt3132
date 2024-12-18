@@ -1,6 +1,6 @@
 <template>
-  <p v-if="id">
-    Current version of this SMS was sent {{ sms_opened_cnt }} times
+  <p v-if="state.sms_id">
+    Current version of this SMS was sent {{ sms_recp_cnt }} times
   </p>
   <div class="my-form-style">
     <FormKit
@@ -51,49 +51,17 @@
   // Incoming id
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
 
   //
   // Outgoing form data
   //
   const emit = defineEmits(['submitted'])
 
-  //
-  // Formkit initial Add state
-  //
-  const state = ref({})
-  state.value.sms_recipient_type_id = 13
-  state.value.admin_user_id = auth.user.admin_user_id
+  const sms_recp_cnt = ref(state.value.sms_recp_cnt)
 
-  //
-  //
-  //
-  const sms_opened_cnt = ref(0)
-  //
-  // Editing if there is an id - Adding if not
-  //
-  if (edit_form) {
-    //
-    // get sms data for id
-    //
-    const { data: sms_data } = await useFetch(`/sms/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-
-    //
-    // assign existing data to Edit form
-    //
-    state.value = sms_data.value
-    // additional
-    state.value.admin_user_id = auth.user.admin_user_id
-
-    sms_opened_cnt.value = sms_data.value.sms_recp_cnt
-  }
   //
   // form handlers
   //

@@ -1,4 +1,7 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -9,6 +12,16 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // Initialize Edit form
+  //
+  const { data: state } = await useFetch(`/payments/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
 
   //
   // News form action
@@ -30,7 +43,7 @@
         <display-admin-header title="Edit payment" />
       </div>
       <payments-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

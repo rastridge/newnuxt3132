@@ -1,5 +1,3 @@
-/Users/rastridge/Code/brc.org.nuxt3/nuxt3-brc/components/forms/sponsorsForm.vue
-/Users/rastridge/Code/brc.org.nuxt3/nuxt3-brc/components/forms/supportingaccountsForm.vue
 <template>
   <div class="my-form-style">
     <FormKit
@@ -54,12 +52,9 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-
-  const auth = useAuthStore()
   const saving = ref(false)
 
-  const { $dayjs } = useNuxtApp()
+  // const { $dayjs } = useNuxtApp()
 
   //
   // Outgoing
@@ -69,49 +64,33 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
-
   //
-  // Initialize Add form
+  // Initialize  form
   //
-  const state = ref({})
+  const state = ref({ ...props.state })
 
-  const dt = $dayjs()
+  /* const dt = $dayjs()
   state.value.release_dt = dt.format('YYYY-MM-DD')
   state.value.expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
 
   //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    //
-    // Initialize Edit form
-    //
-    const { data: payments_data } = await useFetch(`/payments/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = payments_data.value
 
-    // Adjust for local time and Format for Primevue calendar
-    state.value.release_dt = $dayjs(payments_data.value.release_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.expire_dt = $dayjs(payments_data.value.expire_dt).format(
-      'YYYY-MM-DD',
-    )
-  }
+  // Adjust for local time and Format for Primevue calendar
+  state.value.release_dt = $dayjs(payments_data.value.release_dt).format(
+    'YYYY-MM-DD',
+  )
+  state.value.expire_dt = $dayjs(payments_data.value.expire_dt).format(
+    'YYYY-MM-DD',
+  ) */
   //
   // form handlers
   //
   const submitForm = async (state) => {
     saving.value = true
-    state.release_dt = $dayjs(state.release_dt).format('YYYY-MM-DD')
+    /*     state.release_dt = $dayjs(state.release_dt).format('YYYY-MM-DD')
     state.expire_dt = $dayjs(state.expire_dt).format('YYYY-MM-DD')
-    emit('submitted', state)
+ */ emit('submitted', state)
   }
 </script>

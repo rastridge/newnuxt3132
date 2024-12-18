@@ -1,5 +1,7 @@
 <script setup>
   import Swal from 'sweetalert2'
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -11,6 +13,17 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // get sms data for id
+  //
+  const { data: state } = await useFetch(`/sms/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
   //
   // SMS form action
   //
@@ -48,7 +61,7 @@
         <display-admin-header title="Edit SMS" />
       </div>
       <sms-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

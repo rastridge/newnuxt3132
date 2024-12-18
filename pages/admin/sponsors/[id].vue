@@ -1,5 +1,8 @@
 <script setup>
-  import { useAlertStore } from '~/stores/alertStore'
+  import { useAuthStore } from '~/stores/authStore'
+  // import { useAlertStore } from '~/stores/alertStore'
+
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -12,6 +15,14 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  const { data: state } = await useFetch(`/sponsors/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
   //
   // sponsors form action
   //
@@ -36,7 +47,7 @@
         <display-admin-header title="Edit sponsor" />
       </div>
       <sponsors-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

@@ -3,7 +3,7 @@
     v-if="state.newsletter_id"
     class="text-center font-semibold"
   >
-    Newsletter opened count {{ data.opened_cnt }}
+    Newsletter opened count {{ opened.opened_cnt }}
     <br />
     Current recipient group sent count {{ state.newsletter_recp_cnt }}
   </div>
@@ -110,7 +110,7 @@
   //
   // get newsletter openings
   //
-  const { data } = await useFetch(
+  const { data: opened } = await useFetch(
     `/newsletters/getopenedcount/${state.value.newsletter_id}`,
     {
       method: 'get',
@@ -118,6 +118,7 @@
   )
 
   //
+  // get newsletter recipient types
   // Convert for Formkit "label" "value"
   //
   const setNewsletterRecipientTypeOptions = (nltypes) => {
