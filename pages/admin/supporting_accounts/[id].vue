@@ -1,14 +1,24 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
   const { onSubmitEdit } = useSubmit()
 
   //
-  // Get sponsor id
+  // Get supporting accts id
   //
   const route = useRoute()
   const id = route.params.id
+
+  const { data: state } = await useFetch(`/supporting_accounts/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
   //
   // leaders form action
   //
@@ -29,7 +39,7 @@
         <display-admin-header title="Edit Supporting Accounts" />
       </div>
       <supportingaccounts-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

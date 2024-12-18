@@ -67,45 +67,24 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
   const saving = ref(false)
+
+  //
+  // Incoming
+  //
+  const props = defineProps({
+    state: { type: Object, required: true },
+  })
+  const state = ref({ ...props.state })
 
   //
   // Outgoing
   //
   const emit = defineEmits(['submitted'])
-  //
-  // Incoming
-  //
-  const props = defineProps({
-    id: { type: String, default: '0' },
-  })
-  const edit_form = props.id !== '0'
-
-  //
-  // Initialize form
-  //
-  const state = ref({})
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    const { data } = await useFetch(`/supporting_accounts/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-  }
 
   //
   // form handlers
   //
-
   const submitForm = (state) => {
     saving.value = true
     emit('submitted', state)
