@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise'
 const { doDBQueryBuffalorugby } = useQuery()
-const { getConnectionBuffalorugby, getConnection } = useDBConnection()
+const { getConnectionBuffalorugby, getPoolConnection } = useDBConnection()
 
 const { sendEmail } = useEmail()
 
@@ -239,26 +239,27 @@ async function addOne({ vote_question, choices }) {
 
 async function registerBallot({ account_email, answers }) {
   console.log('answers= ', answers)
-  const conn = await getConnection()
-  // const conn = await getConnection()
-
+  const conn = await getPoolConnection()
   try {
     await conn.query('START TRANSACTION')
+    let sql = ''
+    let inserts = []
 
     answers.forEach(async (c) => {
       if (c.vote_choice_id !== '0') {
-        let sql = `INSERT INTO inbrc_votes_voted
+        sql = `INSERT INTO inbrc_votes_voted
 										SET
 											voted_email = ?,
 											vote_date = NOW(),
 											vote_question_id = ?`
 
-        let inserts = []
+        inserts = []
         inserts.push(account_email, c.vote_question_id)
         sql = await mysql.format(sql, inserts)
 
         console.log('sql= ', sql)
-        await conn.execute(sql)
+        // await conn.execute(sql)
+        await conn.query(sql)
 
         // increment vote answer count
         sql = `UPDATE inbrc_votes_choices
@@ -270,7 +271,7 @@ async function registerBallot({ account_email, answers }) {
         inserts = []
         inserts.push(c.vote_choice_id)
         sql = await mysql.format(sql, inserts)
-        await conn.execute(sql)
+        await conn.query(sql)
 
         // increment vote count
         sql = `UPDATE inbrc_votes
@@ -282,16 +283,16 @@ async function registerBallot({ account_email, answers }) {
         inserts = []
         inserts.push(c.vote_question_id)
         sql = await mysql.format(sql, inserts)
-        await conn.execute(sql)
+        await conn.query(sql)
       }
     })
-    await conn.query('COMMIT')
-    await conn.end()
+    await conn.commit()
     return 'COMMIT'
   } catch (e) {
-    await conn.query('ROLLBACK')
-    await conn.end()
+    await conn.rollback()
     return 'ROLLBACK' + e
+  } finally {
+    await conn.end()
   }
 }
 

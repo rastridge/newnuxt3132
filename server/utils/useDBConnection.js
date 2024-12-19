@@ -1,13 +1,16 @@
 import mysql from 'mysql2/promise'
 
 export default function useDBConnection() {
-  async function getConnection() {
+  async function getPoolConnection() {
     const CONFIG = useRuntimeConfig()
     const CONN = await mysql.createConnection({
       host: CONFIG.DB_HOST,
       user: CONFIG.DB_USER,
       password: CONFIG.DB_PASSWORD,
       database: CONFIG.DB_DATABASE,
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
     })
     return CONN
   }
@@ -26,7 +29,7 @@ export default function useDBConnection() {
   }
 
   return {
-    getConnection,
+    getPoolConnection,
     getConnectionBuffalorugby,
   }
 }
