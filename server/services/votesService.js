@@ -313,7 +313,7 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h3>'
 
-  const r = await sendEmail(email, 'Vote', htmlBody)
+  const r = await sendEmail(email, 'Vote', '<p>hello there</p>')
   // return CONFIG.public.HOST + ' ' + email
   return r + '  from sendemail'
 }
