@@ -314,7 +314,7 @@ async function sendBallot(email) {
     '">Start Voting Here</></h3>'
 
   await sendEmail(email, 'Vote', htmlBody)
-  return 1
+  return CONFIG.public.HOST + ' ' + email
 }
 
 async function deleteOne(id) {
