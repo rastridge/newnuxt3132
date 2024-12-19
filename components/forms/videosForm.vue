@@ -62,53 +62,20 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
-  const { $dayjs } = useNuxtApp()
-
   const saving = ref(false)
 
   //
   // Outgoing
   //
   const emit = defineEmits(['submitted'])
+
   //
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
-
-  //
-  // Initialize form
-  //
-  const state = ref({})
-
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    const { data } = await useFetch(`/videos/${props.id}`, {
-      key: props.id,
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    state.value = data.value
-
-    // Format for Primevue calendar
-    state.value.video_event_dt = $dayjs(data.value.video_event_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.video_release_dt = $dayjs(data.value.video_release_dt).format(
-      'YYYY-MM-DD',
-    )
-    state.value.video_expire_dt = $dayjs(data.value.video_expire_dt).format(
-      'YYYY-MM-DD',
-    )
-  }
+  const state = ref({ ...props.state })
 
   //
   // form handlers

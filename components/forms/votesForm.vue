@@ -1,11 +1,13 @@
 <template>
-  <div v-if="props.id !== '0'">
+  <div v-if="edit_form">
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <div
           class="text-left my-text-style border-round-md md:border-round-lg shadow-6 mb-3 m-2 p-4"
         >
-          <p class="font-semibold">Do not edit after voting has begun!</p>
+          <p class="font-semibold">
+            Can not edit choices after voting has begun!
+          </p>
           <p class="font-semibold">
             To change choices, Cancel, then Delete the question and Add a new
             question with new choices
@@ -95,9 +97,6 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-
-  const auth = useAuthStore()
   // control Prgress Bar
   const saving = ref(false)
 
@@ -108,52 +107,24 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
 
-  const question = ref({})
-  const choices = ref([
-    { vote_choice_id: 0, vote_choice: '', vote_picked_cnt: 0 },
-  ])
+  const question = ref({ ...props.state })
+  const choices = ref([...props.state.choices])
+
+  // edit if there is an id - add if not
+  const edit_form = question.value.vote_question_id !== '0' ? true : false
+
   const choice_values = ref([])
   const updated_choices = ref([])
 
-  //
-  // edit if there is an id - add if not
-  //
-  if (edit_form) {
-    // Initialize Edit form
-    //
-    // get question by id
-    const { data: question_data } = await useFetch(`/votes/${props.id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
-    question.value = question_data.value
-
-    // get choices
-    //
-    const { data: choices_data } = await useFetch(
-      `/votes/getchoices/${props.id}`,
-      {
-        method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
-      },
-    )
-    choices.value = choices_data.value
-
-    // create list of choice_values for Formkit (only contains choice value)
-    choices.value.forEach((choice) => {
-      if (choice.vote_choice !== '') {
-        choice_values.value.push(choice.vote_choice)
-      }
-    })
-  }
+  // create list of choice_values for Formkit (only contains choice value)
+  choices.value.forEach((choice) => {
+    if (choice.vote_choice !== '') {
+      choice_values.value.push(choice.vote_choice)
+    }
+  })
 
   // form handlers
   //

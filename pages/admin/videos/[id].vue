@@ -1,7 +1,12 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
+  const { $dayjs } = useNuxtApp()
+
   definePageMeta({
     middleware: ['auth'],
   })
+
   const { onSubmitEdit } = useSubmit()
 
   //
@@ -9,6 +14,25 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  const { data: state } = await useFetch(`/videos/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
+  // Format for Primevue calendar
+  /*   state.value.video_event_dt = $dayjs(data.value.video_event_dt).format(
+    'YYYY-MM-DD',
+  )
+  state.value.video_release_dt = $dayjs(data.value.video_release_dt).format(
+    'YYYY-MM-DD',
+  )
+  state.value.video_expire_dt = $dayjs(data.value.video_expire_dt).format(
+    'YYYY-MM-DD',
+  ) */
+
   //
   // Videos form action
   //
@@ -28,7 +52,7 @@
         <display-admin-header title="Edit Video" />
       </div>
       <videos-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>

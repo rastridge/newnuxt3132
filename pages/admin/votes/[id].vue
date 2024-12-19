@@ -1,14 +1,28 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
+
   definePageMeta({
     middleware: ['auth'],
   })
   const { onSubmitEdit } = useSubmit()
 
   //
-  // Get video id
+  // Initialize Edit form
   //
   const route = useRoute()
   const id = route.params.id
+  //
+
+  // Initialize Edit form
+  //
+  // get votes by id
+  const { data: state } = await useFetch(`/votes/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
   //
   // Votes form action
   //
@@ -28,7 +42,7 @@
         <display-admin-header title="Edit Votes" />
       </div>
       <votes-form
-        :id="id"
+        :state="state"
         @submitted="onSubmit"
       />
     </div>
