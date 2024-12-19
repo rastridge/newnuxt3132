@@ -12,7 +12,7 @@
           :options="options[q_index]"
         />
       </div>
-      <display-cancelform :destination="'/admin/votes'" />
+      <display-cancelform :destination="'/'" />
       <Button
         label="Submit"
         severity="info"
