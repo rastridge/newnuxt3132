@@ -16,6 +16,7 @@
  */
 
 import querystring from 'querystring'
+// const { activityLog } = useActivityLogs()
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
@@ -326,7 +327,6 @@ export default function useEmail() {
   }
 
   function sendEmail(to, subject, message) {
-    //data
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
       subject: subject,
