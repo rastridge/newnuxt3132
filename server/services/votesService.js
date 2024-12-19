@@ -309,6 +309,7 @@ async function sendBallot({ email }) {
     `<h3><a href="${HOSTING}/admin/votes/form/` +
     email +
     '">Start Voting Here</></h3>'
+  console.log('htmlbody=  ', htmlBody)
   // from composable
   await sendEmail(email, 'Vote', htmlBody)
   return 1
