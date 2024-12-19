@@ -313,8 +313,9 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h3>'
 
-  await sendEmail(email, 'Vote', htmlBody)
-  return CONFIG.public.HOST + ' ' + email
+  const r = await sendEmail(email, 'Vote', htmlBody)
+  // return CONFIG.public.HOST + ' ' + email
+  return r + '  from sendemail'
 }
 
 async function deleteOne(id) {

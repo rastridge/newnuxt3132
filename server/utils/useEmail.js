@@ -337,14 +337,13 @@ export default function useEmail() {
       body_text: '',
       isTransactional: true,
     })
-    let success = true
+    let success = ''
     fetch('https://api.elasticemail.com/v2/email/send', {
       method: 'POST',
       body: post_data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     })
       .then((response) => response.json())
-      // .then((json) => console.log('json= ', json))
       .then((json) => {
         success = json.success
       })
@@ -352,7 +351,8 @@ export default function useEmail() {
         console.log('error = ', error)
       })
 
-    return success
+    // return success
+    return CONFIG.public.HOST + ' to ' + to + ' success = ' + success
   }
 
   return {
