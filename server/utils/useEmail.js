@@ -352,7 +352,7 @@ export default function useEmail() {
       })
 
     // return success
-    return CONFIG.public.HOST + ' to ' + to + ' success = ' + success
+    return CONFIG.public.HOST + ' post_data = ' + post_data
   }
 
   return {
