@@ -255,7 +255,7 @@ async function registerBallot({ account_email, answers }) {
 
         inserts = []
         inserts.push(account_email, c.vote_question_id)
-        sql = await mysql.format(sql, inserts)
+        sql = mysql.format(sql, inserts)
 
         console.log('sql= ', sql)
         // await conn.execute(sql)
@@ -270,7 +270,9 @@ async function registerBallot({ account_email, answers }) {
 
         inserts = []
         inserts.push(c.vote_choice_id)
-        sql = await mysql.format(sql, inserts)
+        sql = mysql.format(sql, inserts)
+        console.log('sql= ', sql)
+
         await conn.query(sql)
 
         // increment vote count
@@ -282,7 +284,9 @@ async function registerBallot({ account_email, answers }) {
 
         inserts = []
         inserts.push(c.vote_question_id)
-        sql = await mysql.format(sql, inserts)
+        sql = mysql.format(sql, inserts)
+        console.log('sql= ', sql)
+
         await conn.query(sql)
       }
     })
@@ -291,9 +295,9 @@ async function registerBallot({ account_email, answers }) {
   } catch (e) {
     await conn.rollback()
     return 'ROLLBACK' + e
-  } finally {
+  } /* finally {
     await conn.end()
-  }
+  } */
 }
 
 async function sendBallot({ email }) {
@@ -309,7 +313,7 @@ async function sendBallot({ email }) {
     `<h3><a href="${HOSTING}/admin/votes/form/` +
     email +
     '">Start Voting Here</></h3>'
-  console.log('htmlbody=  ', htmlBody)
+  console.log('sent ', email)
   // from composable
   await sendEmail(email, 'Vote', htmlBody)
   return 1
