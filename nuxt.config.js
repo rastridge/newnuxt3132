@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also be
     // exposed to the client-side
     public: {
+      HOST: process.env.HOST,
       SEASON_DIVIDE_DT: process.env.SEASON_DIVIDE_DT,
       MEDIA_URL: process.env.MEDIA_URL,
       IMAGES_URL: process.env.IMAGES_URL,

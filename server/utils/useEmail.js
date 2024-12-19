@@ -20,7 +20,7 @@ import querystring from 'querystring'
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
-  const HOSTING = 'https://buffalorugby.org'
+
   const dt = new Date()
   async function sendNewsletters(
     recipientss,
@@ -35,7 +35,7 @@ export default function useEmail() {
       newsletter_subject,
     ) {
       // this should work if and when email works
-      const TRACKING = `${HOSTING}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
+      const TRACKING = `${CONFIG.public.HOST}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
       const TRACKINGPIXEL = `<img src="${TRACKING}" height="1" width="1"  />`
 
       ///////// Template from https://dashboard.unlayer.com/create/blank?ref=templates ////////////////////////////////
@@ -263,7 +263,7 @@ export default function useEmail() {
           <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
             <p style="line-height: 140%;">
               <p>This is Your Current Contact Info.</p>
-              <p> Please <a href="${HOSTING}/update/918J275B654I${recipient.account_id}" target="_blank"> Update your info if necessary</a></p>
+              <p> Please <a href="${CONFIG.public.HOST}/update/918J275B654I${recipient.account_id}" target="_blank"> Update your info if necessary</a></p>
               <table>
                 <tbody>
                   <tr><td>${recipient.member_firstname} ${recipient.member_lastname}</td></tr>

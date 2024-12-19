@@ -57,7 +57,7 @@ https://app.netlify.com/teams/rastridge/sites
 - site sourced from github repository "rastridge/newnuxt3132"
 - All ENV variables must be registered
 - All redirects from old website URLs handled by \_redirect file
-- Dreamhost buffalorugby.org is DNS only - No web hosting
+- Dreamhost buffalorugby.org is DNS only - No web HOST
 - Set up Netlify custom external domain for site 'buffalorugby.org' via Dreamhost
 - Maintain DNS for email and media subdomain for buffalorugby.org at Dreamhost Domain configuration
 

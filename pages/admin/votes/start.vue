@@ -42,11 +42,12 @@
 </template>
 
 <script setup>
-  const handleSubmit = (state) => {
+  const handleSubmit = async (state) => {
     const email = state.email
+
     useFetch('/votes/sendballot', {
       method: 'POST',
-      body: email,
+      body: { email },
     })
     navigateTo('/admin/votes/confirm')
   }

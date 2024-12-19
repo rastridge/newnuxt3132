@@ -1,10 +1,8 @@
 import mysql from 'mysql2/promise'
 const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby, getPoolConnection } = useDBConnection()
-
 const { sendEmail } = useEmail()
-
-const HOSTING = 'https://buffalorugby.org'
+const CONFIG = useRuntimeConfig()
 
 export const votesService = {
   getAll,
@@ -301,6 +299,7 @@ async function registerBallot({ account_email, answers }) {
 }
 
 async function sendBallot(email) {
+  console.log(CONFIG.public.HOST)
   const htmlBody =
     '<h3>Heads up: </h3><h3>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h3>' +
     '<br>' +
@@ -310,11 +309,10 @@ async function sendBallot(email) {
     '<h3>You can read the choices, Cancel and come back later to finish if you like</h3>' +
     '<br>' +
     '<br>' +
-    `<h3><a href="${HOSTING}/admin/votes/form/` +
+    `<h3><a href="${CONFIG.public.HOST}/admin/votes/form/` +
     email +
     '">Start Voting Here</></h3>'
-  // console.log('sent ', email)
-  // from composable
+
   await sendEmail(email, 'Vote', htmlBody)
   return 1
 }
