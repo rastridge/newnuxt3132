@@ -245,7 +245,7 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
       sendEmail(
         'ron.astridge@me.com',
         'Buffalo Rugby Club Admin Account Modification',
-        'An account for user ' +
+        'An new account for admin user ' +
           lc_admin_user_name +
           '  has been created, password = ' +
           password +
