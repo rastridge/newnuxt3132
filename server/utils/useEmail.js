@@ -355,7 +355,8 @@ export default function useEmail() {
 
     // return success
     // return CONFIG.public.HOST + ' post_data = ' + post_data
-    return 'err = ' + err
+    // return 'err = ' + err
+    return to + ' ' + subject + ' ' + message
   }
 
   return {
