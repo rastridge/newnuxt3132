@@ -133,16 +133,6 @@ async function addOne({
       ad_image_path,
     )
     await doDBQueryBuffalorugby(sql, inserts)
-
-    /* const email = {
-			from: FROM,
-			fromName: FROM_NAME,
-			to: 'ron.astridge@me.com',
-			subject: 'BRC Member Account Modification',
-			body_text: '',
-			body_html: `<h3>An Buffalo Rugby Club sponsorship for ${ad_client_name} has been created. Email ${ad_client_email}</h3>`,
-		}
-		sendEmail(email) */
   } else {
     msg = `Sponsor with email ${lc_ad_client_email} already exists`
   }
