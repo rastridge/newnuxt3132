@@ -369,8 +369,7 @@ async function editOne(info) {
       )
 
       sql = mysql.format(sql, inserts)
-      const result = await CONN.execute(sql)
-      // console.log('result = ', result[0].info)
+      await CONN.execute(sql)
     } else {
       msg = 'Account with email ' + lc_account_email + ' already exists'
     }
