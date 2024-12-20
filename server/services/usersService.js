@@ -242,16 +242,16 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 
         await conn.execute(sql)
       }
-      // sendEmail(
-      // 	'ron.astridge@me.com',
-      // 	'Buffalo Rugby Club Admin Account Modification',
-      // 	'An account for user ' +
-      // 		lc_admin_user_name +
-      // 		'  has been created, password = ' +
-      // 		password +
-      // 		' email = ' +
-      // 		lc_admin_user_email
-      // )
+      sendEmail(
+        'ron.astridge@me.com',
+        'Buffalo Rugby Club Admin Account Modification',
+        'An account for user ' +
+          lc_admin_user_name +
+          '  has been created, password = ' +
+          password +
+          ' email = ' +
+          lc_admin_user_email,
+      )
     } else {
       msg =
         'A user with username ' +
@@ -259,15 +259,6 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
         ' or email ' +
         lc_admin_user_email +
         ' already exists'
-      // sendEmail(
-      // 	'ron.astridge@me.com',
-      // 	'Buffalo Rugby Club Admin Account Modification',
-      // 	'A user with username ' +
-      // 		lc_admin_user_name +
-      // 		' or email ' +
-      // 		lc_admin_user_email +
-      // 		' already exists'
-      // )
     }
 
     await conn.query('COMMIT')
@@ -531,7 +522,7 @@ async function resetPassword({ username, password }) {
   const inserts = []
   inserts.push(hashedpassword, username)
   await doDBQueryBuffalorugby(sql, inserts)
-
+  console.log('in resetpass ', username, password)
   sendEmail(
     'ron.astridge@me.com',
     'BRC Member Account Modification',

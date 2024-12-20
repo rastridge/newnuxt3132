@@ -445,20 +445,6 @@ async function editOne(info) {
     )
 
     await doDBQueryBuffalorugby(sql, inserts)
-
-    const success =
-      'The flag youth account for ' +
-      member_firstname +
-      ' ' +
-      member_lastname +
-      '  has been modified the email is ' +
-      account_email
-
-    await sendEmail(
-      CONFIG.TO_FLAG,
-      'Buffalo Rugby Club Flag Account Modification',
-      success,
-    )
   } else {
     msg = 'Account with email ' + lc_account_email + ' already exists'
   }

@@ -236,10 +236,8 @@ async function addOne(info) {
         'lexmaccubbin@yahoo.com',
         'owen.lawther26@gmail.com',
       ]
-      // const email_list = ['ron.astridge@icloud.com']
-
+      // notify interested parties
       for (const email of email_list) {
-        // console.log('email = ', email)
         await sendEmail(
           email,
           'Buffalo Rugby Club Member Account Creation',
