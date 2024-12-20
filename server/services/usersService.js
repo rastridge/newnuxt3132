@@ -333,6 +333,12 @@ async function editOne(info) {
         sql = mysql.format(sql, inserts)
 
         await conn.execute(sql)
+
+        sendEmail(
+          'ron.astridge@me.com',
+          'BRC Member Account Modification',
+          `<h3>The password has been changed for ${lc_admin_username}. The new password is "${password}"</h3>`,
+        )
       } else {
         // no new password
         // just update other info
@@ -522,7 +528,7 @@ async function resetPassword({ username, password }) {
   const inserts = []
   inserts.push(hashedpassword, username)
   await doDBQueryBuffalorugby(sql, inserts)
-  console.log('in resetpass ', username, password)
+
   sendEmail(
     'ron.astridge@me.com',
     'BRC Member Account Modification',
