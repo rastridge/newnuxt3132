@@ -228,7 +228,7 @@ async function addOne(info) {
         lc_account_email +
         ' previous club ' +
         member_prev_club
-
+      // this worked with add new
       const email_list = [
         'ron.astridge@icloud.com',
         'ron.astridge@me.com',

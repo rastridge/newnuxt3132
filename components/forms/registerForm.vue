@@ -205,7 +205,8 @@
   const state = ref({})
 
   state.value.member_year = $dayjs().format('YYYY')
-  state.value.account_addr_phone = ''
+
+  state.value.account_addr_phone = '+1716'
   state.value.member_show_phone = '1'
   state.value.account_addr_state = 'NY'
   state.value.account_addr_street_ext = ''
