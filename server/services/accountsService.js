@@ -231,10 +231,12 @@ async function addOne(info) {
 
       const email_list = [
         'ron.astridge@icloud.com',
-        'j.qualey@yahoo.com',
-        'cnrehlers@gmail.com',
-        'lexmaccubbin@yahoo.com',
-        'owen.lawther26@gmail.com',
+        'ron.astridge@me.com',
+        'ron@astridgehome.org',
+        // 'j.qualey@yahoo.com',
+        // 'cnrehlers@gmail.com',
+        // 'lexmaccubbin@yahoo.com',
+        // 'owen.lawther26@gmail.com',
       ]
       // notify interested parties
       for (const email of email_list) {

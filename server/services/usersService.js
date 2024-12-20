@@ -337,7 +337,7 @@ async function editOne(info) {
         sendEmail(
           'ron.astridge@me.com',
           'BRC Member Account Modification',
-          `<h3>The password has been changed for ${lc_admin_username}. The new password is "${password}"</h3>`,
+          `<h3>The password has been changed for admin user ${lc_admin_username}. The new password is "${password}"</h3>`,
         )
       } else {
         // no new password
