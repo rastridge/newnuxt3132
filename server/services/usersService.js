@@ -488,11 +488,11 @@ async function getAppPerms() {
 /***************************************** */
 async function resetRequest({ username }) {
   // this works here
-  /*   sendEmail(
+  sendEmail(
     'ron.astridge@me.com',
     'Buffalo Rugby Club Admin Account Modification',
     'usersService resetRequest ',
-  ) */
+  )
 
   // Find out if matching username exists
   const sql = `SELECT
