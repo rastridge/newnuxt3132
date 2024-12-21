@@ -118,8 +118,8 @@ async function addOne(info) {
   //debug
   sendEmail(
     'ron.astridge@me.com',
-    'votesService sendBallot ',
-    'votesService sendBallot ',
+    'vaccountService addOne ',
+    'vaccountService addOne ',
   )
 
   const emailExists = await checkEmailAdd(info)
