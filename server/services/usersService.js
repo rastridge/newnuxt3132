@@ -487,7 +487,7 @@ async function getAppPerms() {
 /*                                         */
 /***************************************** */
 async function resetRequest({ username }) {
-  // this works
+  // this works here
   sendEmail(
     'ron.astridge@me.com',
     'Buffalo Rugby Club Admin Account Modification',
