@@ -313,6 +313,7 @@ async function sendBallot(email) {
     '">Start Voting Here</></h3>'
 
   sendEmail(email, 'Vote', htmlBody)
+
   return email
 }
 
