@@ -237,15 +237,13 @@ async function addOne(info) {
         lc_account_email +
         ' previous club ' +
         member_prev_club
-      // this worked with add new
+
       const email_list = [
         'ron.astridge@icloud.com',
-        'ron.astridge@me.com',
-        'ron@astridgehome.org',
-        // 'j.qualey@yahoo.com',
-        // 'cnrehlers@gmail.com',
-        // 'lexmaccubbin@yahoo.com',
-        // 'owen.lawther26@gmail.com',
+        'j.qualey@yahoo.com',
+        'cnrehlers@gmail.com',
+        'lexmaccubbin@yahoo.com',
+        'owen.lawther26@gmail.com',
       ]
       // notify interested parties
       for (const email of email_list) {
