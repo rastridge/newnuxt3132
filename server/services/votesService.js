@@ -236,7 +236,6 @@ async function addOne({ vote_question, choices }) {
 }
 
 async function registerBallot({ account_email, answers }) {
-  // console.log('answers= ', answers)
   const conn = await getPoolConnection()
   try {
     await conn.query('START TRANSACTION')
@@ -255,7 +254,6 @@ async function registerBallot({ account_email, answers }) {
         inserts.push(account_email, c.vote_question_id)
         sql = mysql.format(sql, inserts)
 
-        // console.log('sql= ', sql)
         // await conn.execute(sql)
         await conn.query(sql)
 
@@ -269,7 +267,6 @@ async function registerBallot({ account_email, answers }) {
         inserts = []
         inserts.push(c.vote_choice_id)
         sql = mysql.format(sql, inserts)
-        // console.log('sql= ', sql)
 
         await conn.query(sql)
 
@@ -283,7 +280,6 @@ async function registerBallot({ account_email, answers }) {
         inserts = []
         inserts.push(c.vote_question_id)
         sql = mysql.format(sql, inserts)
-        // console.log('sql= ', sql)
 
         await conn.query(sql)
       }
@@ -293,9 +289,7 @@ async function registerBallot({ account_email, answers }) {
   } catch (e) {
     await conn.rollback()
     return 'ROLLBACK' + e
-  } /* finally {
-    await conn.end()
-  } */
+  }
 }
 
 async function sendBallot(email) {
@@ -318,9 +312,8 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h3>'
 
-  const r = await sendEmail(email, 'Vote', htmlBody)
-  // return CONFIG.public.HOST + ' ' + email
-  return r + '  from sendemail'
+  await sendEmail(email, 'Vote', htmlBody)
+  return email
 }
 
 async function deleteOne(id) {
