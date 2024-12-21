@@ -488,11 +488,11 @@ async function getAppPerms() {
 /***************************************** */
 async function resetRequest({ username }) {
   // this works here
-  sendEmail(
+  /*   sendEmail(
     'ron.astridge@me.com',
     'Buffalo Rugby Club Admin Account Modification',
     'usersService resetRequest ',
-  )
+  ) */
 
   // Find out if matching username exists
   const sql = `SELECT
@@ -514,6 +514,7 @@ async function resetRequest({ username }) {
       username +
       '" rel="noopener noreferrer" target="_blank" >Click here</a>'
 
+    //but not here?
     sendEmail(
       admin_user_email,
       'BRC Admin User Password Reset',
