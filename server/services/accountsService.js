@@ -239,13 +239,15 @@ async function addOne(info) {
         // 'owen.lawther26@gmail.com',
       ]
       // notify interested parties
+      let result = ''
       for (const email of email_list) {
-        await sendEmail(
+        result = await sendEmail(
           email,
           'Buffalo Rugby Club Member Account Creation',
           email_msg,
         )
       }
+      msg = result
     } else {
       msg = `An account with email ${lc_account_email} already exists`
     }
