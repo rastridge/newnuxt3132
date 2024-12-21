@@ -242,6 +242,7 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 
         await conn.execute(sql)
       }
+
       sendEmail(
         'ron.astridge@me.com',
         'Buffalo Rugby Club Admin Account Modification',

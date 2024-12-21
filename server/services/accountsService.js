@@ -241,7 +241,7 @@ async function addOne(info) {
       // notify interested parties
       let result = ''
       for (const email of email_list) {
-        result = await sendEmail(
+        result = sendEmail(
           email,
           'Buffalo Rugby Club Member Account Creation',
           email_msg,
