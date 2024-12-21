@@ -115,7 +115,7 @@ async function getOne(id) {
 /*              addOne                     */
 /***************************************** */
 async function addOne(info) {
-  //debug
+  //debug - next sendEmail will not wrk without this
   sendEmail(
     'ron.astridge@me.com',
     'vaccountService addOne ',
@@ -125,7 +125,9 @@ async function addOne(info) {
   const emailExists = await checkEmailAdd(info)
   // make sure email is lowercase
   const lc_account_email = info.account_email.toLowerCase()
-  let msg = null // will be returned with message if email exists */
+
+  // will be returned with message if email exists
+  let msg = null
 
   const CONN = await getConnectionBuffalorugby()
   try {
@@ -246,20 +248,17 @@ async function addOne(info) {
         // 'owen.lawther26@gmail.com',
       ]
       // notify interested parties
-      let result = ''
       for (const email of email_list) {
-        result = sendEmail(
+        sendEmail(
           email,
           'Buffalo Rugby Club Member Account Creation',
           email_msg,
         )
       }
-      msg = result
     } else {
       msg = `An account with email ${lc_account_email} already exists`
     }
 
-    // console.log('msg = ', msg)
     await CONN.query('COMMIT')
     await CONN.end()
     return { message: msg }
