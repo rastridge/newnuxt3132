@@ -276,6 +276,13 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 /***************************************** */
 
 async function editOne(info) {
+  // this works
+  sendEmail(
+    'ron.astridge@me.com',
+    'Buffalo Rugby Club Admin Account Modification',
+    'editOne userService ',
+  )
+
   const { admin_user_id, admin_user_name, admin_user_email, perms, password } =
     info
 

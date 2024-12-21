@@ -146,6 +146,15 @@ async function deleteOne(id) {
 }
 
 async function changeStatus({ id, status }) {
+  /*   const { sendEmail } = useEmail()
+
+// this works
+  sendEmail(
+    'ron.astridge@me.com',
+    'Buffalo Rugby Club Admin Account Modification',
+    'An new account for admin user ',
+  )
+ */
   const sql =
     `UPDATE inbrc_content SET status = "` +
     status +
