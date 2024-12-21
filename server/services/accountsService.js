@@ -267,15 +267,6 @@ async function addOne(info) {
 /*               editOne                   */
 /***************************************** */
 async function editOne(info) {
-  const { sendEmail } = useEmail()
-
-  // this works
-  sendEmail(
-    'ron.astridge@me.com',
-    'Buffalo Rugby Club Admin Account Modification',
-    'accountService editOne ',
-  )
-
   const emailExists = await checkEmail(info)
   let msg = null // will be returned with message if email exists
   // make sure email is lowercase
