@@ -115,6 +115,13 @@ async function getOne(id) {
 /*              addOne                     */
 /***************************************** */
 async function addOne(info) {
+  //debug
+  sendEmail(
+    'ron.astridge@me.com',
+    'votesService sendBallot ',
+    'votesService sendBallot ',
+  )
+
   const emailExists = await checkEmailAdd(info)
   // make sure email is lowercase
   const lc_account_email = info.account_email.toLowerCase()
