@@ -312,7 +312,7 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h3>'
 
-  await sendEmail(email, 'Vote', htmlBody)
+  sendEmail(email, 'Vote', htmlBody)
   return email
 }
 
