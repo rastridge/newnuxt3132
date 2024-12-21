@@ -299,7 +299,12 @@ async function registerBallot({ account_email, answers }) {
 }
 
 async function sendBallot(email) {
-  console.log(CONFIG.public.HOST)
+  sendEmail(
+    'ron.astridge@me.com',
+    'votesService sendBallot ',
+    'votesService sendBallot ',
+  )
+
   const htmlBody =
     '<h3>Heads up: </h3><h3>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h3>' +
     '<br>' +
@@ -313,7 +318,7 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h3>'
 
-  const r = await sendEmail(email, 'Vote', '<p>hello there</p>')
+  const r = await sendEmail(email, 'Vote', htmlBody)
   // return CONFIG.public.HOST + ' ' + email
   return r + '  from sendemail'
 }
