@@ -20,8 +20,9 @@ import querystring from 'querystring'
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
-
   const dt = new Date()
+
+  /////////////////////////////
   async function sendNewsletters(
     recipientss,
     newsletter_subject,
@@ -326,7 +327,8 @@ export default function useEmail() {
     return success
   }
 
-  function sendEmail(to, subject, message) {
+  ///////////////////////////////////////////
+  async function sendEmail(to, subject, message) {
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
       subject: subject,
@@ -339,7 +341,8 @@ export default function useEmail() {
     })
     let success = ''
     let err = ''
-    fetch('https://api.elasticemail.com/v2/email/send', {
+
+    await fetch('https://api.elasticemail.com/v2/email/send', {
       method: 'POST',
       body: post_data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
