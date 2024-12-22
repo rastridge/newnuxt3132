@@ -228,15 +228,14 @@ async function addOne({
       ', Thank you for your contribution to the Buffalo Rugby Club. We are a NYS 501 C3 organization and as such your donation is tax deductible. This email serves as a record that you donated $' +
       contribution_amount +
       ' to your Buffalo Rugby Club'
-    const r = await sendEmail(
+    await sendEmail(
       rows[0].account_email,
       'Thank you for Your Contribution to the Buffalo Rugby Club',
       msg,
     )
     await CONN.query('COMMIT')
     await CONN.end()
-    // return { message: 'ok' }
-    return 'r ', r
+    return { message: 'ok' }
   } catch (e) {
     await CONN.query('ROLLBACK')
     await CONN.end()
