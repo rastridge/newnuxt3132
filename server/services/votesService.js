@@ -308,7 +308,7 @@ async function sendBallot(email) {
     '<h3>You can read the choices, Cancel and come back later to finish if you like</h3>' +
     '<br>' +
     '<br>' +
-    `<h3><a href="${CONFIG.public.HOST}/admin/votes/form/` +
+    `<h3><a href="${CONFIG.public.HOST}/voting/form/` +
     email +
     '">Start Voting Here</></h3>'
 

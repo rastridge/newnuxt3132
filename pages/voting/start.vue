@@ -48,6 +48,6 @@
       method: 'POST',
       body: { email },
     })
-    navigateTo('/admin/votes/confirm')
+    navigateTo('/voting/confirm')
   }
 </script>
