@@ -299,7 +299,7 @@ async function sendBallot(email) {
     'votesService sendBallot ',
   )
 
-  const htmlBody =
+  /*   const htmlBody =
     '<h3>Heads up: </h3><h3>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h3>' +
     '<br>' +
     '<h3>Your vote is final once you hit Submit</h3>' +
@@ -310,9 +310,9 @@ async function sendBallot(email) {
     '<br>' +
     `<h3><a href="${CONFIG.public.HOST}/voting/form/` +
     email +
-    '">Start Voting Here</></h3>'
+    '">Start Voting Here</></h3>' */
 
-  sendEmail(email, 'Vote', htmlBody)
+  sendEmail(email, 'Vote', 'htmlBody')
 
   return email
 }
