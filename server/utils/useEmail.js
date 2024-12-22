@@ -328,7 +328,7 @@ export default function useEmail() {
   }
 
   ///////////////////////////////////////////
-  async function sendEmail(to, subject, message) {
+  function sendEmail(to, subject, message) {
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
       subject: subject,
@@ -342,7 +342,7 @@ export default function useEmail() {
     let success = ''
     let err = ''
 
-    await fetch('https://api.elasticemail.com/v2/email/send', {
+    fetch('https://api.elasticemail.com/v2/email/send', {
       method: 'POST',
       body: post_data,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -350,10 +350,11 @@ export default function useEmail() {
       .then((response) => response.json())
       .then((json) => {
         success = json.success
+        console.log('success = ', success)
       })
       .catch((error) => {
         err = error
-        console.log('error = ', error)
+        console.log('err = ', err)
       })
 
     // return success
