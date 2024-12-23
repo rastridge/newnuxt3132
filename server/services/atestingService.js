@@ -18,7 +18,7 @@ async function send(email) {
   ) */
 
   const htmlBody =
-    `from send` +
+    '<h1>from send</h1>' +
     '<h2>Heads up: </h2><h2>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h2>' +
     '<h2>Your vote is final once you hit Submit</h2>' +
     '<h2>You can read the choices, Cancel and come back later to finish if you like</h2>' +
@@ -26,9 +26,9 @@ async function send(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  sendEmail(email, 'Vote', htmlBody)
+  sendEmail(email, 'Testing', htmlBody)
 
-  return 'from sendBallot email = ' + email
+  return 'from send() email = ' + email
 }
 
 async function getAll() {
