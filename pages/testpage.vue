@@ -15,7 +15,7 @@
       @submitted="($event) => (data = $event)"
     /> -->
 
-    <p>Sending email to {{ email }}</p>
+    <p>Sendingg email to {{ email }}</p>
     <p>data = {{ data }}</p>
   </div>
 </template>
