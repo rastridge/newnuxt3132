@@ -1,7 +1,7 @@
 <script setup>
   // const data = ref({ title: 'my novel' })
   const email = 'ron.astridge@me.com'
-  const { data } = await useFetch('/votes/sendballot', {
+  const { data } = await useFetch('/atesting/send', {
     method: 'POST',
     body: { email },
   })
