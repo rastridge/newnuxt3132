@@ -44,7 +44,7 @@
 <script setup>
   const handleSubmit = async (state) => {
     const email = state.email
-    useFetch('/votes/sendballot', {
+    await useFetch('/votes/sendballot', {
       method: 'POST',
       body: { email },
     })
