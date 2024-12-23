@@ -1,5 +1,6 @@
 <template>
   <div class="start">
+    data = {{ data }}
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <div
@@ -44,10 +45,11 @@
 <script setup>
   const handleSubmit = async (state) => {
     const email = state.email
-    await useFetch('/votes/sendballot', {
+    const { data } = await useFetch('/votes/sendballot', {
       method: 'POST',
       body: { email },
     })
-    navigateTo('/voting/confirm')
+
+    // navigateTo('/voting/confirm')
   }
 </script>

@@ -308,6 +308,7 @@ async function sendBallot(email) {
     '">Start Voting Here</></h2>'
 
   sendEmail(email, 'Vote', htmlBody)
+  // await sendEmail(email, 'Vote', htmlBody)
 
   return 'from sendBallot email = ' + email
 }

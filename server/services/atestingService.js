@@ -26,7 +26,8 @@ async function send(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  await sendEmail(email, 'Testing', htmlBody)
+  // await sendEmail(email, 'Testing', htmlBody)
+  sendEmail(email, 'Testing', htmlBody)
 
   return 'from send() email = ' + email
 }
