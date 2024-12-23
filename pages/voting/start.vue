@@ -1,5 +1,6 @@
 <template>
   <div class="start">
+    <!-- da = {{ da }} -->
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <div
@@ -42,12 +43,14 @@
 </template>
 
 <script setup>
+  // const da = ref('')
   const handleSubmit = async (state) => {
     const email = state.email
-    useFetch('/votes/sendballot', {
+    const { data } = await useFetch('/votes/sendballot', {
       method: 'POST',
       body: { email },
     })
-    navigateTo('/admin/votes/confirm')
+    // da.value = data.value
+    // navigateTo('/voting/confirm')
   }
 </script>

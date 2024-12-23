@@ -121,6 +121,6 @@
       method: 'POST',
       body: { account_email, answers },
     })
-    navigateTo('/admin/votes/thanks')
+    navigateTo('/voting/thanks')
   }
 </script>

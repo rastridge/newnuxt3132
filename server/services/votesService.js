@@ -293,27 +293,24 @@ async function registerBallot({ account_email, answers }) {
 }
 
 async function sendBallot(email) {
-  sendEmail(
+  /*   sendEmail(
     'ron.astridge@me.com',
     'votesService sendBallot ',
     'votesService sendBallot ',
-  )
+  ) */
 
   const htmlBody =
-    '<h3>Heads up: </h3><h3>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h3>' +
-    '<br>' +
-    '<h3>Your vote is final once you hit Submit</h3>' +
-    '<br>' +
-    '<br>' +
-    '<h3>You can read the choices, Cancel and come back later to finish if you like</h3>' +
-    '<br>' +
-    '<br>' +
-    `<h3><a href="${CONFIG.public.HOST}/admin/votes/form/` +
+    '<h2>Heads up: </h2><h2>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h2>' +
+    '<h2>Your vote is final once you hit Submit</h2>' +
+    '<h2>You can read the choices, Cancel and come back later to finish if you like</h2>' +
+    `<h2><a href="${CONFIG.public.HOST}/voting/form/` +
     email +
-    '">Start Voting Here</></h3>'
+    '">Start Voting Here</></h2>'
 
   sendEmail(email, 'Vote', htmlBody)
-  return email
+  // await sendEmail(email, 'Vote', htmlBody)
+
+  return 'from sendBallot email = ' + email
 }
 
 async function deleteOne(id) {
