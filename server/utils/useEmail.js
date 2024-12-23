@@ -350,11 +350,11 @@ export default function useEmail() {
       .then((response) => response.json())
       .then((json) => {
         success = json.success
-        console.log('success = ', success)
+        console.log('in sendEmail success = ', success)
       })
       .catch((error) => {
         err = error
-        console.log('err = ', err)
+        console.log('in sendEmail err = ', err)
       })
 
     // return success
