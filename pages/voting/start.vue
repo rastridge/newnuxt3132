@@ -51,6 +51,6 @@
       body: { email },
     })
     // da.value = data.value
-    // navigateTo('/voting/confirm')
+    navigateTo('/voting/confirm')
   }
 </script>
