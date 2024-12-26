@@ -357,8 +357,37 @@ export default function useEmail() {
     // return res
   }
 
+  ///////////////////////////////////////////
+  async function sendEmailAwait(to, subject, message) {
+    const post_data = querystring.stringify({
+      api_key: CONFIG.EE_API_KEY,
+      subject: subject,
+      from: CONFIG.FROM,
+      fromName: CONFIG.FROM_NAME,
+      to: to,
+      body_html: message,
+      body_text: '',
+      isTransactional: true,
+    })
+
+    const response = await fetch('https://api.elasticemail.com/v2/email/send', {
+      method: 'POST',
+      body: post_data,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    })
+
+    const data = await response.json()
+    console.log('messageid = ', data.data.messageid)
+    return data.data.messageid
+  }
+  // return success
+  // return CONFIG.public.HOST + ' post_data = ' + post_data
+  // return 'from sendEmailAwait ' + to + ' ' + subject + ' ' + message
+  // return 'from sendEmailAwait success = ' + success
+
   return {
     sendEmail,
+    sendEmailAwait,
     sendNewsletters,
   }
 }
