@@ -380,10 +380,6 @@ export default function useEmail() {
     console.log('messageid = ', data.data.messageid)
     return data.data.messageid
   }
-  // return success
-  // return CONFIG.public.HOST + ' post_data = ' + post_data
-  // return 'from sendEmailAwait ' + to + ' ' + subject + ' ' + message
-  // return 'from sendEmailAwait success = ' + success
 
   return {
     sendEmail,

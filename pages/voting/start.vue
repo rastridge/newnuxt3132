@@ -1,6 +1,6 @@
 <template>
   <div class="start">
-    <!-- da = {{ da }} -->
+    <p>messageid = {{ messageid }}</p>
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <div
@@ -43,14 +43,14 @@
 </template>
 
 <script setup>
-  // const da = ref('')
+  const messageid = ref('')
   const handleSubmit = async (state) => {
     const email = state.email
-    const { data } = await useFetch('/votes/sendballot', {
+    const { data } = await useFetch('/atesting/sendawait', {
       method: 'POST',
       body: { email },
     })
-    // da.value = data.value
-    navigateTo('/voting/confirm')
+    messageid.value = data.value
+    // navigateTo('/voting/confirm')
   }
 </script>
