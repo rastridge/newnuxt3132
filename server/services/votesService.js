@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise'
 const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby, getPoolConnection } = useDBConnection()
-const { sendEmail } = useEmail()
+const { sendEmailAwait } = useEmail()
 const CONFIG = useRuntimeConfig()
 
 export const votesService = {
@@ -293,12 +293,6 @@ async function registerBallot({ account_email, answers }) {
 }
 
 async function sendBallot(email) {
-  /*   sendEmail(
-    'ron.astridge@me.com',
-    'votesService sendBallot ',
-    'votesService sendBallot ',
-  ) */
-
   const htmlBody =
     '<h2>Heads up: </h2><h2>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h2>' +
     '<h2>Your vote is final once you hit Submit</h2>' +
@@ -307,10 +301,9 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  sendEmail(email, 'Vote', htmlBody)
-  // await sendEmail(email, 'Vote', htmlBody)
+  const messageid = await sendEmailAwait(email, 'Vote', htmlBody)
 
-  return 'from sendBallot email = ' + email
+  return messageid
 }
 
 async function deleteOne(id) {

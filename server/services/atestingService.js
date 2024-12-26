@@ -12,12 +12,6 @@ export const atestingService = {
 }
 
 async function send(email) {
-  /*   sendEmail(
-    'ron.astridge@me.com',
-    'votesService sendBallot ',
-    'votesService sendBallot ',
-  ) */
-
   const htmlBody =
     '<h1>from send</h1>' +
     '<h2>Heads up: </h2><h2>There may be more than one available question on which to vote. If so, the next question will come up when the current one is submitted.</h2>' +
