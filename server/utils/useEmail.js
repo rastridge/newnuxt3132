@@ -377,8 +377,8 @@ export default function useEmail() {
     })
 
     const data = await response.json()
-    console.log('messageid = ', data.data.messageid)
-    return data.data.messageid
+    console.log('in sendEmailAwait data = ', data)
+    return data
   }
 
   return {

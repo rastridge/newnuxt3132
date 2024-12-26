@@ -36,8 +36,10 @@ async function sendAwait(email) {
     `<h2><a href="${CONFIG.public.HOST}/voting/form/` +
     email +
     '">Start Voting Here</></h2>'
-  const messageid = await sendEmailAwait(email, 'Testing', htmlBody)
-  return messageid
+
+  const data = await sendEmailAwait(email, 'Testing', htmlBody)
+  console.log('data = ', data)
+  return data
 }
 
 async function getAll() {

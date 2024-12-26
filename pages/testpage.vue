@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Sending email to {{ email }}</p>
-    <p>messageid = {{ messageid }}</p>
+    <p>info = {{ info }}</p>
   </div>
 </template>
 
@@ -11,5 +11,5 @@
     method: 'POST',
     body: { email },
   })
-  const messageid = ref(data.value)
+  const info = ref(data.value)
 </script>

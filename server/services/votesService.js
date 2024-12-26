@@ -301,9 +301,9 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  const messageid = await sendEmailAwait(email, 'Vote', htmlBody)
-
-  return messageid
+  const data = await sendEmailAwait(email, 'Vote', htmlBody)
+  console.log('data = ', data)
+  return data
 }
 
 async function deleteOne(id) {
