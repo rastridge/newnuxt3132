@@ -1,6 +1,5 @@
 <template>
   <div class="start">
-    info = {{ info }}
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <div
@@ -51,6 +50,6 @@
       body: { email },
     })
     info.value = ref(data.value)
-    // navigateTo('/voting/confirm')
+    navigateTo('/voting/confirm')
   }
 </script>
