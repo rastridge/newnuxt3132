@@ -119,11 +119,12 @@
     </div>
 
     <!-- Game Modal -->
-    <Dialog
+    <!--     <Dialog
       v-model:visible="displayGameModal"
       :breakpoints="{ '900px': '75vw', '640px': '90vw' }"
       :style="{ width: '60vw' }"
-    >
+    > -->
+    <Dialog v-model:visible="displayGameModal">
       <template #header>
         <div>
           <span class="text-lg font-semibold"
@@ -154,11 +155,7 @@
     </Dialog>
 
     <!-- History Modal -->
-    <Dialog
-      v-model:visible="displayHistoryModal"
-      :breakpoints="{ '900px': '75vw', '640px': '90vw' }"
-      :style="{ width: '60vw' }"
-    >
+    <Dialog v-model:visible="displayHistoryModal">
       <template #header>
         <div>
           <span class="text-lg font-semibold ml-5">History</span>
