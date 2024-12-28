@@ -144,8 +144,7 @@
   <div class="my-form-style">
     <div
       v-if="
-        !edit_form ||
-        (edit_form && $dayjs().isBefore($dayjs.unix(state.date_ut)))
+        addForm || (!addForm && $dayjs().isBefore($dayjs.unix(state.date_ut)))
       "
     >
       <!-- Select previous game for autofill -->
@@ -188,7 +187,6 @@
     <!-- ------------ players table ------------------------- -- -->
     <div class="xs:w-full mt-4 my-text-style">
       <table
-        v-if="players"
         style="
           border-collapse: collapse;
           border-spacing: 0;
@@ -227,7 +225,7 @@
                 }"
                 optionLabel="title"
                 :suggestions="filteredNames"
-                @complete="search"
+                @complete="search_players"
               />
             </td>
             <td>
@@ -290,7 +288,7 @@
                   },
                 }"
                 :suggestions="filteredNames"
-                @complete="search"
+                @complete="search_players"
               />
             </td>
           </tr>
@@ -334,11 +332,9 @@
 </template>
 
 <script setup>
-  import { useAuthStore } from '~/stores/authStore'
-  const auth = useAuthStore()
   const { $dayjs } = useNuxtApp()
   const saving = ref(false)
-  const { convertToFormkitDate, convertToFormkitTime } = useUnixtime()
+  const { convertToFormkitDate } = useUnixtime()
 
   //
   // Outgoing
@@ -348,19 +344,18 @@
   // Incoming
   //
   const props = defineProps({
-    id: { type: String, default: '0' },
+    state: { type: Object, required: true },
+    players: { type: Object, required: true },
   })
-  const edit_form = props.id !== '0'
+  const state = ref({ ...props.state })
+  const players = ref([...props.players])
 
   // Reactive variables
   const showReplaceDialog = ref(false)
-  const gametypes = ref([])
-  const players = ref([])
-  const state = ref({})
   const reset = ref('')
   const reset_opponent = ref(false)
-
-  const addForm = ref(props.id === '0')
+  // which form?
+  const addForm = ref(state.value.game_id === '0')
 
   //
   // Player name autocomplete
@@ -368,18 +363,14 @@
   const selectedPlayers = ref([])
   const selectedReplacements = ref([])
   const filteredNames = ref([])
-  const suggestions = ref([])
-  const search = (event) => {
+  const search_players = (event) => {
     if (!event.query.trim().length) {
-      filteredNames.value = [...suggestions.value]
+      filteredNames.value = [...player_suggestions.value]
     } else {
-      filteredNames.value = suggestions.value.filter((suggestion) => {
-        return (
-          suggestion.title
-            .toLowerCase()
-            // .startsWith(event.query.toLowerCase())
-            .includes(event.query.toLowerCase())
-        )
+      filteredNames.value = player_suggestions.value.filter((suggestion) => {
+        return suggestion.title
+          .toLowerCase()
+          .includes(event.query.toLowerCase())
       })
     }
   }
@@ -387,18 +378,19 @@
   //
   // Opponent name autocomplete
   //
-  const suggestions_opponents = ref([])
+  // const opponent_suggstions = ref([])
   const filteredOpponents = ref([])
   const selectedOpponent = ref('')
+
   const setOpponent = () => {
     state.value.opponent_id = selectedOpponent.value.opponent_id
     state.value.opponent_name = selectedOpponent.value.opponent_name
   }
   const search_opponents = (event) => {
     if (!event.query.trim().length) {
-      filteredOpponents.value = [...suggestions_opponents.value]
+      filteredOpponents.value = [...opponent_suggstions.value]
     } else {
-      filteredOpponents.value = suggestions_opponents.value.filter(
+      filteredOpponents.value = opponent_suggstions.value.filter(
         (suggestion) => {
           return (
             suggestion.opponent_name
@@ -415,159 +407,76 @@
   // Get other options for form
   //
   // Game types
-  const { data: gt } = await useFetch(`/game_player_stats/getgametypes`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  //
+  const { data: gametypes } = await useFetch(
+    `/game_player_stats/getgametypes`,
+    {
+      method: 'get',
     },
-    // lazy: true,
-  })
-  // if (!pending_gametypes) {
-  // convert for formkit
+  )
+  //
+  // convert game types for formkit
+  //
   const result = []
-  gt.value.map((old) => {
+  gametypes.value.map((old) => {
     const n = {}
     n.label = old.game_type
     n.value = old.game_type_id
     result.push(n)
   })
   gametypes.value = result
-  // }
+
   // player names suggestions
-  const { data: players_sug } = await useFetch(`/accounts/suggestions`, {
+  //
+  const { data: player_suggestions } = await useFetch(`/accounts/suggestions`, {
     method: 'get',
-    headers: {
-      authorization: auth.user.token,
-    },
-    // lazy: true,
   })
-  suggestions.value = players_sug.value
 
   // opponent names suggestions
   //
-  const { data: opps_sug } = await useFetch(`/opponents/suggestions`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
-    },
-  })
-  suggestions_opponents.value = opps_sug.value
-
-  //
-  //
-  // edit if there is an id
-  //
-  if (edit_form) {
-    //
-    // Initialize Edit form game area
-    //
-    const { data: game } = await useFetch(`/game_player_stats/${props.id}`, {
+  const { data: opponent_suggstions } = await useFetch(
+    `/opponents/suggestions`,
+    {
       method: 'get',
-      headers: {
-        authorization: auth.user.token,
-      },
-      // lazy: true,
+    },
+  )
+  // opponent_suggstions.value = opps_sug.value
+
+  /// add
+  // for Primevue autocomplete
+  if (addForm.value) {
+    selectedPlayers.value.push({
+      account_id: '',
+      title: '',
+      member_firstname: '',
+      member_lastname: '',
     })
-
-    // if (!pending_game) {
-    state.value = game.value
-    // convert date and time from unix time for FormKit inputs
-    // for a day when date / time fields are dropped from the DB
-
-    state.value.date = convertToFormkitDate(state.value.date_ut)
-    state.value.time = convertToFormkitTime(state.value.date_ut)
-
-    // needs to be carried over because its not used in the form
-    state.value.opponent_id = game.value.opponent_id
-    // }
-    //
-    // Initialize Edit form Players area
-    //
-    const { data: p } = await useFetch(
-      `/game_player_stats/players/${props.id}`,
-      {
-        method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
-        // lazy: true,
-      },
-    )
-    players.value = p.value
-
-    // if (!pending_players.value) {
-    // Special for Primevue AutoComplete
-    players.value.forEach((value) => {
-      selectedPlayers.value.push({
-        account_id: value.player_id ? value.player_id : '0',
-        member_firstname: value.pfn ? value.pfn : '',
-        member_lastname: value.pln ? value.pln : '',
-        title: value.pname ? value.pname : '',
-      })
-      selectedReplacements.value.push({
-        account_id: value.replaced_by,
-        member_firstname: value.rfn,
-        member_lastname: value.rln,
-        title: value.rname ? value.rname : '',
-      })
+    selectedReplacements.value.push({
+      account_id: '',
+      title: '',
+      member_firstname: '',
+      member_lastname: '',
     })
   } else {
-    // add
-    //
-    // initialize blank Add form
-    //
-    // game
-    state.value.opponent_id = ''
-    state.value.referee = ''
-    state.value.venue = 'Delaware Park'
-    state.value.comment = ''
-    state.value.date_ut = $dayjs().unix()
-    state.value.date = convertToFormkitDate($dayjs().unix())
-    state.value.time = convertToFormkitTime($dayjs().unix())
-    /*
-    state.value.date = $dayjs().format('YYYY-MM-DD')
-    state.value.time = $dayjs().format('13:00')
-    */
-    state.value.occasion = ''
-    state.value.ptsFor = ''
-    state.value.ptsAgn = ''
+    // edit
+    console.log('players= ', players)
 
-    // initialize players - any new older games will have room for 23 players
-    for (let i = 0; i < 23; i++) {
-      players.value.push({
-        position_id: i + 1,
-        player_id: '',
-        pname: '',
-        pfn: '',
-        pln: '',
-        replaced_by: '0',
-        rname: '',
-        rfn: '',
-        rln: '',
-        tries: '0',
-        assists: '0',
-        conv: '0',
-        penk: '0',
-        dgoal: '0',
-        yellow: '0',
-        red: '0',
-      })
-      // for Primevue autocomplete
+    // Special for Primevue AutoComplete
+    players.value.forEach((player) => {
       selectedPlayers.value.push({
-        account_id: '',
-        title: '',
-        member_firstname: '',
-        member_lastname: '',
+        account_id: player.player_id ? player.player_id : '0',
+        member_firstname: player.pfn ? player.pfn : '',
+        member_lastname: player.pln ? player.pln : '',
+        title: player.pname ? player.pname : '',
       })
       selectedReplacements.value.push({
-        account_id: '',
-        title: '',
-        member_firstname: '',
-        member_lastname: '',
+        account_id: player.replaced_by,
+        member_firstname: player.rfn,
+        member_lastname: player.rln,
+        title: player.rname ? player.rname : '',
       })
-    }
+    })
   }
-
   //
   // Replace Players
   //
@@ -578,9 +487,6 @@
       `/game_player_stats/getprevious/${date_ut}`,
       {
         method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
       },
     )
     // convert for formkit select previous games
@@ -624,9 +530,6 @@
       `/game_player_stats/players/${game_id}`,
       {
         method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
       },
     )
 

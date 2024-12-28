@@ -1,4 +1,6 @@
 <script setup>
+  import { useAuthStore } from '~/stores/authStore'
+  const auth = useAuthStore()
   definePageMeta({
     middleware: ['auth'],
   })
@@ -8,6 +10,36 @@
   //
   const route = useRoute()
   const id = route.params.id
+
+  //
+  // Initialize Edit form game info area
+  //
+  const { data: state } = await useFetch(`/game_player_stats/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
+
+  // convert date and time from unix time for FormKit inputs
+  // for a day when date / time fields are dropped from the DB
+  const { convertToFormkitDate, convertToFormkitTime } = useUnixtime()
+
+  state.value.date = convertToFormkitDate(state.value.date_ut)
+  state.value.time = convertToFormkitTime(state.value.date_ut)
+
+  // needs to be carried over because its not used in the form
+  // state.value.opponent_id = state.value.opponent_id
+  // }
+  //
+  // Initialize Edit form Players area
+  //
+  const { data: players } = await useFetch(`/game_player_stats/players/${id}`, {
+    method: 'get',
+    headers: {
+      authorization: auth.user.token,
+    },
+  })
 
   //
   // content form action
@@ -32,7 +64,8 @@
       </div>
     </div>
     <game-form
-      :id="id"
+      :players="players"
+      :state="state"
       @submitted="onSubmit"
     />
   </div>

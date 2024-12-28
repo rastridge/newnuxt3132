@@ -24,6 +24,7 @@
           />
         </div>
       </div>
+
       <render-list
         :data="filteredData"
         :page="page"
@@ -56,14 +57,15 @@
   // get initial values
   //
   const placemark = usePlacemarkStore()
+
   const page = ref(placemark.getPage)
   const season = ref(placemark.getSeasonYear)
   const gametype = ref(placemark.getGameTypeId)
   // Initialize year select
   const startyear = 1966
 
-  console.log('placemark.getSeasonYear = ', placemark.getSeasonYear)
-  console.log('season = ', season)
+  // console.log('placemark.getSeasonYear = ', placemark.getSeasonYear)
+  // console.log('season = ', season)
 
   //
   // filter season gams by Game type
