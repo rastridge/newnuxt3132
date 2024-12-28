@@ -17,26 +17,26 @@
             @submitted="onSubmitSeasonYear"
           />
 
+          <!--Select gsme type -->
           <select-game-type
             :currenttype="gametype"
             @submitted="onSubmitGameType"
           />
         </div>
       </div>
-      <div>
-        <render-list
-          :data="filteredData"
-          :page="page"
-          :app="app"
-          :statusable="statusable"
-          :editable="editable"
-          :deleteable="deleteable"
-          :addable="addable"
-          :viewable="viewable"
-          @changeStatus="changeStatus"
-          @deleteItem="deleteItem"
-        />
-      </div>
+
+      <render-list
+        :data="filteredData"
+        :page="page"
+        :app="app"
+        :statusable="statusable"
+        :editable="editable"
+        :deleteable="deleteable"
+        :addable="addable"
+        :viewable="viewable"
+        @changeStatus="changeStatus"
+        @deleteItem="deleteItem"
+      />
     </div>
   </div>
 </template>
@@ -47,26 +47,28 @@
     middleware: ['auth'],
   })
 
-  const placemark = usePlacemarkStore()
-
   // initialize renderlist
   //
+  const app = 'game_player_stats'
   const { getAccess } = useRenderListAccess()
   const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
-  const app = 'game_player_stats'
-  const page = ref(placemark.getPage)
 
-  // Initialize year select
   //
-  const startyear = 1966
+  // get initial values
+  //
+  const placemark = usePlacemarkStore()
+  const page = ref(placemark.getPage)
   const season = ref(placemark.getSeasonYear)
+  const gametype = ref(placemark.getGameTypeId)
+  // Initialize year select
+  const startyear = 1966
 
   console.log('placemark.getSeasonYear = ', placemark.getSeasonYear)
   console.log('season = ', season)
-  // select Game type
-  //
-  const gametype = ref(placemark.getGameTypeId)
 
+  //
+  // filter season gams by Game type
+  //
   const filteredData = computed(() => {
     return stats.value.filter((d) => {
       if (gametype.value === 7) {
@@ -77,7 +79,10 @@
     })
   })
 
-  // Save current after changes
+  // Save current after changing game type
+  //
+  // redundant ???
+  // see ln #130
   watch(gametype, (newgametype) => {
     placemark.setGameTypeId(newgametype)
     placemark.setPage(0)
@@ -111,6 +116,7 @@
 
   //
   // set season after drop down choice
+  // get games by season
   //
   const onSubmitSeasonYear = async function (season) {
     placemark.setSeasonYear(season)
@@ -118,13 +124,18 @@
     page.value = 0
     await getSeasonGames(season)
   }
-
+  //
   // set gametype after drop down choice
   //
   const onSubmitGameType = async function (value) {
     gametype.value = value
     placemark.setGameTypeId(gametype.value)
   }
+
+  /*
+    placemark.setGameTypeId(newgametype)
+    placemark.setPage(0)
+    page.value = 0 */
 
   // Renderlist actions
   //

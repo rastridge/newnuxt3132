@@ -8,10 +8,12 @@
         <display-admin-header :title="app" />
       </div>
 
+      <!--Select by email -->
       <div class="topsectionitem">
         <lookup-by-email />
       </div>
 
+      <!--Select member type -->
       <div class="topsectionitem">
         <p class="my-header-style">Member type</p>
         <Dropdown
@@ -22,6 +24,8 @@
           placeholder="Select a member type"
         />
       </div>
+
+      <!--Select by alpha -->
       <div class="topsectionitem">
         <p>Last name begins with</p>
         <Dropdown
@@ -33,21 +37,20 @@
       </div>
     </div>
 
-    <div>
-      <render-list
-        :data="filteredData"
-        :page="page"
-        :app="app"
-        :statusable="statusable"
-        :editable="editable"
-        :deleteable="deleteable"
-        :addable="addable"
-        :viewable="viewable"
-        @changeStatus="changeStatus"
-        @deleteItem="deleteItem"
-      />
-    </div>
+    <render-list
+      :data="filteredData"
+      :page="page"
+      :app="app"
+      :statusable="statusable"
+      :editable="editable"
+      :deleteable="deleteable"
+      :addable="addable"
+      :viewable="viewable"
+      @changeStatus="changeStatus"
+      @deleteItem="deleteItem"
+    />
 
+    <!-- player on game roster -->
     <Dialog
       v-model:visible="visible"
       modal
@@ -117,6 +120,7 @@
     }
     return temp
   })
+
   //
   // Set placemarks after changing member type
   //
@@ -127,6 +131,7 @@
     placemark.setPage(0)
     page.value = 0
   })
+
   //
   // Set placemarks after changing Alpha
   //
@@ -142,7 +147,7 @@
   const memberTypeOptions = await getMemberTypeOptions()
 
   //
-  // Get alpha options for alpha selector
+  // Set alpha options for alpha selector
   //
   const alphas = [
     { label: 'Any', value: '1' },
@@ -178,6 +183,7 @@
   //
   // default warning dialog visibility
   const visible = ref(false)
+
   //
   // default message for found on roster
   const message = ref('')
