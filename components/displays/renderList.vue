@@ -167,15 +167,16 @@
   //
   // make local copy of input data
   //
+  const current = ref(0)
   const data_local = ref([])
   watchEffect(() => {
     data_local.value = [...props.data]
+    current.value = props.page
   })
 
   //
   // Initial settings for pagination
   //
-  const current = ref(props.page)
 
   //
   // Watch = Save paginator page number

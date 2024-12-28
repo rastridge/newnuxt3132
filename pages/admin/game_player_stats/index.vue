@@ -24,7 +24,6 @@
           />
         </div>
       </div>
-
       <render-list
         :data="filteredData"
         :page="page"
@@ -79,16 +78,6 @@
     })
   })
 
-  // Save current after changing game type
-  //
-  // redundant ???
-  // see ln #130
-  watch(gametype, (newgametype) => {
-    placemark.setGameTypeId(newgametype)
-    placemark.setPage(0)
-    page.value = 0
-  })
-
   //
   // get season data
   //
@@ -131,11 +120,6 @@
     gametype.value = value
     placemark.setGameTypeId(gametype.value)
   }
-
-  /*
-    placemark.setGameTypeId(newgametype)
-    placemark.setPage(0)
-    page.value = 0 */
 
   // Renderlist actions
   //
