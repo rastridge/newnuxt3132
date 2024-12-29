@@ -28,9 +28,6 @@
   state.value.date = convertToFormkitDate(state.value.date_ut)
   state.value.time = convertToFormkitTime(state.value.date_ut)
 
-  // needs to be carried over because its not used in the form
-  // state.value.opponent_id = state.value.opponent_id
-  // }
   //
   // Initialize Edit form Players area
   //
