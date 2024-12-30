@@ -459,8 +459,6 @@
     })
   } else {
     // edit
-    console.log('players= ', players)
-
     // Special for Primevue AutoComplete
     players.value.forEach((player) => {
       selectedPlayers.value.push({
