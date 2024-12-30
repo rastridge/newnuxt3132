@@ -119,11 +119,7 @@
     </div>
 
     <!-- Game Modal -->
-    <!--     <Dialog
-      v-model:visible="displayGameModal"
-      :breakpoints="{ '900px': '75vw', '640px': '90vw' }"
-      :style="{ width: '60vw' }"
-    > -->
+
     <Dialog v-model:visible="displayGameModal">
       <template #header>
         <div>

@@ -50,37 +50,7 @@
       </ul>
     </div>
     <!-- Modal -->
-    <Dialog
-      v-model:visible="displayModal"
-      :breakpoints="{ '900px': '75vw', '640px': '90vw' }"
-      :style="{ width: '60vw' }"
-      :pt="{
-        root: {
-          style: {
-            padding: '0',
-            minWidth: '10rem',
-            'border-radius': '20px',
-          },
-        },
-        header: {
-          style: {
-            'background-color': '#CCC',
-          },
-        },
-        content: {
-          style: {
-            padding: '1rem',
-            'background-color': '#EEE',
-          },
-        },
-        footer: {
-          style: {
-            'background-color': '#CCC',
-            padding: '1rem',
-          },
-        },
-      }"
-    >
+    <Dialog v-model:visible="displayModal">
       <template #header>
         <div>
           <h4>{{ item.video_title }}</h4>

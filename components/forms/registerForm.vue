@@ -105,32 +105,6 @@
     :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
     :style="{ width: '50vw' }"
     modal
-    :pt="{
-      root: {
-        style: {
-          padding: '0',
-          minWidth: '10rem',
-          'border-radius': '20px',
-        },
-      },
-      header: {
-        style: {
-          'background-color': '#CCC',
-        },
-      },
-      content: {
-        style: {
-          padding: '1rem',
-          'background-color': '#EEE',
-        },
-      },
-      footer: {
-        style: {
-          'background-color': '#CCC',
-          padding: '1rem',
-        },
-      },
-    }"
   >
     <template #header>
       <div>

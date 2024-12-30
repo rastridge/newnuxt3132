@@ -49,36 +49,7 @@
       </div>
     </div>
 
-    <Dialog
-      v-model:visible="displayModal"
-      :pt="{
-        root: {
-          style: {
-            padding: '0',
-            minWidth: '10rem',
-            width: '95%',
-            'border-radius': '20px',
-          },
-        },
-        header: {
-          style: {
-            'background-color': '#CCC',
-          },
-        },
-        content: {
-          style: {
-            padding: '1rem',
-            'background-color': '#EEE',
-          },
-        },
-        footer: {
-          style: {
-            'background-color': '#CCC',
-            padding: '1rem',
-          },
-        },
-      }"
-    >
+    <Dialog v-model:visible="displayModal">
       <template #header>
         <div class="font-semibold text-md lg:text-lg">
           {{ selectedItem.archive_title }}
