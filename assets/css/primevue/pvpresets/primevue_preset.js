@@ -17,10 +17,10 @@ const pvPreset = {
   dialog: {
     root: {
       style: {
-        padding: '0',
-        minWidth: '10rem',
+        minWidth: '20rem',
         'border-radius': '20px',
       },
+      class: 'w-10',
     },
     header: {
       style: {
@@ -83,8 +83,9 @@ const pvPreset = {
     root: {
       style: {
         'background-color': '#transparent',
-        'border-radius': '25px',
+        'border-radius': '20px',
       },
+      class: '',
     },
     menu: {
       style: {
@@ -96,12 +97,15 @@ const pvPreset = {
         'background-color': '#transparent',
       },
     },
+    label: {
+      class: '',
+    },
 
     content: {
       style: {
         'background-color': '#transparent',
       },
-      class: 'text-xs md:text-sm lg:text-base p-2',
+      class: 'ml-2  mb-1 md:mb-2 text-700 text-sm md:text-base lg:text-lg',
     },
   },
 }

@@ -333,16 +333,13 @@
       </div>
     </div>
     <!-- Modal -->
-    <Dialog
-      v-model:visible="displayModal"
-      :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-      :style="{ width: '60vw' }"
-      :pt="{
+    <!--  :pt="{
         root: {
           style: {
             padding: '0',
+            width: '80%',
             minWidth: '10rem',
-            'border-radius': '20px',
+            'border-radius': '30px',
           },
         },
         header: {
@@ -362,8 +359,8 @@
             padding: '1rem',
           },
         },
-      }"
-    >
+      }" -->
+    <Dialog v-model:visible="displayModal">
       <template #header>
         <div>
           <h5>{{ selectedItem.news_title }}</h5>
