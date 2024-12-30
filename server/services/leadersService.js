@@ -1,31 +1,31 @@
 const { doDBQueryBuffalorugby } = useQuery()
 export const leadersService = {
-	getAll,
-	getAllCurrent,
-	getOne,
-	editOne,
-	addOne,
-	getYears,
-	deleteOne,
-	changeStatus,
+  getAll,
+  getAllCurrent,
+  getOne,
+  editOne,
+  addOne,
+  getYears,
+  deleteOne,
+  changeStatus,
 }
 
 async function getYears() {
-	const sql = `SELECT
+  const sql = `SELECT
 								leaders_year
-							FROM 
+							FROM
 								inbrc_leaders
-							WHERE 
+							WHERE
 								deleted != 1
-							ORDER BY 
+							ORDER BY
 								leaders_year`
 
-	const years = await doDBQueryBuffalorugby(sql)
-	return years
+  const years = await doDBQueryBuffalorugby(sql)
+  return years
 }
 
 async function getAll() {
-	const sql = `SELECT
+  const sql = `SELECT
 									leaders_id,
 									leaders_id as id,
 									leaders_year as title,
@@ -34,7 +34,7 @@ async function getAll() {
 									secretary,
 									match_secretary,
 									treasurer,
-									social_chairman, 
+									social_chairman,
 									spring_captain,
 									fall_captain,
 									coach,
@@ -49,12 +49,12 @@ async function getAll() {
                 WHERE deleted = 0
                 ORDER BY title ASC`
 
-	const leaders = await doDBQueryBuffalorugby(sql)
-	return leaders
+  const leaders = await doDBQueryBuffalorugby(sql)
+  return leaders
 }
 
 async function getAllCurrent() {
-	const sql = `SELECT
+  const sql = `SELECT
 										leaders_id,
 										leaders_id as id,
 										leaders_year as title,
@@ -63,7 +63,7 @@ async function getAllCurrent() {
 										secretary,
 										match_secretary,
 										treasurer,
-										social_chairman, 
+										social_chairman,
 										spring_captain,
 										fall_captain,
 										coach,
@@ -78,14 +78,15 @@ async function getAllCurrent() {
 									WHERE
 										deleted = 0
 										AND
-										STATUS = 1`
+										STATUS = 1
+										ORDER BY leaders_year ASC`
 
-	const leaders = await doDBQueryBuffalorugby(sql)
-	return leaders
+  const leaders = await doDBQueryBuffalorugby(sql)
+  return leaders
 }
 
 async function getOne(id) {
-	const sql = `SELECT 	
+  const sql = `SELECT
 								leaders_id,
 								leaders_id as id,
 								leaders_year,
@@ -94,36 +95,36 @@ async function getOne(id) {
 								secretary,
 								match_secretary,
 								treasurer,
-								social_chairman, 
+								social_chairman,
 								spring_captain,
 								fall_captain,
 								coach,
 								assistant_coach,
 								chair_bod
-							from 
-								inbrc_leaders 
-							where 
+							from
+								inbrc_leaders
+							where
 								leaders_id=${id}`
 
-	const leaders = await doDBQueryBuffalorugby(sql)
-	return leaders[0]
+  const leaders = await doDBQueryBuffalorugby(sql)
+  return leaders[0]
 }
 
 async function addOne({
-	leaders_year,
-	president,
-	vice_president,
-	secretary,
-	match_secretary,
-	treasurer,
-	social_chairman,
-	spring_captain,
-	fall_captain,
-	coach,
-	assistant_coach,
-	chair_bod,
+  leaders_year,
+  president,
+  vice_president,
+  secretary,
+  match_secretary,
+  treasurer,
+  social_chairman,
+  spring_captain,
+  fall_captain,
+  coach,
+  assistant_coach,
+  chair_bod,
 }) {
-	const sql = `INSERT INTO 
+  const sql = `INSERT INTO
 								inbrc_leaders
               SET
 								leaders_year = ?,
@@ -143,41 +144,41 @@ async function addOne({
 								created_dt = NOW(),
 								modified_dt = NOW()`
 
-	let inserts = []
-	inserts.push(
-		leaders_year,
-		president,
-		vice_president,
-		secretary,
-		match_secretary,
-		treasurer,
-		social_chairman,
-		spring_captain,
-		fall_captain,
-		coach,
-		assistant_coach,
-		chair_bod
-	)
-	const leaders = await doDBQueryBuffalorugby(sql, inserts)
-	return leaders
+  let inserts = []
+  inserts.push(
+    leaders_year,
+    president,
+    vice_president,
+    secretary,
+    match_secretary,
+    treasurer,
+    social_chairman,
+    spring_captain,
+    fall_captain,
+    coach,
+    assistant_coach,
+    chair_bod,
+  )
+  const leaders = await doDBQueryBuffalorugby(sql, inserts)
+  return leaders
 }
 
 async function editOne({
-	leaders_year,
-	president,
-	vice_president,
-	secretary,
-	match_secretary,
-	treasurer,
-	social_chairman,
-	spring_captain,
-	fall_captain,
-	coach,
-	assistant_coach,
-	chair_bod,
-	id,
+  leaders_year,
+  president,
+  vice_president,
+  secretary,
+  match_secretary,
+  treasurer,
+  social_chairman,
+  spring_captain,
+  fall_captain,
+  coach,
+  assistant_coach,
+  chair_bod,
+  id,
 }) {
-	const sql = `UPDATE inbrc_leaders SET
+  const sql = `UPDATE inbrc_leaders SET
 									leaders_year = ?,
 									president = ?,
 									vice_president = ?,
@@ -192,39 +193,39 @@ async function editOne({
 									chair_bod =?,
 									modified_dt= NOW()
 								WHERE leaders_id = ?`
-	let inserts = []
+  let inserts = []
 
-	inserts.push(
-		leaders_year,
-		president,
-		vice_president,
-		secretary,
-		match_secretary,
-		treasurer,
-		social_chairman,
-		spring_captain,
-		fall_captain,
-		coach,
-		assistant_coach,
-		chair_bod,
-		id
-	)
-	const sponsor = await doDBQueryBuffalorugby(sql, inserts)
-	return sponsor
+  inserts.push(
+    leaders_year,
+    president,
+    vice_president,
+    secretary,
+    match_secretary,
+    treasurer,
+    social_chairman,
+    spring_captain,
+    fall_captain,
+    coach,
+    assistant_coach,
+    chair_bod,
+    id,
+  )
+  const sponsor = await doDBQueryBuffalorugby(sql, inserts)
+  return sponsor
 }
 
 async function deleteOne(id) {
-	const sql = `UPDATE inbrc_leaders SET deleted=1, deleted_dt=NOW() WHERE leaders_id=${id}`
-	const sponsor = await doDBQueryBuffalorugby(sql)
-	return sponsor
+  const sql = `UPDATE inbrc_leaders SET deleted=1, deleted_dt=NOW() WHERE leaders_id=${id}`
+  const sponsor = await doDBQueryBuffalorugby(sql)
+  return sponsor
 }
 
 async function changeStatus({ id, status }) {
-	const sql =
-		`UPDATE inbrc_leaders SET STATUS = "` +
-		status +
-		`" WHERE leaders_id  = ` +
-		id
-	const sponsor = await doDBQueryBuffalorugby(sql)
-	return sponsor
+  const sql =
+    `UPDATE inbrc_leaders SET STATUS = "` +
+    status +
+    `" WHERE leaders_id  = ` +
+    id
+  const sponsor = await doDBQueryBuffalorugby(sql)
+  return sponsor
 }
