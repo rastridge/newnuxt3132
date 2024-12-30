@@ -333,33 +333,7 @@
       </div>
     </div>
     <!-- Modal -->
-    <!--  :pt="{
-        root: {
-          style: {
-            padding: '0',
-            width: '80%',
-            minWidth: '10rem',
-            'border-radius': '30px',
-          },
-        },
-        header: {
-          style: {
-            'background-color': '#CCC',
-          },
-        },
-        content: {
-          style: {
-            padding: '1rem',
-            'background-color': '#EEE',
-          },
-        },
-        footer: {
-          style: {
-            'background-color': '#CCC',
-            padding: '1rem',
-          },
-        },
-      }" -->
+
     <Dialog v-model:visible="displayModal">
       <template #header>
         <div>
