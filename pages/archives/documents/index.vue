@@ -39,7 +39,8 @@
               <Button
                 label="Open"
                 text
-                class="p-button-sm cursor-pointer"
+                size="small"
+                class="cursor-pointer"
                 @click.prevent="showDocument(itm)"
               />
             </div>
