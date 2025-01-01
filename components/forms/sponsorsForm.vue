@@ -161,11 +161,11 @@
 
       openProgressModal()
 
-      // Find server code in folder Nuxt3-brc-media-api
       const CONFIG = useRuntimeConfig()
-
       const url = `${CONFIG.public.MEDIA_URL}sponsors`
-
+      //
+      // Find server code in folder Nuxt3-brc-media-api
+      //
       const res = await fetch(url, {
         method: 'POST',
         body: formData,
