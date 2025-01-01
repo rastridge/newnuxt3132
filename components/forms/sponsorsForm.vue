@@ -47,7 +47,6 @@
         type="text"
         validation="required"
       />
-
       <div class="my-fileupload-wrapper-style">
         <!-- sponsor image file upload 			-->
         <p>Image must be 750w 125h 72dpi</p>
@@ -120,7 +119,7 @@
   //
   const emit = defineEmits(['submitted'])
   //
-  // Incoming id
+  // Incoming sponsor data
   //
   const props = defineProps({
     state: { type: Object, required: true },
@@ -128,8 +127,9 @@
   const state = ref({ ...props.state })
 
   //
-  // progress modal
+  // control progress modal
   //
+
   const displayModal = ref(false)
   const openProgressModal = () => {
     displayModal.value = true
@@ -158,6 +158,7 @@
     if (imageDimensions.height === 125 && imageDimensions.width === 750) {
       const formData = new FormData()
       formData.append('file', file)
+
       openProgressModal()
 
       // Find server code in folder Nuxt3-brc-media-api
@@ -174,9 +175,9 @@
       })
 
       const data = await res.json()
+
       closeProgressModal()
       image.value = data.imageUrl
-      // console.log('IN handle image.value = ', image.value)
       state.value.ad_image_path = data.imageUrl
     } else {
       alert.error(
