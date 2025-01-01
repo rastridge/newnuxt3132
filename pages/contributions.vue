@@ -12,7 +12,6 @@
         <Card>
           <template #content>
             <h5>Buffalo Rugby Alumni Fund Paypal</h5>
-
             <form
               action="https://www.paypal.com/donate"
               method="post"
@@ -21,7 +20,7 @@
               <input
                 type="hidden"
                 name="hosted_button_id"
-                value="CBFY5FB86KUAY"
+                value="EH2TSRTGPZVPY"
               />
               <input
                 type="image"
