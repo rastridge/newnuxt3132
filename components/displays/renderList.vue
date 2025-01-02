@@ -11,6 +11,15 @@
       >
       </Button>
     </div>
+
+    <!--  <ConfirmPopup></ConfirmPopup>
+    <div class="card flex flex-wrap gap-2 justify-content-center">
+      <Button
+        label="Save"
+        @click="confirm1($event)"
+      ></Button>
+    </div> -->
+
     <div
       v-if="viewable"
       class="renderlist-enclosure"
@@ -93,6 +102,15 @@
                 ><i class="pi pi-pencil"></i>
               </nuxt-link>
               &nbsp;
+              <!-- <Button
+                v-if="deleteable"
+                href="#"
+                size="small"
+                link
+                severity="danger"
+                @click="deleteItem(slotProps.data.id, $event)"
+                ><i class="pi pi-trash"></i
+              ></Button> -->
               <a
                 v-if="deleteable"
                 href="#"
@@ -142,6 +160,10 @@
 
 <script setup>
   import { usePlacemarkStore } from '~/stores/placemarkStore'
+  import { useConfirm } from 'primevue/useconfirm'
+  import { useToast } from 'primevue/usetoast'
+
+  const confirm = useConfirm()
   const placemark = usePlacemarkStore()
   const { $dayjs } = useNuxtApp()
   const { formatUnixDate } = useUnixtime()
@@ -205,12 +227,31 @@
   //
   // Delete in local data and database
   //
+  // const deleteItem = (id, event) => {
   const deleteItem = (id) => {
     // save item id
     itemId.value = id
+    // confirm1(id, event)
     // open confirm dialog
     deleteDialog.value = true
   }
+
+  /* const confirm1 = (id, event) => {
+    confirm.require({
+      target: event.currentTarget,
+      message: 'Are you sure you want to delete?',
+      icon: 'pi pi-exclamation-triangle',
+      rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
+      acceptClass: 'p-button-sm',
+      rejectLabel: 'Cancel',
+      acceptLabel: 'Delete',
+      accept: (id) => {
+        confirmedDelete(id)
+      },
+      reject: () => {},
+    })
+  } */
+
   const confirmedDelete = (id) => {
     data_local.value = data_local.value.filter((u) => u.id !== id)
 

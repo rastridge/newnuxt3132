@@ -93,8 +93,8 @@
   //
   // incoming from inputBody component
   //
-  const changeState = (field) => {
-    state.value.content_body = field
+  const changeState = (content_body) => {
+    state.value.content_body = content_body
   }
   //
 
@@ -105,7 +105,7 @@
     saving.value = true
     // Update html from InputBody component to make images responsive
     //
-    state.value.content_body = state.value.content_body.replace(
+    state.content_body = state.content_body.replace(
       /\<img/g,
       '<img width="100%"',
     )
