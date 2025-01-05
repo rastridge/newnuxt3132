@@ -19,7 +19,7 @@
       "
     >
       <div
-        v-for="item in otherdata"
+        v-for="item in data"
         :key="item.id"
         class=""
       >
@@ -53,16 +53,11 @@
   // Get account id to edit
   //
   const route = useRoute()
-  const room = ref(route.params.room)
+  const id = route.params.room
 
-  const otherdata = ref(null)
-
-  const { data } = await useFetch(`/clubhouse/room/${room.value}`, {
+  const { data } = await useFetch(`/clubhouse/room/${id}`, {
     method: 'get',
   })
-  otherdata.value = data.value
-
-  // Find server code in folder Nuxt3-brc-media-api
 </script>
 
 <style scoped>

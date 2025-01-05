@@ -33,7 +33,7 @@
   // Get account id to edit
   //
   const route = useRoute()
-  const id = ref(route.params.id)
+  const id = route.params.id
 
   const players = ref([])
   const game = ref({})
@@ -72,8 +72,8 @@
     }
   }
 
-  game.value = await getOne(id.value) // get game info
-  players.value = await getPlayers(id.value) // get game info for players
+  game.value = await getOne(id) // get game info
+  players.value = await getPlayers(id) // get game info for players
 
   const returnToList = () => {
     navigateTo(`/games/schedule/0`)
