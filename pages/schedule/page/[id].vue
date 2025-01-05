@@ -21,13 +21,13 @@
   // Get account id to edit
   //
   const route = useRoute()
-  const id = ref(route.params.id)
+  const id = route.params.id
 
   const players = ref([])
   const game = ref({})
 
-  const getPlayers = async (game_id) => {
-    const url = `/game_player_stats/players/${game_id}`
+  const getPlayers = async (id) => {
+    const url = `/game_player_stats/players/${id}`
     const { data } = await useFetch(url, {
       method: 'get',
     })
@@ -42,6 +42,6 @@
     return data.value
   }
 
-  game.value = await getOne(id.value) // get game info
-  players.value = await getPlayers(id.value) // get game info for players
+  game.value = await getOne(id) // get game info
+  players.value = await getPlayers(id) // get game info for players
 </script>
