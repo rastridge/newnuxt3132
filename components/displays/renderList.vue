@@ -254,7 +254,7 @@
 
   const confirmedDelete = (id) => {
     data_local.value = data_local.value.filter((u) => u.id !== id)
-
+    //
     // deletion confirmed
     // close confirm dialog
     deleteDialog.value = false

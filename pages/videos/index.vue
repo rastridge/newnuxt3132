@@ -26,7 +26,7 @@
           :key="itm.video_id"
           class="cursor-pointer bg-white border-round-lg border-1 p-3 m-2"
           href="#"
-          @click.prevent="selectItem(itm)"
+          @click.prevent="selectItem(itm.video_id)"
         >
           <span class="font-italic">
             {{ $dayjs(itm.dt).format('YYYY MMM') }}
@@ -109,22 +109,25 @@
     method: 'get',
   })
 
-  const selectItem = (item) => getOne(item.id)
-
-  const getOne = async (id) => {
-    const { data } = await useFetch('/videos/' + id, {
-      method: 'get',
-    })
-
-    item.value = data.value
+  const selectItem = async (id) => {
+    item.value = await getOne(id)
+    //
+    // open modal or open window depeding on video source?
+    //
     if (item.value.video_url.includes('yout')) {
       video_url.value =
         'https://www.youtube.com/embed/' + getIdFromURL(item.value.video_url)
       openModal()
     } else {
-      const url = item.value.video_url
-      window.open(url)
+      window.open(item.value.video_url)
     }
+  }
+
+  const getOne = async (id) => {
+    const { data } = await useFetch('/videos/' + id, {
+      method: 'get',
+    })
+    return data.value
   }
 
   //

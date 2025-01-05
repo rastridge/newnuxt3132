@@ -259,7 +259,7 @@
         statusMessage: `Could not get data from ${url}`,
       })
     } else {
-      players.value = data.value
+      return data.value
     }
   }
 
@@ -271,7 +271,8 @@
       method: 'get',
     })
 
-    game_info.value = data.value
+    // game_info.value = data.value
+    return data.value
   }
 
   const displayGameModal = ref(false)
@@ -283,8 +284,8 @@
     displayGameModal.value = false
   }
   const showGame = async (id) => {
-    await getTheInfo(id)
-    await getThePlayers(id)
+    game_info.value = await getTheInfo(id)
+    players.value = await getThePlayers(id)
     openModal()
   }
   //

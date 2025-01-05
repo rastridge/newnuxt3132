@@ -108,7 +108,7 @@
   const selectedItem = ref({})
   const displayModal = ref(false)
   const openModal = async (item) => {
-    await getOne(item.id)
+    selectedItem.value = await getOne(item.id)
     displayModal.value = true
   }
   const closeModal = () => {
@@ -119,6 +119,6 @@
     const { data } = await useFetch(`/newsletters/${id}`, {
       method: 'get',
     })
-    selectedItem.value = data.value
+    return data.value
   }
 </script>

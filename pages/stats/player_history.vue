@@ -185,8 +185,8 @@
     displayModal.value = false
   }
   const openGameModal = async (id) => {
-    await getOne(id) // get game info
-    await getPlayers(id) // get game info for players
+    game.value = await getOne(id) // get game info
+    players.value = await getPlayers(id) // get game info for players
     openModal()
   }
   const getPlayers = async (game_id) => {
@@ -200,7 +200,7 @@
         statusMessage: `Could not get data from ${url}`,
       })
     } else {
-      players.value = data.value
+      return data.value
     }
   }
   const getOne = async (id) => {
@@ -214,7 +214,7 @@
         statusMessage: `Could not get data from ${url}`,
       })
     } else {
-      game.value = data.value
+      return data.value
     }
   }
   //

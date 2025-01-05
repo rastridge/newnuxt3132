@@ -27,7 +27,7 @@
           >
             <a
               href="#"
-              @click="openModal(itm)"
+              @click="openModal(itm.id)"
             >
               <span class="text-900 font-italic">{{
                 $dayjs(itm.news_event_dt).format('MMM D, YYYY')
@@ -103,9 +103,8 @@
   //
   const selectedItem = ref({})
   const displayModal = ref(false)
-  const openModal = async (item) => {
-    await getOne(item.id)
-
+  const openModal = async (id) => {
+    selectedItem.value = await getOne(id)
     displayModal.value = true
   }
   const closeModal = () => {
@@ -118,6 +117,6 @@
     const { data } = await useFetch(`/news/${id}`, {
       method: 'get',
     })
-    selectedItem.value = data.value
+    return data.value
   }
 </script>
