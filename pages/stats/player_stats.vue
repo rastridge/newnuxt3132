@@ -177,7 +177,7 @@
   import { FilterMatchMode } from 'primevue/api'
 
   //
-  // Get current news
+  // Get player stats
   //
   const { data } = await useFetch('/game_player_stats/getplayerstats/1', {
     // 1 = fifteens
