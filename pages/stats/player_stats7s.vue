@@ -9,7 +9,7 @@
       <div class="my-datatable-wrapper-style">
         <DataTable
           v-model:filters="filters"
-          :value="table_data"
+          :value="data"
           dataKey="name"
           :globalFilterFields="['member_type']"
           class="p-datatable-sm my-text-style"
@@ -168,15 +168,11 @@
   import { FilterMatchMode } from 'primevue/api'
 
   //
-  // Get current news
+  // Get current player stats sevens/tens
   //
-  const { data: table_data } = await useFetch(
-    '/game_player_stats/getplayerstats/7',
-    {
-      // 1 = sevens
-      method: 'get',
-    },
-  )
+  const { data } = await useFetch('/game_player_stats/getplayerstats/7', {
+    method: 'get',
+  })
 
   //
   // filter value criteria
