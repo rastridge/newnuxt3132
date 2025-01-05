@@ -107,6 +107,8 @@
   const closeModal = () => {
     displayModal.value = false
   }
+
+  // selected item is URL
   const selectedItem = ref(null)
 
   const showDocument = async (item) => {

@@ -1,5 +1,5 @@
 <template>
-  <p>{{ news_data.news_article }}</p>
+  <p>{{ data.news_article }}</p>
 </template>
 
 <script setup>
@@ -19,11 +19,11 @@
   // Get content id parameter
   //
   const route = useRoute()
-  const news_id = ref(route.params.id)
+  const id = route.params.id
   //
   // Get custom page content
   //
-  const { data: news_data } = await useFetch(`/news/${news_id.value}`, {
+  const { data } = await useFetch(`/news/${id}`, {
     method: 'get',
   })
 </script>
