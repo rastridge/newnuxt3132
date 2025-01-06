@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="my-simple-card-style">
-      <div>
+      <div v-if="year_data.length">
         <ul class="list-none my-text-style">
           <li
             v-for="itm in year_data"
@@ -40,6 +40,9 @@
             </a>
           </li>
         </ul>
+      </div>
+      <div v-else>
+        <p class="my-text-style text-center">No news for this year</p>
       </div>
     </div>
 

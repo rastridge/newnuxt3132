@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="my-simple-card-style">
-      <div>
+      <div v-if="filteredData.length">
         <ul class="list-none my-text-style">
           <li
             v-for="itm in filteredData"
@@ -46,6 +46,9 @@
             </div>
           </li>
         </ul>
+      </div>
+      <div v-else>
+        <p class="my-text-style text-center">No documents for this year</p>
       </div>
     </div>
 

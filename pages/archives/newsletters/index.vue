@@ -18,30 +18,36 @@
       </div>
     </div>
     <div class="my-simple-card-style">
-      <ul class="list-none my-text-style font-semibold">
-        <li
-          v-for="itm in year_data"
-          :key="itm.id"
-          class="cursor-pointer text-500 font-semibold bg-white border-1 border-round-lg p-3 m-2"
-        >
-          <a
-            href="#"
-            @click="openModal(itm)"
+      <div v-if="year_data.length">
+        <ul class="list-none my-text-style font-semibold">
+          <li
+            v-for="itm in year_data"
+            :key="itm.id"
+            class="cursor-pointer text-500 font-semibold bg-white border-1 border-round-lg p-3 m-2"
           >
-            <span class="text-sm md:text-lg text-600">{{
-              $dayjs(itm.sent_dt).format('MMM D, YYYY')
-            }}</span>
-            -
-            <span class="text-sm md:text-lg text-500 font-semibold">{{
-              itm.title
-            }}</span>
-            <span class="text-xs md:text-sm text-blue-600 cursor-pointer">
-              - Open</span
+            <a
+              href="#"
+              @click="openModal(itm)"
             >
-          </a>
-        </li>
-      </ul>
+              <span class="text-sm md:text-lg text-600">{{
+                $dayjs(itm.sent_dt).format('MMM D, YYYY')
+              }}</span>
+              -
+              <span class="text-sm md:text-lg text-500 font-semibold">{{
+                itm.title
+              }}</span>
+              <span class="text-xs md:text-sm text-blue-600 cursor-pointer">
+                - Open</span
+              >
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div v-else>
+        <p class="my-text-style text-center">No newsletters for this year</p>
+      </div>
     </div>
+
     <!-- </div> -->
 
     <!-- Modal -->

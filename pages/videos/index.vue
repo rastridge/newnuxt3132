@@ -17,10 +17,7 @@
       </div>
     </div>
     <div class="my-simple-card-style">
-      <div
-        v-if="filteredData.length"
-        x
-      >
+      <div v-if="filteredData.length">
         <ul class="list-none my-text-style">
           <li
             v-for="itm in filteredData"
