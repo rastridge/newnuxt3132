@@ -236,29 +236,35 @@
     total.value = sum
     contributions.value = data.value
   }
-  const getTopContributors = async () => {
+
+  //
+  // Get top contributions all time
+  //
+  /*   const getTopContributors = async () => {
     const { data } = await useFetch(`/contributions/top`, {
       method: 'get',
     })
     topcontributors.value = data.value
-  }
+  } */
 
   // topcontributors values
-  const topcontributors = ref([])
-  getTopContributors()
+  const { data: topcontributors } = await useFetch(`/contributions/top`, {
+    method: 'get',
+  })
 
   // initial values
-  const year = ref(parseInt($dayjs().format('YYYY')))
+  const year = parseInt($dayjs().format('YYYY'))
   const contributions = ref([])
-  getYearContributiions(year.value)
+  getYearContributiions(year)
 
   //
-  // Select year action
+  // Select year start year
   //
   const startyear = 2012
+  //
   // get year contributions
-  const onSubmit = (value) => {
-    year.value = value
-    getYearContributiions(year.value)
+  //
+  const onSubmit = (year) => {
+    getYearContributiions(year)
   }
 </script>
