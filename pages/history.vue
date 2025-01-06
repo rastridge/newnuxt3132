@@ -9,7 +9,7 @@
     <div class="my-simple-card-style">
       <div class="my-datatable-wrapper-style">
         <DataTable
-          :value="history"
+          :value="data"
           class="p-datatable-sm my-text-style"
           striped-rows
           showGridlines
@@ -58,7 +58,7 @@
   //
   // Get current news
   //
-  const { data: history } = await useFetch('/history/getallcurrent', {
+  const { data } = await useFetch('/history/getallcurrent', {
     method: 'get',
   })
 </script>
