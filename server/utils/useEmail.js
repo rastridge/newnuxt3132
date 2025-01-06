@@ -353,8 +353,6 @@ export default function useEmail() {
       .catch((error) => {
         console.log(error)
       })
-
-    // return res
   }
 
   ///////////////////////////////////////////
