@@ -9,7 +9,7 @@
         <DataTable
           v-model:expandedRows="expandedRows"
           v-model:filters="filters"
-          :value="members"
+          :value="data"
           dataKey="account_id"
           :globalFilterFields="['member_type']"
           :class="'p-datatable-sm my-text-style'"
@@ -135,7 +135,7 @@
   //
   // Get current news
   //
-  const { data: members } = await useFetch('/accounts/getshow', {
+  const { data } = await useFetch('/accounts/getshow', {
     method: 'get',
   })
 
