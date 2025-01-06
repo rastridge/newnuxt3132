@@ -20,19 +20,6 @@
             frameborder="0"
             scrolling="yes"
           ></iframe>
-
-          <!--
-            <nuxt-link
-              to="https://xplorer.rugby/empire/fixtures-results?comp=7i8kPXDpmeAyzH2Mu&team=All&season=2025&tab=Fixtures"
-              target="_blank"
-              rel="noopener"
-            >
-              <Button
-                label="D2 League Results"
-                class="m-1"
-              ></Button>
-            </nuxt-link>
-            -->
         </template>
       </Card>
       <div>
@@ -47,19 +34,6 @@
               frameborder="0"
               scrolling="yes"
             ></iframe>
-
-            <!--
-            <nuxt-link
-              to="https://xplorer.rugby/empire/fixtures-results?comp=9LmeCHHfxEnJCEmap&team=All&season=2025&tab=Fixtures"
-              target="_blank"
-              rel="noopener"
-            >
-              <Button
-                label="D3 North League Results"
-                class="m-1"
-              ></Button>
-            </nuxt-link>
-            -->
           </template>
         </Card>
       </div>

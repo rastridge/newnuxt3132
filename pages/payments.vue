@@ -34,7 +34,7 @@
 
 <script setup>
   //
-  // Get current news
+  // Get current payments
   //
   const { data: payments } = await useFetch('/payments/getallcurrent', {
     method: 'get',

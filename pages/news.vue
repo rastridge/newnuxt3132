@@ -305,7 +305,7 @@
         class="flex flex-column md:flex-row flex-wrap align-items-center md:align-items-start justify-content-center"
       >
         <Card
-          v-for="item in news"
+          v-for="item in data"
           :key="item.news_id"
           style="width: 320px; height: 320px"
           class="flex justify-content-center"
@@ -377,7 +377,7 @@
   //
   // Get current news
   //
-  const { data: news } = await useFetch('/news/getallcurrent', {
+  const { data } = await useFetch('/news/getallcurrent', {
     method: 'get',
   })
 </script>
