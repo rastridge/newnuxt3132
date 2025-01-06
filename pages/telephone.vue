@@ -1,11 +1,13 @@
 <template>
-	phonenumber = {{ phonenumber }}
-	<input-telephone
-		:tnumber="phonenumber"
-		@update="(t) => (phonenumber = t.value)"
-	/>
+  <div>
+    phonenumber = {{ phonenumber }}
+    <input-telephone
+      :tnumber="phonenumber"
+      @update="(t) => (phonenumber = t.value)"
+    />
+  </div>
 </template>
 
 <script setup>
-	const phonenumber = ref(null)
+  const phonenumber = ref(null)
 </script>
