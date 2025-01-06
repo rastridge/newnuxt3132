@@ -320,7 +320,7 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
-      success = await sendEmail(email.to, email.subject, email.message)
+      success = await sendEmailAwait(email.to, email.subject, email.message)
       i++
     } while (i < recipientss.length && success)
 
