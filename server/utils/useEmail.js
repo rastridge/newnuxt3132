@@ -320,11 +320,12 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
-      success = await sendEmailAwait(email.to, email.subject, email.message)
+      // success = await sendEmailAwait(email.to, email.subject, email.message)
       i++
     } while (i < recipientss.length && success)
 
-    return success
+    // return success
+    return 'sent = ' + i
   }
 
   ///////////////////////////////////////////
@@ -357,6 +358,8 @@ export default function useEmail() {
 
   ///////////////////////////////////////////
   async function sendEmailAwait(to, subject, message) {
+    // console.log('in sendEmailAwait to = ', to)
+
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
       subject: subject,
@@ -375,7 +378,6 @@ export default function useEmail() {
     })
 
     const data = await response.json()
-    console.log('in sendEmailAwait data = ', data)
     return data
   }
 
