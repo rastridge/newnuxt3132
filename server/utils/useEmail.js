@@ -38,7 +38,6 @@ export default function useEmail() {
       // this should work if and when email works
       const TRACKING = `${CONFIG.public.HOST}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
       const TRACKINGPIXEL = `<img src="${TRACKING}" height="1" width="1"  />`
-
       ///////// Template from https://dashboard.unlayer.com/create/blank?ref=templates ////////////////////////////////
 
       const BEGIN_HTML = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -314,18 +313,21 @@ export default function useEmail() {
     let email = ''
     let i = 0
     let success = true
+    let sent_count = 0
     do {
       email = await composeEmailHelper(
         recipientss[i],
         newsletter_body_html,
         newsletter_subject,
       )
-      // success = await sendEmailAwait(email.to, email.subject, email.message)
+      success = await sendEmailAwait(email.to, email.subject, email.message)
+      if (success) {
+        sent_count++
+      }
       i++
     } while (i < recipientss.length && success)
 
-    // return success
-    return 'sent = ' + i
+    return { success: success, sent: sent_count }
   }
 
   ///////////////////////////////////////////
@@ -378,7 +380,7 @@ export default function useEmail() {
     })
 
     const data = await response.json()
-    return data
+    return data.success
   }
 
   return {

@@ -106,7 +106,7 @@ async function sendNewsletter({
   newsletter_subject,
   newsletter_recipient_type_id,
 }) {
-  // get all active accounts marked to receive new
+  // get all active accounts marked to receive newsletter
   const sql = `SELECT
 								account_id,
 								member_firstname,
@@ -147,17 +147,18 @@ async function sendNewsletter({
   )
   // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
-  const success = await sendNewsletters(
+  const { success, sent } = await sendNewsletters(
     recipients,
     newsletter_subject,
     newsletter_body_html,
     newsletter_id,
   )
-
+  console.log('in service/sendNewsletter  success, sent = ', success, sent)
   // log the email send only if sendNewsletters is "success"
   //
-  if (success) {
-    const sql2 = `UPDATE inbrc_newsletters
+  let sql2 = ''
+  if (success && recipients.length === sent) {
+    sql2 = `UPDATE inbrc_newsletters
 								SET
 									newsletter_sent = NOW(),
 									newsletter_send = NOW(),
@@ -167,10 +168,17 @@ async function sendNewsletter({
 									newsletter_recp_cnt = ${recipients.length}
 								WHERE
 									newsletter_id = ${newsletter_id}`
-
-    await doDBQueryBuffalorugby(sql2)
+  } else {
+    sql2 = `UPDATE inbrc_newsletters
+              SET
+                newsletter_send_status = 4,
+                newsletter_recp_cnt = ${recipients.length - sent}
+              WHERE
+                newsletter_id = ${newsletter_id}`
   }
-  return success
+  await doDBQueryBuffalorugby(sql2)
+
+  return { success, sent }
 }
 //
 //
