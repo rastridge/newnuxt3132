@@ -5,7 +5,7 @@
   >
     Newsletter opened count {{ opened.opened_cnt }}
     <br />
-    Current recipient group sent count {{ state.newsletter_recp_cnt }}
+    Current recipient group size {{ state.newsletter_recp_cnt }}
   </div>
   <div class="my-form-style">
     <FormKit

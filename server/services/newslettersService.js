@@ -145,7 +145,10 @@ async function sendNewsletter({
     accounts,
     newsletter_recipient_type_id,
   )
-  // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
+  console.log(
+    'in service/sendNewsletter  recipeints.lngth= ',
+    recipients.length,
+  ) // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
   const { success, sent } = await sendNewsletters(
     recipients,
@@ -153,7 +156,9 @@ async function sendNewsletter({
     newsletter_body_html,
     newsletter_id,
   )
-  console.log('in service/sendNewsletter  success, sent = ', success, sent)
+
+  // console.log('in service/sendNewsletter  success, sent = ', success, sent)
+
   // log the email send only if sendNewsletters is "success"
   //
   let sql2 = ''
@@ -243,11 +248,12 @@ async function trackNewsletter(query) {
       sql = mysql.format(sql, inserts)
       await conn.execute(sql)
     }
-    sql = `UPDATE inbrc_newsletters
+
+    /*     sql = `UPDATE inbrc_newsletters
 					SET
 						newsletter_opened_cnt = newsletter_opened_cnt + 1
 					WHERE
-						newsletter_id = ?`
+						newsletter_id = ?` */
 
     inserts = []
     inserts.push(query.newsletter_id)

@@ -320,6 +320,7 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
+
       success = await sendEmailAwait(email.to, email.subject, email.message)
       if (success) {
         sent_count++
@@ -381,6 +382,7 @@ export default function useEmail() {
 
     const data = await response.json()
     return data.success
+    // return true
   }
 
   return {
