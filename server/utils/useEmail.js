@@ -37,7 +37,7 @@ export default function useEmail() {
     ) {
       // this should work if and when email works
       const TRACKING = `${CONFIG.public.HOST}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
-      const TRACKINGPIXEL = `<img src="${TRACKING}" height="1" width="1"  />`
+      const TRACKINGPIXEL = `<img src="${TRACKING}" style="width:1px;height:1px" alt="" />`
       ///////// Template from https://dashboard.unlayer.com/create/blank?ref=templates ////////////////////////////////
 
       const BEGIN_HTML = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -152,6 +152,9 @@ export default function useEmail() {
   <body class="clean-body u_body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #dfdfdf;color: #000000">
     <!--[if IE]><div class="ie-container"><![endif]-->
     <!--[if mso]><div class="mso-container"><![endif]-->
+
+    ->${TRACKINGPIXEL}<-
+
     <table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #dfdfdf;width:100%" cellpadding="0" cellspacing="0">
     <tbody>
     <tr style="vertical-align: top">
@@ -173,7 +176,6 @@ export default function useEmail() {
     <tbody>
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
-          ${TRACKINGPIXEL}
 
     <!--[if mso]><table width="100%"><tr><td><![endif]-->
       <h1 style="margin: 0px; color: #0200e0; line-height: 140%; text-align: center; word-wrap: break-word; font-family: arial black,AvenirNext-Heavy,avant garde,arial; font-size: 36px; font-weight: 400;"><span><span><span><span>Buffalo Rugby News</span></span></span></span></h1>
@@ -261,7 +263,6 @@ export default function useEmail() {
       <tr>
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
           <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
-            <p style="line-height: 140%;">
               <p>This is Your Current Contact Info.</p>
               <p> Please <a href="${CONFIG.public.HOST}/update/918J275B654I${recipient.account_id}" target="_blank"> Update your info if necessary</a></p>
               <table>
@@ -276,7 +277,6 @@ export default function useEmail() {
                   <tr><td>Previous teams ${recipient.member_prev_club}</td></tr>
                 </tbody>
               </table>
-            </p>
           </div>
         </td>
       </tr>

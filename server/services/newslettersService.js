@@ -145,10 +145,10 @@ async function sendNewsletter({
     accounts,
     newsletter_recipient_type_id,
   )
-  console.log(
+  /*   console.log(
     'in service/sendNewsletter  recipeints.length= ',
     recipients.length,
-  )
+  ) */
   //
   // // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
@@ -195,6 +195,7 @@ async function getOpenedCount(id) {
 }
 
 async function trackNewsletter(query) {
+  console.log('track ', query)
   const conn = await getConnectionBuffalorugby()
 
   try {
@@ -240,11 +241,11 @@ async function trackNewsletter(query) {
       await conn.execute(sql)
     }
 
-    /*     sql = `UPDATE inbrc_newsletters
+    sql = `UPDATE inbrc_newsletters
 					SET
 						newsletter_opened_cnt = newsletter_opened_cnt + 1
 					WHERE
-						newsletter_id = ?` */
+						newsletter_id = ?`
 
     inserts = []
     inserts.push(query.newsletter_id)
