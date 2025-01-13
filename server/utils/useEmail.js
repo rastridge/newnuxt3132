@@ -314,6 +314,7 @@ export default function useEmail() {
     let i = 0
     let success = true
     let sent_count = 0
+    let fail_count = 0
     do {
       email = await composeEmailHelper(
         recipientss[i],
@@ -324,11 +325,13 @@ export default function useEmail() {
       success = await sendEmailAwait(email.to, email.subject, email.message)
       if (success) {
         sent_count++
+      } else {
+        fail_count++
       }
       i++
-    } while (i < recipientss.length && success)
+    } while (i < recipientss.length)
 
-    return { success: success, sent: sent_count }
+    return { sent: sent_count, failed: fail_count }
   }
 
   ///////////////////////////////////////////
@@ -361,7 +364,7 @@ export default function useEmail() {
 
   ///////////////////////////////////////////
   async function sendEmailAwait(to, subject, message) {
-    // console.log('in sendEmailAwait to = ', to)
+    console.log('in sendEmailAwait to = ', to)
 
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,

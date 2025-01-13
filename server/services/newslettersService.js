@@ -146,11 +146,13 @@ async function sendNewsletter({
     newsletter_recipient_type_id,
   )
   console.log(
-    'in service/sendNewsletter  recipeints.lngth= ',
+    'in service/sendNewsletter  recipeints.length= ',
     recipients.length,
-  ) // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
+  )
   //
-  const { success, sent } = await sendNewsletters(
+  // // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
+  //
+  const { sent, failed } = await sendNewsletters(
     recipients,
     newsletter_subject,
     newsletter_body_html,
@@ -158,12 +160,8 @@ async function sendNewsletter({
   )
 
   // console.log('in service/sendNewsletter  success, sent = ', success, sent)
-
-  // log the email send only if sendNewsletters is "success"
   //
-  let sql2 = ''
-  if (success && recipients.length === sent) {
-    sql2 = `UPDATE inbrc_newsletters
+  const sql2 = `UPDATE inbrc_newsletters
 								SET
 									newsletter_sent = NOW(),
 									newsletter_send = NOW(),
@@ -173,17 +171,10 @@ async function sendNewsletter({
 									newsletter_recp_cnt = ${recipients.length}
 								WHERE
 									newsletter_id = ${newsletter_id}`
-  } else {
-    sql2 = `UPDATE inbrc_newsletters
-              SET
-                newsletter_send_status = 4,
-                newsletter_recp_cnt = ${recipients.length - sent}
-              WHERE
-                newsletter_id = ${newsletter_id}`
-  }
+
   await doDBQueryBuffalorugby(sql2)
 
-  return { success, sent }
+  return { sent: sent, failed: failed }
 }
 //
 //
