@@ -175,9 +175,10 @@ export default function useEmail() {
     <!--[if IE]><div class="ie-container"><![endif]-->
     <!--[if mso]><div class="mso-container"><![endif]-->
 
-    ${TRACKINGPIXEL}
+
 
     <!--
+     ${TRACKINGPIXEL}
     image->
     <img src="https://buffalorugby.org/newsletters/track?account_id=1933&newsletter_id=2749" height="1" width="1"  alt=""/>
     <<-
@@ -245,6 +246,9 @@ export default function useEmail() {
       </tr>
     </tbody>
   </table>
+  <!-- TRACKINGPIXEL -->
+
+       ${TRACKINGPIXEL}
 
   <!-- CONTENT -->
 
