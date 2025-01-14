@@ -254,7 +254,9 @@ async function trackNewsletter(query) {
 
     await conn.query('COMMIT')
     await conn.end()
-    return 'COMMIT trackNewsletter ' + query
+    return (
+      'COMMIT trackNewsletter ' + query.account_id + ' ' + query.newsletter_id
+    )
   } catch (e) {
     await conn.query('ROLLBACK')
     await conn.end()
