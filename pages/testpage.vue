@@ -8,7 +8,7 @@
     /> -->
     ->
     <img
-      src="https://buffalorugby.org/newsletters/track?account_id=1813&newsletter_id=2749"
+      src="https://buffalorugby.org/newsletters/track?account_id=1&newsletter_id=2749"
       height="100"
       width="100"
       alt=""
