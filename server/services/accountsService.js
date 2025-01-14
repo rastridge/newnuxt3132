@@ -116,11 +116,11 @@ async function getOne(id) {
 /***************************************** */
 async function addOne(info) {
   //debug - next sendEmail will not wrk without this
-  sendEmail(
-    'ron.astridge@me.com',
-    'vaccountService addOne ',
-    'vaccountService addOne ',
-  )
+  // sendEmail(
+  //   'ron.astridge@me.com',
+  //   'vaccountService addOne ',
+  //   'vaccountService addOne ',
+  // )
 
   const emailExists = await checkEmailAdd(info)
   // make sure email is lowercase

@@ -15,6 +15,28 @@
       })
  */
 
+/*
+	//
+	// self invoking function, passing the number of iterations as an argument
+	// very cute - https://stackoverflow.com/questions/3583724/how-do-i-add-a-delay-in-a-javascript-loop
+	(function myLoop(i) {
+		// Using recursion
+		// Send emails to Elasticemail slowly
+		setTimeout(function () {
+			const email = composeEmail(
+				recipients[i - 1],
+				newsletter_body_html,
+				newsletter_subject,
+				id
+			);
+			activityLog("newsletters", "email.to = ", email.to);
+			//
+			sendEmail(email);
+			if (--i) myLoop(i); //  decrement i and call myLoop again if i > 0
+		}, 500); // delay 300ms
+	})(rec_cnt);
+*/
+
 import querystring from 'querystring'
 // const { activityLog } = useActivityLogs()
 
@@ -153,7 +175,13 @@ export default function useEmail() {
     <!--[if IE]><div class="ie-container"><![endif]-->
     <!--[if mso]><div class="mso-container"><![endif]-->
 
-    ->${TRACKINGPIXEL}<-
+    ${TRACKINGPIXEL}
+
+    <!--
+    image->
+    <img src="https://buffalorugby.org/newsletters/track?account_id=1933&newsletter_id=2749" height="1" width="1"  alt=""/>
+    <<-
+    -->
 
     <table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #dfdfdf;width:100%" cellpadding="0" cellspacing="0">
     <tbody>
@@ -226,7 +254,7 @@ export default function useEmail() {
         <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
 
       <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
-        <p style="line-height: 140%;">`
+        <p>`
 
       // content goes here
 
