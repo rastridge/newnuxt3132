@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise'
 const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby, getPoolConnection } = useDBConnection()
-const { sendEmailAwait } = useEmail()
+const { sendEmail } = useEmail()
 const CONFIG = useRuntimeConfig()
 
 export const votesService = {
@@ -301,8 +301,7 @@ async function sendBallot(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  const data = await sendEmailAwait(email, 'Vote', htmlBody)
-  console.log('data = ', data)
+  const data = await sendEmail(email, 'Vote', htmlBody)
   return data
 }
 

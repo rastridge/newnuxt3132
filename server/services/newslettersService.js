@@ -145,14 +145,11 @@ async function sendNewsletter({
     accounts,
     newsletter_recipient_type_id,
   )
-  /*   console.log(
-    'in service/sendNewsletter  recipeints.length= ',
-    recipients.length,
-  ) */
   //
   // // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
-  const { sent, failed } = await sendNewsletters(
+  // const { sent, failed } = await sendNewsletters(
+  const { sentlist } = await sendNewsletters(
     recipients,
     newsletter_subject,
     newsletter_body_html,
@@ -175,7 +172,8 @@ async function sendNewsletter({
 
   await doDBQueryBuffalorugby(sql2)
 
-  return { sent: sent, failed: failed }
+  // return { sent: sent, failed: failed }
+  return sentlist
 }
 //
 //

@@ -1,5 +1,5 @@
 const { doDBQueryTZ0 } = useQuery()
-const { sendEmail, sendEmailAwait } = useEmail()
+const { sendEmail } = useEmail()
 const CONFIG = useRuntimeConfig()
 
 export const atestingService = {
@@ -37,7 +37,7 @@ async function sendAwait(email) {
     email +
     '">Start Voting Here</></h2>'
 
-  const data = await sendEmailAwait(email, 'Testing', htmlBody)
+  const data = await sendEmail(email, 'Testing', htmlBody)
   console.log('data = ', data)
   return data
 }
