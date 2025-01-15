@@ -159,7 +159,8 @@ async function sendNewsletter({
     newsletter_id,
   )
 
-  // console.log('in service/sendNewsletter  success, sent = ', success, sent)
+  //
+  //
   //
   const sql2 = `UPDATE inbrc_newsletters
 								SET
@@ -195,7 +196,7 @@ async function getOpenedCount(id) {
 }
 
 async function trackNewsletter(query) {
-  console.log('track ', query.account_id + ' ' + query.newsletter_id)
+  // console.log('track ', query.account_id + ' ' + query.newsletter_id)
   const conn = await getConnectionBuffalorugby()
 
   try {

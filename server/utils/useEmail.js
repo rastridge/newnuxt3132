@@ -36,7 +36,7 @@
 		}, 500); // delay 300ms
 	})(rec_cnt);
 */
-
+import delay from 'delay'
 import querystring from 'querystring'
 // const { activityLog } = useActivityLogs()
 
@@ -348,6 +348,7 @@ export default function useEmail() {
     let sent_count = 0
     let fail_count = 0
     do {
+      // email = await composeEmailHelper(
       email = await composeEmailHelper(
         recipientss[i],
         newsletter_body_html,
@@ -355,11 +356,13 @@ export default function useEmail() {
       )
 
       success = await sendEmailAwait(email.to, email.subject, email.message)
+      await delay(250)
       if (success) {
         sent_count++
       } else {
         fail_count++
       }
+      // console.log('email.to ', email.to)
       i++
     } while (i < recipientss.length)
 
@@ -396,7 +399,7 @@ export default function useEmail() {
 
   ///////////////////////////////////////////
   async function sendEmailAwait(to, subject, message) {
-    console.log('in sendEmailAwait to = ', to)
+    // console.log('in sendEmailAwait to = ', to)
 
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,
@@ -409,6 +412,7 @@ export default function useEmail() {
       isTransactional: true,
     })
 
+    // const response = await fetch('https://api.elasticemail.com/v2/email/send', {
     const response = await fetch('https://api.elasticemail.com/v2/email/send', {
       method: 'POST',
       body: post_data,
@@ -416,7 +420,9 @@ export default function useEmail() {
     })
 
     const data = await response.json()
+    // console.log('in sendEmailAwait data = ', data)
     return data.success
+
     // return true
   }
 
