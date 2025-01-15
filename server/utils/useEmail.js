@@ -313,8 +313,8 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
-      // sendEmail(email.to, email.subject, email.message)
-      // await delay(100)
+      sendEmail(email.to, email.subject, email.message)
+      await delay(100)
       sentlist.push(email.to)
       i++
     } while (i < recipientss.length)
