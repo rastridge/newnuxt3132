@@ -305,7 +305,6 @@ export default function useEmail() {
     }
     let sentlist = []
     let email = ''
-
     let i = 0
     do {
       email = composeEmailHelper(
