@@ -148,8 +148,7 @@ async function sendNewsletter({
   //
   // // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
-  // const { sent, failed } = await sendNewsletters(
-  const { sentlist } = await sendNewsletters(
+  const { success, fail, sentlist } = await sendNewsletters(
     recipients,
     newsletter_subject,
     newsletter_body_html,
@@ -172,8 +171,7 @@ async function sendNewsletter({
 
   await doDBQueryBuffalorugby(sql2)
 
-  // return { sent: sent, failed: failed }
-  return sentlist
+  return { success, fail, sentlist }
 }
 //
 //

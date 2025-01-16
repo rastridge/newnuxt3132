@@ -305,22 +305,33 @@ export default function useEmail() {
     }
     let sentlist = []
     let email = ''
+    let success = 0
+    let fail = 0
     let i = 0
     do {
+      // let result = ''
       email = composeEmailHelper(
         recipientss[i],
         newsletter_body_html,
         newsletter_subject,
       )
+      // result = sendEmail(email.to, email.subject, email.message)
       sendEmail(email.to, email.subject, email.message)
+      // console.log('in sendNewsletters result = ', result)
+
       // await delay(100)
+      /*       if (result === 200) {
+        success++
+      } else {
+        fail++
+      } */
       sentlist.push(email.to)
       i++
     } while (i < recipientss.length)
 
     console.log('in sendNewsletters sentlist.length = ', sentlist.length)
 
-    return { sentlist: sentlist }
+    return { success: success, fail: fail, sentlist: sentlist }
   }
 
   function sendEmail(to, subject, message) {
@@ -346,6 +357,42 @@ export default function useEmail() {
       },
     }
 
+    const req = https.request(post_options, (res) => {
+      console.log('statusCode:', res.statusCode)
+
+      // res.on('data', (d) => {
+      //   process.stdout.write(d)
+      // })
+    })
+
+    req.on('error', (e) => {
+      console.error(e)
+    })
+
+    req.write(post_data)
+    req.end()
+
+    /* fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+          title: 'foo',
+          body: 'bar',
+          userId: 1,
+      }),
+      headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+      },
+  })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch(error => {
+          console.log(error)
+      }) */
+
+    //
+    // this one workd
+    //
+    /*
     let result = ''
     const post_req = https.request(post_options, function (res) {
       res.setEncoding('utf8')
@@ -359,6 +406,7 @@ export default function useEmail() {
     post_req.end()
 
     return result
+*/
   }
 
   return {
