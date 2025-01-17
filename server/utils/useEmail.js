@@ -359,10 +359,6 @@ export default function useEmail() {
 
     const req = https.request(post_options, (res) => {
       console.log('statusCode:', res.statusCode)
-
-      // res.on('data', (d) => {
-      //   process.stdout.write(d)
-      // })
     })
 
     req.on('error', (e) => {
