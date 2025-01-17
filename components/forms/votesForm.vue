@@ -47,7 +47,17 @@
     <display-cancelform :destination="'/admin/votes'" />
 
     <!-- FormKit list input Voodoo -->
-    <h6>Choices</h6>
+    <div>
+      <h6 v-if="!edit_form">Add Choices - When finished choose Submit</h6>
+    </div>
+    <div>
+      <h6
+        v-if="!choice_values.length"
+        class="alert-danger w-full"
+      >
+        Choices required
+      </h6>
+    </div>
     <FormKit
       #default="{ items, node, value }"
       v-model="choice_values"
