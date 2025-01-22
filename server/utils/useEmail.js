@@ -1,6 +1,5 @@
 import querystring from 'querystring'
 import https from 'https'
-import delay from 'delay'
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
@@ -306,7 +305,7 @@ export default function useEmail() {
     let sentlist = []
     let email = ''
     let success = 0
-    let fail = 0
+    // let fail = 0
     let i = 0
     do {
       // let result = ''
@@ -318,8 +317,8 @@ export default function useEmail() {
       // result = sendEmail(email.to, email.subject, email.message)
       sendEmail(email.to, email.subject, email.message)
       // console.log('in sendNewsletters result = ', result)
+      success++
 
-      // await delay(100)
       /*       if (result === 200) {
         success++
       } else {
@@ -331,7 +330,8 @@ export default function useEmail() {
 
     console.log('in sendNewsletters sentlist.length = ', sentlist.length)
 
-    return { success: success, fail: fail, sentlist: sentlist }
+    // return { success: success, fail: fail, sentlist: sentlist }
+    return { success: success, sentlist: sentlist }
   }
 
   function sendEmail(to, subject, message) {
