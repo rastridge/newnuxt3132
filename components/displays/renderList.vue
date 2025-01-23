@@ -12,14 +12,6 @@
       </Button>
     </div>
 
-    <!--  <ConfirmPopup></ConfirmPopup>
-    <div class="card flex flex-wrap gap-2 justify-content-center">
-      <Button
-        label="Save"
-        @click="confirm1($event)"
-      ></Button>
-    </div> -->
-
     <div
       v-if="viewable"
       class="renderlist-enclosure"
@@ -102,15 +94,7 @@
                 ><i class="pi pi-pencil"></i>
               </nuxt-link>
               &nbsp;
-              <!-- <Button
-                v-if="deleteable"
-                href="#"
-                size="small"
-                link
-                severity="danger"
-                @click="deleteItem(slotProps.data.id, $event)"
-                ><i class="pi pi-trash"></i
-              ></Button> -->
+
               <a
                 v-if="deleteable"
                 href="#"
@@ -191,7 +175,9 @@
   //
   const current = ref(0)
   const data_local = ref([])
+
   watchEffect(() => {
+    // console.log('watcheffect triggered')
     data_local.value = [...props.data]
     current.value = props.page
   })
