@@ -55,6 +55,20 @@
           >
         </Card>
       </div>
+
+      <!-- venmo-->
+      <div class="topsectionitem mb-2">
+        <Card>
+          <template #content
+            ><p>
+              <img
+                width="100%"
+                src="https://media.buffalorugby.org/_img/_news_newsletters/1737562879969-newsletter640-alumnifundvenmo.png"
+              /></p
+          ></template>
+        </Card>
+      </div>
+
       <!-- ------------ yearly contributions --------------------------->
       <div class="topsectionitem">
         <select-year

@@ -302,7 +302,7 @@ async function sendBallot(email) {
     '">Start Voting Here</></h2>'
 
   sendEmail(email, 'Vote', htmlBody)
-  return 'Ballot sent to ', email
+  return email
 }
 
 async function deleteOne(id) {
