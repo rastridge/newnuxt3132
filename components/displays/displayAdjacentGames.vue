@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-  const { $dayjs } = useNuxtApp()
+  // const { $dayjs } = useNuxtApp()
   const { formatUnixDate, formatUnixTime } = useUnixtime()
 
   const props = defineProps({
