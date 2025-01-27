@@ -315,7 +315,7 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
-      // sendEmail(email.to, email.subject, email.message)
+      sendEmail(email.to, email.subject, email.message)
       delay(3)
       // console.log('in sendNewsletters result = ', result)
       success++
