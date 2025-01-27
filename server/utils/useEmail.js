@@ -1,5 +1,6 @@
 import querystring from 'querystring'
 import https from 'https'
+import delay from 'delay'
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
@@ -314,8 +315,8 @@ export default function useEmail() {
         newsletter_body_html,
         newsletter_subject,
       )
-      // result = sendEmail(email.to, email.subject, email.message)
-      sendEmail(email.to, email.subject, email.message)
+      // sendEmail(email.to, email.subject, email.message)
+      delay(3)
       // console.log('in sendNewsletters result = ', result)
       success++
 
