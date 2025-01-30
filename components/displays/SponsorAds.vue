@@ -19,7 +19,7 @@
 <script setup>
   const route = useRoute()
 
-  const item = ref(null)
+  const item = ref({})
 
   watch(
     () => route.fullPath,
@@ -43,9 +43,9 @@
       method: 'get',
     })
 
-    const adIdIndex = await getRandomInt(0, adIds.value.length)
+    const adIdIndex = await getRandomInt(0, adIds.value.length - 1)
 
-    item.value = getOne(adIds.value[adIdIndex].id)
+    item.value = await getOne(adIds.value[adIdIndex].id)
   }
 
   const getOne = async (id) => {
