@@ -122,7 +122,6 @@
     saving.value = true
     //
     // Insert into quill html to make images responsive
-    //
     state.news_article = state.news_article.replace(
       /\<img/g,
       '<img width="100%"',

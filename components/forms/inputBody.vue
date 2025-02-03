@@ -64,9 +64,7 @@
     displayModal.value = false
   }
   //
-  // quill modules
-  //
-
+  // quill module
   const modules = {
     module: ImageUploader,
     options: {

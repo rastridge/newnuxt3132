@@ -103,8 +103,8 @@
   //
   const submitForm = (state) => {
     saving.value = true
-    // Update html from InputBody component to make images responsive
     //
+    // Update html from InputBody component to make images responsive
     state.content_body = state.content_body.replace(
       /\<img/g,
       '<img width="100%"',
