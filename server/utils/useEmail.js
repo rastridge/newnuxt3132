@@ -344,7 +344,7 @@ export default function useEmail() {
       to: to,
       body_html: message,
       body_text: '',
-      isTransactional: true,
+      isTransactional: false,
     })
 
     const post_options = {
