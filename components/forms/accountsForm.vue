@@ -295,12 +295,12 @@
   // progress modal
   //
   const displayModal = ref(false)
-  const openProgressModal = () => {
+  /*  const openProgressModal = () => {
     displayModal.value = true
   }
   const closeProgressModal = () => {
     displayModal.value = false
-  }
+  } */
 
   const customUploader = async (event) => {
     const file = event.files[0]
@@ -319,7 +319,9 @@
     if (imageDimensions.height === 72 && imageDimensions.width === 72) {
       const formData = new FormData()
       formData.append('file', file)
-      openProgressModal()
+      // openProgressModal()
+      displayModal.value = true
+
       // Find server code in folder Nuxt3-brc-media-api
       const CONFIG = useRuntimeConfig()
 
@@ -333,7 +335,9 @@
         },
       })
       const data = await res.json()
-      closeProgressModal()
+      // closeProgressModal()
+      displayModal.value = false
+
       image.value = data.imageUrl
       // console.log('IN handle image.value = ', image.value)
       local_state.value.member_pic_path = data.imageUrl

@@ -57,12 +57,12 @@
   // progress modal
   //
   const displayModal = ref(false)
-  const openProgressModal = () => {
+  /*   const openProgressModal = () => {
     displayModal.value = true
   }
   const closeProgressModal = () => {
     displayModal.value = false
-  }
+  } */
   //
   // quill module
   const modules = {
@@ -71,7 +71,8 @@
       upload: async (file) => {
         const formData = new FormData()
         formData.append('file', file)
-        openProgressModal()
+        // openProgressModal()
+        displayModal.value = true
         const CONFIG = useRuntimeConfig()
         // Find server code in folder Nuxt3-brc-media-api
         const url = `${CONFIG.public.MEDIA_URL}${props.app}`
@@ -83,7 +84,9 @@
           },
         })
         const data = await res.json()
-        closeProgressModal()
+        // closeProgressModal()
+        displayModal.value = false
+
         return data.imageUrl
       },
     },
