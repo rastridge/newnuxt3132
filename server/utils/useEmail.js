@@ -1,6 +1,8 @@
 import querystring from 'querystring'
 import https from 'https'
-import delay from 'delay'
+
+import ElasticEmail from '@elasticemail/elasticemail-client'
+// See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
 
 export default function useEmail() {
   const CONFIG = useRuntimeConfig()
@@ -14,12 +16,8 @@ export default function useEmail() {
     newsletter_id,
   ) {
     // local function
-    function composeEmailHelper(
-      recipient,
-      newsletter_body_html,
-      newsletter_subject,
-    ) {
-      // this should work if and when email works
+    // // used
+    function composeEmail(recipient, newsletter_body_html, newsletter_subject) {
       const TRACKING = `${CONFIG.public.HOST}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
       const TRACKINGPIXEL = `<img src="${TRACKING}" style="width:1px;height:1px" alt="" />`
       ///////// Template from https://dashboard.unlayer.com/create/blank?ref=templates ////////////////////////////////
@@ -296,45 +294,82 @@ export default function useEmail() {
 </html>`
 
       const email = {
-        to: recipient.account_email,
-        subject: newsletter_subject,
-        message: BEGIN_HTML + newsletter_body_html + NEWSLETTER_END_STYLES,
+        Email: recipient.account_email,
+        Fields: {
+          body: BEGIN_HTML + newsletter_body_html + NEWSLETTER_END_STYLES,
+          subject: newsletter_subject,
+        },
       }
-      // return email
+
       return email
     }
-    let sentlist = []
-    let email = ''
-    let success = 0
-    // let fail = 0
-    let i = 0
+    // end of composeremail
+
+    let k = 0
+    let emails = []
+    console.log('recips = ', recipientss)
+    // create array of objects suitable for EE v4 bulk email
     do {
-      // let result = ''
-      email = composeEmailHelper(
-        recipientss[i],
-        newsletter_body_html,
-        newsletter_subject,
+      // array of objects with recipients info
+      emails.push(
+        composeEmail(recipientss[k], newsletter_body_html, newsletter_subject),
+        // composeEmail(1813, newsletter_body_html, newsletter_subject),
       )
-      sendEmail(email.to, email.subject, email.message)
-      delay(3)
-      // console.log('in sendNewsletters result = ', result)
-      success++
+      k++
+    } while (k < recipientss.length)
+    //See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
+    sendEmailEE(emails)
 
-      /*       if (result === 200) {
-        success++
-      } else {
-        fail++
-      } */
-      sentlist.push(email.to)
-      i++
-    } while (i < recipientss.length)
+    const success = ''
+    const sentlist = []
 
-    console.log('in sendNewsletters sentlist.length = ', sentlist.length)
-
-    // return { success: success, fail: fail, sentlist: sentlist }
     return { success: success, sentlist: sentlist }
   }
 
+  // Bulk email send
+  //
+  function sendEmailEE(emails) {
+    //
+    //
+    const callback = (error, data, response) => {
+      if (error) {
+        console.error(error)
+      } else {
+        console.log('response.res.statusMessage = ', response.res.statusMessage)
+      }
+    }
+
+    console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
+    console.log('in sendEmailEE ', emails[1].Email, emails[1].Fields.subject)
+    //
+    const defaultClient = ElasticEmail.ApiClient.instance
+    const apikey = defaultClient.authentications['apikey']
+    apikey.apiKey = CONFIG.EE_API_KEY
+
+    const emailsApi = new ElasticEmail.EmailsApi()
+    const emailData = {
+      Recipients: emails,
+      Content: {
+        Body: [
+          {
+            ContentType: 'HTML',
+            Charset: 'utf-8',
+            Content: '{body}',
+          },
+          {
+            ContentType: 'PlainText',
+            Charset: 'utf-8',
+            Content: 'Hi!',
+          },
+        ],
+        From: 'secretary@buffalorugby.org',
+        Subject: '{subject}',
+      },
+    }
+    emailsApi.emailsPost(emailData, callback)
+  }
+  // single email send
+  //
   function sendEmail(to, subject, message) {
     const post_data = querystring.stringify({
       api_key: CONFIG.EE_API_KEY,

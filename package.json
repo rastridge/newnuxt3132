@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@elasticemail/elasticemail-client": "^4.0.26",
     "@formkit/nuxt": "^1.6.1",
     "@formkit/themes": "^1.6.1",
     "@nuxt/eslint": "^0.3.10",
