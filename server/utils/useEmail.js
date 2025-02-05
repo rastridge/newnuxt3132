@@ -307,23 +307,23 @@ export default function useEmail() {
 
     let k = 0
     let emails = []
-    console.log('recips = ', recipientss)
+    let sentlist = []
+    // console.log('recipientss = ', recipientss)
+
     // create array of objects suitable for EE v4 bulk email
     do {
+      // console.log(k, ' ', recipientss[k].account_email)
+      sentlist.push(recipientss[k].account_email)
       // array of objects with recipients info
       emails.push(
         composeEmail(recipientss[k], newsletter_body_html, newsletter_subject),
-        // composeEmail(1813, newsletter_body_html, newsletter_subject),
       )
       k++
     } while (k < recipientss.length)
-    //See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
+    // See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
     sendEmailEE(emails)
 
-    const success = ''
-    const sentlist = []
-
-    return { success: success, sentlist: sentlist }
+    return { success: sentlist.length, sentlist: sentlist }
   }
 
   // Bulk email send
@@ -339,8 +339,8 @@ export default function useEmail() {
       }
     }
 
-    console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
-    console.log('in sendEmailEE ', emails[1].Email, emails[1].Fields.subject)
+    // console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
+    // console.log('in sendEmailEE ', emails[1].Email, emails[1].Fields.subject)
     //
     const defaultClient = ElasticEmail.ApiClient.instance
     const apikey = defaultClient.authentications['apikey']
@@ -403,42 +403,6 @@ export default function useEmail() {
 
     req.write(post_data)
     req.end()
-
-    /* fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      body: JSON.stringify({
-          title: 'foo',
-          body: 'bar',
-          userId: 1,
-      }),
-      headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-      },
-  })
-      .then((response) => response.json())
-      .then((json) => console.log(json))
-      .catch(error => {
-          console.log(error)
-      }) */
-
-    //
-    // this one workd
-    //
-    /*
-    let result = ''
-    const post_req = https.request(post_options, function (res) {
-      res.setEncoding('utf8')
-
-      res.on('error', function (e) {
-        result = 'Error: ' + e.message
-      })
-    })
-
-    post_req.write(post_data)
-    post_req.end()
-
-    return result
-*/
   }
 
   return {
