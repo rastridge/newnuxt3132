@@ -5,16 +5,16 @@
   const { $dayjs } = useNuxtApp()
 
   const { onSubmitAdd } = useSubmit()
+
+  // Format for Primevue calendar
   const dt = $dayjs()
 
   // initialize form data
-  const state = ref({
-    // Format for Primevue calendar
+  const state = {
     release_dt: dt.format('YYYY-MM-DD'),
     event_dt: dt.add(7, 'day').format('YYYY-MM-DD'),
     expire_dt: dt.add(28, 'day').format('YYYY-MM-DD'),
-  })
-
+  }
   //
   // Events form action
   //
