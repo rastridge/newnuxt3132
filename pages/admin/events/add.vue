@@ -6,15 +6,15 @@
 
   const { onSubmitAdd } = useSubmit()
 
-  // initialize form data
-  const state = {}
-
   // Format for Primevue calendar
   const dt = $dayjs()
-  state.value.release_dt = dt.format('YYYY-MM-DD')
-  state.value.event_dt = dt.add(7, 'day').format('YYYY-MM-DD')
-  state.value.expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
-
+  // initialize form data
+  const state = ref({
+    // Format for Primevue calendar
+    release_dt: dt.format('YYYY-MM-DD'),
+    event_dt: dt.add(7, 'day').format('YYYY-MM-DD'),
+    expire_dt: dt.add(28, 'day').format('YYYY-MM-DD'),
+  })
   //
   // Events form action
   //
