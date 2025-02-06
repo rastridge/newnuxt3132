@@ -11,7 +11,7 @@
       >
       </Button>
     </div>
-    <ConfirmDialog></ConfirmDialog>
+    <!-- <ConfirmDialog></ConfirmDialog> -->
 
     <div
       v-if="viewable"
@@ -218,12 +218,11 @@
   const deleteItem = (id) => {
     // save item id
     itemId.value = id
-    // confirm1(id, event)
     // open confirm dialog
     deleteDialog.value = true
   }
 
-  const confirm1 = () => {
+  /*   const confirm1 = () => {
     confirm.require({
       message: 'Are you sure you want to delete?',
       icon: 'pi pi-exclamation-triangle',
@@ -234,14 +233,14 @@
       accept: () => {},
       reject: navigateTo('/admin/${app}/'),
     })
-  }
+  } */
   const confirmedDelete = (id) => {
     data_local.value = data_local.value.filter((u) => u.id !== id)
     //
     // confirm deletion
-    confirm1()
+    // confirm1()
     // close confirm dialog
-    // deleteDialog.value = false
+    deleteDialog.value = false
     // "exists in game" warning steps found in deleteItem
     emit('deleteItem', id)
   }
