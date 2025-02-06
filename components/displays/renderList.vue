@@ -11,6 +11,7 @@
       >
       </Button>
     </div>
+    <ConfirmDialog></ConfirmDialog>
 
     <div
       v-if="viewable"
@@ -144,10 +145,10 @@
 
 <script setup>
   import { usePlacemarkStore } from '~/stores/placemarkStore'
-  // import { useConfirm } from 'primevue/useconfirm'
-  // import { useToast } from 'primevue/usetoast'
+  import { useConfirm } from 'primevue/useconfirm'
+  import { navigateTo } from 'nuxt/app'
+  const confirm = useConfirm()
 
-  // const confirm = useConfirm()
   const placemark = usePlacemarkStore()
   const { $dayjs } = useNuxtApp()
   const { formatUnixDate } = useUnixtime()
@@ -222,28 +223,25 @@
     deleteDialog.value = true
   }
 
-  /* const confirm1 = (id, event) => {
+  const confirm1 = () => {
     confirm.require({
-      target: event.currentTarget,
       message: 'Are you sure you want to delete?',
       icon: 'pi pi-exclamation-triangle',
       rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
       acceptClass: 'p-button-sm',
       rejectLabel: 'Cancel',
       acceptLabel: 'Delete',
-      accept: (id) => {
-        confirmedDelete(id)
-      },
-      reject: () => {},
+      accept: () => {},
+      reject: navigateTo('/admin/${app}/'),
     })
-  } */
-
+  }
   const confirmedDelete = (id) => {
     data_local.value = data_local.value.filter((u) => u.id !== id)
     //
-    // deletion confirmed
+    // confirm deletion
+    confirm1()
     // close confirm dialog
-    deleteDialog.value = false
+    // deleteDialog.value = false
     // "exists in game" warning steps found in deleteItem
     emit('deleteItem', id)
   }

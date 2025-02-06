@@ -2,6 +2,7 @@
   definePageMeta({
     middleware: ['auth'],
   })
+  const { $dayjs } = useNuxtApp()
 
   const { onSubmitAdd } = useSubmit()
 
