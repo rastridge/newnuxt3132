@@ -1,13 +1,19 @@
 <template>
   <div>
-    <displayDeleteconfirm @confirmedDelete="confirmedDelete" />
+    <!-- <displayDeleteconfirm @confirmedDelete="confirmedDelete" /> -->
+    <button @click="test">test</button>
   </div>
 </template>
 
 <script setup>
-  const id = ref(999)
+  const { getStatusEmailEE } = useEmailEE()
 
-  const confirmedDelete = () => {
-    console.log('deleting ', id.value)
+  const test = async () => {
+    getStatusEmailEE('dsfsf')
   }
+  // const id = ref(999)
+
+  // const confirmedDelete = () => {
+  //   console.log('deleting ', id.value)
+  // }
 </script>

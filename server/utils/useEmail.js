@@ -16,7 +16,7 @@ export default function useEmail() {
     newsletter_id,
   ) {
     // local function
-    // // used
+    // used to create
     function composeEmail(recipient, newsletter_body_html, newsletter_subject) {
       const TRACKING = `${CONFIG.public.HOST}/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}`
       const TRACKINGPIXEL = `<img src="${TRACKING}" style="width:1px;height:1px" alt="" />`
@@ -292,7 +292,10 @@ export default function useEmail() {
     <!--[if IE]></div><![endif]-->
   </body>
 </html>`
-
+      //
+      // This object conforms to Recipients key in "emailsPost"
+      // Fields object defines template values in Content key
+      // See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
       const email = {
         Email: recipient.account_email,
         Fields: {
@@ -368,6 +371,32 @@ export default function useEmail() {
     }
     emailsApi.emailsPost(emailData, callback)
   }
+
+  // Bulk email send
+  //
+  function getStatusEmailEE(transaction) {
+    //
+    //
+    const callback = (error, data, response) => {
+      if (error) {
+        console.error(error)
+      } else {
+        console.log('response.res.statusMessage = ', response.res.statusMessage)
+      }
+    }
+
+    // console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
+    // console.log('in sendEmailEE ', emails[1].Email, emails[1].Fields.subject)
+    //
+    const defaultClient = ElasticEmail.ApiClient.instance
+    const apikey = defaultClient.authentications['apikey']
+    apikey.apiKey = CONFIG.EE_API_KEY
+
+    const statsApi = new ElasticEmail.EmailsApi()
+
+    statsApi.emailsByTransactionidStatusGet(transaction, callback)
+  }
+
   // single email send
   //
   function sendEmail(to, subject, message) {
@@ -408,5 +437,6 @@ export default function useEmail() {
   return {
     sendEmail,
     sendNewsletters,
+    getStatusEmailEE,
   }
 }
