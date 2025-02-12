@@ -25,7 +25,7 @@
     </div>
   </div>
   <p class="text-center text-sm md:text-lg lg:text-xl text-white">
-    Home Field Delaware Park | Meet up Casey's Blackrock
+    Home Field Delaware Park | Meet up The Banshee Irish Pub
   </p>
 </template>
 
