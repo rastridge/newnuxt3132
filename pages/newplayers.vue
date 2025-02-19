@@ -16,16 +16,10 @@
           position you play. Skills from soccer, football, basketball,
           wrestling, all transfer well to positions in rugby. Rugby is a two way
           sport so good tackling is essential. The one characteristic essential
-          rugby is running.<br /><br />
-          Signing up is an expression of interest in being informed of the club
-          activities and does not imply any commitment financially or
-          otherwise.<br />
-          Just come to practice / try out and see if we're right for you.<br />
-
-          Now its time to come to a practice ( see the News page for times and
-          locations)<br />
-
-          Wear shorts, cleats and a t-shirt ( or warmer if necessary)<br />
+          to rugby is running.<br /><br />
+          Signing up is an expression of interest in joining the club and does
+          not imply any commitment financially or otherwise.<br />
+          Sign up, come to practice / try out and see if we're right for you.<br /><br />
 
           When you arrive, ask someone to point out a coach, introduce yourself.
           <br />
