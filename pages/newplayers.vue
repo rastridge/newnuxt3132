@@ -8,43 +8,59 @@
         <common-header title="Buffalo Rugby Club Welcomes New Players" />
       </div>
     </div>
-    <div class="">
-      <p>
-        Registering is an expression of interest in being informed of the club
-        activities and does not imply any commitment financially or otherwise.
-      </p>
-      <p>Just come to practice and see if we're right for you.</p>
-      <u>
-        <li>Become a member of USA Rugby $</li>
-        <li>Pay Buffalo Rugby Club dues $</li>
-        <li>Practice 2 hours twice a week</li>
-        <li>
-          Have the ability to travel on weekends to away games as far as NYC $
-        </li>
-      </u>
-      <p>We love our sport. We take our preparation seriously and play hard.</p>
-      <p>Join us.</p>
-      <p>
-        Now its time to come to a practice ( see the News page for times and
-        locations)
-      </p>
 
-      <p>Wear shorts, cleats and a t-shirt ( or warmer if necessary)</p>
-      <p>
-        When youu arrive, ask someone to point out a coach, introduce yourself.
-      </p>
-      <p>Do the warmup</p>
-      <p>Watch a drill or activity and join in when comfortable</p>
-      <p>
-        If you enjoy the challenge, ask the coach to change your membership
-        status to "Active"
-      </p>
-      <p>Ask what you need to do to become a full member.</p>
+    <div class="card mb-1">
+      <Fieldset legend="GIVE IT A TRY">
+        <p class="m-0">
+          Signing up is an expression of interest in being informed of the club
+          activities and does not imply any commitment financially or
+          otherwise.<br />
+          Just come to practice and see if we're right for you.<br />
 
-      <p>Register</p>
-      <register-form2 @submitted="onSubmit" />
+          Now its time to come to a practice ( see the News page for times and
+          locations)<br />
 
-      <img :src="team" />
+          Wear shorts, cleats and a t-shirt ( or warmer if necessary)<br />
+
+          When you arrive, ask someone to point out a coach, introduce yourself.
+          <br />
+          Watch a drill or activity and join in when comfortable.<br />
+        </p>
+      </Fieldset>
+    </div>
+
+    <div class="card mb-1">
+      <Fieldset legend="LATER IF YOU DECIDE TO JOIN">
+        <div class="m-0">
+          <ul>
+            <li>You'll need to become a member of USA Rugby $</li>
+            <li>Pay Buffalo Rugby Club dues $</li>
+            <li>Practice 2 hours twice a week</li>
+            <li>
+              Have the ability to travel on weekends to away games as far as NYC
+              $
+            </li>
+          </ul>
+        </div>
+      </Fieldset>
+    </div>
+    <div class="card mb-1">
+      <Fieldset legend="SIGN UP">
+        <div class="m-0">
+          <nuxt-link to="/register2">Register for try outs here</nuxt-link>
+        </div>
+      </Fieldset>
+    </div>
+
+    <div class="card">
+      <Fieldset legend="THE RUGBY FAMILY">
+        <div class="m-0">
+          <img
+            :src="team"
+            width="100%"
+          />
+        </div>
+      </Fieldset>
     </div>
   </div>
 </template>
