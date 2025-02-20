@@ -14,12 +14,17 @@
         <p class="m-0">
           Just like any sport, rugby players come in all sizes, depending on the
           position you play. Skills from soccer, football, basketball,
-          wrestling, all transfer well to positions in rugby. Rugby is a two way
-          sport so good tackling is essential. The one characteristic essential
-          to rugby is running.<br /><br />
+          wrestling, all transfer well to positions in rugby. <br /><br />
+
+          Rugby is a two way sport so good tackling is essential. The one
+          characteristic essential to rugby is running." to say "Rugby is a
+          two-way sport in which all players both offense and defense in a
+          continuously flowing game lasting 80 minutes. Thus, players must be
+          able to tackle, handle the ball, and have a high level of fitness.<br /><br /><br />
           Signing up is an expression of interest in joining the club and does
           not imply any commitment financially or otherwise.<br />
-          Sign up, come to practice / try out and see if we're right for you.<br /><br />
+          Sign up below, come to practice / try out and see if we're right for
+          you.<br /><br />
 
           When you arrive, ask someone to point out a coach, introduce yourself.
           <br />
