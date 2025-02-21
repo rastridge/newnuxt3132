@@ -323,6 +323,8 @@ export default function useEmail() {
       )
       k++
     } while (k < recipientss.length)
+
+    // console.log('sentlist= ', sentlist)
     // See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
     sendEmailEE(emails)
 
@@ -381,7 +383,10 @@ export default function useEmail() {
       if (error) {
         console.error(error)
       } else {
-        console.log('response.res.statusMessage = ', response.res.statusMessage)
+        console.log(
+          'callback response.res.statusMessage = ',
+          response.res.statusMessage,
+        )
       }
     }
 
@@ -423,7 +428,7 @@ export default function useEmail() {
     }
 
     const req = https.request(post_options, (res) => {
-      console.log('statusCode:', res.statusCode)
+      console.log('request statusCode:', res.statusCode)
     })
 
     req.on('error', (e) => {
