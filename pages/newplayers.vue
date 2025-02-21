@@ -76,13 +76,21 @@
             not imply any commitment financially or otherwise.<br />
             Sign up below, come to practice / try out and see if we're right for
             you.<br /><br />
+            <nuxt-link
+              to="https://buffalorugby.org/events"
+              class="p-2 bg-primary border-round-lg"
+              target="blank"
+              >Practices and Events</nuxt-link
+            >
 
+            <br /><br />
             When you arrive, ask someone to point out a coach, introduce
             yourself.
             <br /><br />
             <nuxt-link
               to="/register2"
               class="p-3 bg-primary border-round-lg"
+              target="blank"
               >SIGN UP</nuxt-link
             >
           </p>
