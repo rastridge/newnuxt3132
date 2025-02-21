@@ -340,7 +340,10 @@ export default function useEmail() {
       if (error) {
         console.error(error)
       } else {
-        console.log('response.res.statusMessage = ', response.res.statusMessage)
+        console.log(
+          'in sendEmailEE callback response.res.statusMessage = ',
+          response.res.statusMessage,
+        )
       }
     }
 
@@ -384,7 +387,7 @@ export default function useEmail() {
         console.error(error)
       } else {
         console.log(
-          'callback response.res.statusMessage = ',
+          'In getStatusEmailEE callback response.res.statusMessage = ',
           response.res.statusMessage,
         )
       }
