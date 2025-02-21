@@ -21,14 +21,6 @@
           two-way sport in which all players both offense and defense in a
           continuously flowing game lasting 80 minutes. Thus, players must be
           able to tackle, handle the ball, and have a high level of fitness.<br /><br /><br />
-          Signing up is an expression of interest in joining the club and does
-          not imply any commitment financially or otherwise.<br />
-          Sign up below, come to practice / try out and see if we're right for
-          you.<br /><br />
-
-          When you arrive, ask someone to point out a coach, introduce yourself.
-          <br />
-          Watch a drill or activity and join in when comfortable.<br />
         </p>
       </Fieldset>
     </div>
@@ -51,11 +43,21 @@
     <div class="card mb-1">
       <Fieldset legend="SIGN UP FOR TRYOUTS HERE">
         <div class="m-0">
-          <nuxt-link
-            to="/register2"
-            class="p-3 bg-primary border-round-lg"
-            >SIGN UP</nuxt-link
-          >
+          <p>
+            Signing up is an expression of interest in joining the club and does
+            not imply any commitment financially or otherwise.<br />
+            Sign up below, come to practice / try out and see if we're right for
+            you.<br /><br />
+
+            When you arrive, ask someone to point out a coach, introduce
+            yourself.
+            <br /><br />
+            <nuxt-link
+              to="/register2"
+              class="p-3 bg-primary border-round-lg"
+              >SIGN UP</nuxt-link
+            >
+          </p>
         </div>
       </Fieldset>
     </div>
