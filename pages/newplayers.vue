@@ -20,7 +20,35 @@
           characteristic essential to rugby is running." to say "Rugby is a
           two-way sport in which all players both offense and defense in a
           continuously flowing game lasting 80 minutes. Thus, players must be
-          able to tackle, handle the ball, and have a high level of fitness.<br /><br /><br />
+          able to tackle, handle the ball, and have a high level of fitness.<br /><br />
+          Our team plays games each weekend at two competitive levels. Each game
+          has 15 starters and a maximum of 7 reserves.
+
+          <br /><br />
+          The Buffalo Rugby Club (BRC) is a member of the Empire Geographic
+          Union (EGU). BRC has two competitive sides in the EGU league
+          competitions playing at the D2 and D3 level. BRC runs a
+          U23/Developmental team in the late spring and early summer and
+          competes in summer with a 7 man version of the game as the East Lake
+          Erie Hawaiians
+          <br /><br />
+          Don't worry, we will coach you up on the rules, skills, techniques and
+          safety aspects.<br />
+          Stick with it and some day you could move up from second side reserve
+          to first side starter depending on your commitment, ability to learn,
+          athletic ability.<br />
+          Every player on the team had to take this first step at the
+          beginning.<br /><br />
+          Our members are committed. Check out our schedule. Is this something
+          for which you have the time and resources?<br /><br />
+          <nuxt-link
+            to="https://buffalorugby.org/schedule"
+            class="p-2 bg-primary border-round-lg"
+            target="blank"
+            >Schedule</nuxt-link
+          >
+          <br /><br />
+          Be careful. Rugby can change your life.<br />
         </p>
       </Fieldset>
     </div>
