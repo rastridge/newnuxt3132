@@ -50,11 +50,9 @@ async function getAll() {
 async function getOne(id) {
   const sql = `SELECT
 								account_id,
-								account_pass,
 								account_email_opening,
 								account_textmsg_opening,
 
-								last_login_dt,
 								STATUS,
 								deleted,
 								deleted_dt,

@@ -107,8 +107,9 @@
     // filter by member type
     temp = accounts.value.filter(function (d) {
       return (
-        d.member_type_id === member_type_id.value ||
-        d.member_type2_id === member_type_id.value
+        /*         d.member_type_id === member_type_id.value ||
+        d.member_type2_id === member_type_id.value */
+        d.member_type_id === member_type_id.value
       )
     })
 
