@@ -311,7 +311,6 @@ export default function useEmail() {
     let k = 0
     let emails = []
     let sentlist = []
-    // console.log('recipientss = ', recipientss)
 
     // create array of objects suitable for EE v4 bulk email
     do {
@@ -325,7 +324,9 @@ export default function useEmail() {
     } while (k < recipientss.length)
 
     // console.log('sentlist= ', sentlist)
+    // console.log('emails[0]= ', emails[0])
     // See https://github.com/ElasticEmail/elasticemail-js/blob/master/examples/functions/sendBulkEmails.js
+
     sendEmailEE(emails)
 
     return { success: sentlist.length, sentlist: sentlist }
@@ -377,7 +378,7 @@ export default function useEmail() {
     emailsApi.emailsPost(emailData, callback)
   }
 
-  // Bulk email send
+  // ???
   //
   function getStatusEmailEE(transaction) {
     //

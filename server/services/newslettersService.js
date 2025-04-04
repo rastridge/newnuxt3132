@@ -145,10 +145,10 @@ async function sendNewsletter({
     accounts,
     newsletter_recipient_type_id,
   )
+
   //
   // // Calls server/utils/ useEmail composable sendNewsletters to send newsletters
   //
-  // const { success, fail, sentlist } = await sendNewsletters(
   const { success, sentlist } = await sendNewsletters(
     recipients,
     newsletter_subject,
