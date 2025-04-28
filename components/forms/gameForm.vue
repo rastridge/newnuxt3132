@@ -12,6 +12,8 @@
         <Card style="width: 25em; margin-bottom: 1rem">
           <template #title> Find opponent</template>
           <template #content>
+            Type opponent name to search
+
             <AutoComplete
               v-model="selectedOpponent"
               optionLabel="opponent_name"
