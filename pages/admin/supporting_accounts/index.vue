@@ -95,21 +95,25 @@
                     <th>Owner</th>
                     <th>Username</th>
                     <th>Password</th>
+                    <th>Multifactor</th>
                   </tr>
                   <tr>
-                    <td style="width: 30%">
+                    <td style="width: 25%">
                       <nuxt-link :to="slotProps.data.supportingApp_url">{{
                         slotProps.data.supportingApp_url
                       }}</nuxt-link>
                     </td>
-                    <td style="width: 20%">
+                    <td style="width: 15%">
                       {{ slotProps.data.supportingApp_owner }}
                     </td>
-                    <td style="width: 20%">
+                    <td style="width: 15%">
                       {{ slotProps.data.supportingApp_username }}
                     </td>
-                    <td style="width: 20%">
+                    <td style="width: 15%">
                       {{ slotProps.data.supportingApp_password }}
+                    </td>
+                    <td style="width: 15%">
+                      {{ slotProps.data.supportingApp_multifactor }}
                     </td>
                   </tr>
                 </tbody>
