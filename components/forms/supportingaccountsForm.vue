@@ -53,6 +53,13 @@
         validation="required"
         value=""
       />
+      <FormKit
+        label="Multifactor"
+        name="supportingApp_multifactor"
+        type="text"
+        validation="required"
+        value=""
+      />
       <display-cancelform :destination="'/admin/supporting_accounts'" />
     </FormKit>
 
