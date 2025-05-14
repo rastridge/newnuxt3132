@@ -348,7 +348,8 @@ export default function useEmail() {
       }
     }
 
-    // console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
+    console.log('in sendEmailEE ', emails[0].Email, emails[0].Fields.subject)
+    console.log('in sendEmailEE  emails count = ', emails.length)
     // console.log('in sendEmailEE ', emails[1].Email, emails[1].Fields.subject)
     //
     const defaultClient = ElasticEmail.ApiClient.instance
