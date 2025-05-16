@@ -215,15 +215,7 @@
       >
         <template #empty> No members found </template>
         <template #loading> Loading data. Please wait. </template>
-        <template #header>
-          <div style="text-align: left">
-            <Button
-              icon="pi pi-external-link"
-              label="Export to CSV"
-              @click="exportCSV($event)"
-            />
-          </div>
-        </template>
+        <template #header> </template>
         <Column
           field="modified_dt"
           header="Last modified"
@@ -324,11 +316,6 @@
   const member_type_id = ref('3')
 
   const loading = ref(false)
-
-  const dt = ref()
-  const exportCSV = () => {
-    dt.value.exportCSV()
-  }
 
   const onSubmitMemberType = (value) => {
     member_type_id.value = value

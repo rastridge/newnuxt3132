@@ -76,6 +76,7 @@ async function getAll() {
 									member_lastname,
 									CONCAT(member_firstname," ", member_lastname) as title,
 									member_year,
+									member_prev_club,
 									account_email,
 									account_email_opening,
 									account_textmsg_opening,

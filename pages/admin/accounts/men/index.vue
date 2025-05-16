@@ -36,6 +36,15 @@
         />
       </div>
     </div>
+    <!--     csv download button
+ -->
+    <Button
+      id="do-cvs"
+      class="p-button-sm"
+      label="Download CSV file"
+      style="margin: 5px; float: right"
+      @click="tableToCSV('accounts.csv')"
+    ></Button>
 
     <render-list
       :data="filteredData"
@@ -178,6 +187,50 @@
     { label: 'Y', value: 'Y' },
     { label: 'Z', value: 'Z' },
   ]
+  //
+  const tableToCSV = async (filename) => {
+    function jsonToCsv(data) {
+      console.log('data = ', data)
+      if (!Array.isArray(data) || data.length === 0) {
+        return ''
+      }
+
+      const headers = Object.keys(data[0])
+      const csvRows = []
+
+      csvRows.push(headers.join(','))
+
+      for (const row of data) {
+        const values = headers.map((header) => {
+          const value = row[header]
+          return `"${value === null || value === undefined ? '' : value}"`
+        })
+        csvRows.push(values.join(','))
+      }
+      return csvRows.join('\n')
+    }
+
+    function downloadCsv(csvString, filename) {
+      const blob = new Blob([csvString], {
+        type: 'text/csv;charset=utf-8;',
+      })
+      const downloadLink = document.createElement('a')
+      downloadLink.href = URL.createObjectURL(blob)
+      downloadLink.download = filename
+      document.body.appendChild(downloadLink)
+      downloadLink.dispatchEvent(
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        }),
+      )
+      document.body.removeChild(downloadLink)
+    }
+    const csvString = jsonToCsv(filteredData.value)
+    downloadCsv(csvString, filename)
+  }
+  //
 
   //
   // Renderlist actions - including roster check
