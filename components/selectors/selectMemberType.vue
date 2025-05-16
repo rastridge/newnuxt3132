@@ -1,29 +1,29 @@
 <template>
   <div>
-    <span class="font-semibold">Select Member Type</span>
+    <h6 class="font-semibol">Select Member Type</h6>
+
     <Dropdown
-      v-model="membertypeid"
+      v-model="member_type_id"
       :options="memberTypeOptions"
       optionLabel="label"
       optionValue="value"
-      class="w-10rem"
     />
   </div>
 </template>
 
 <script setup>
-  // import { Dropdown } from 'floating-vue'
-
   //
   // Incoming
   //
   const props = defineProps({
     currenttype: {
-      type: String,
+      type: Number,
       required: true,
     },
   })
-  const membertypeid = ref(props.currenttype)
+  const member_type_id = ref(props.currenttype)
+  // console.log(member_type_id.value)
+  // console.log(props.currenttype)
 
   //
   // Outgoing
@@ -39,5 +39,5 @@
   //
   // Watch for dropdown value change
   //
-  watch(membertypeid, () => emit('submitted', membertypeid.value))
+  watch(member_type_id, () => emit('submitted', member_type_id.value))
 </script>

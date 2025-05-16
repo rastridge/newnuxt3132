@@ -29,7 +29,7 @@
 
             <select-member-type
               :currenttype="member_type_id"
-              class="mb-3"
+              class="mb-2"
               @submitted="onSubmitMemberType"
             />
 
@@ -198,6 +198,15 @@
           </template>
         </Card>
       </div>
+      <!--     csv download button
+ -->
+      <Button
+        id="do-cvs"
+        class="p-button-sm"
+        label="Download CSV file"
+        style="margin: 5px; float: right"
+        @click="tableToCSV('accounts.csv')"
+      ></Button>
     </div>
     <div class="renderlist-enclosure">
       <DataTable
@@ -298,8 +307,6 @@
   definePageMeta({
     middleware: ['auth'],
   })
-  /* 	import { usePlacemarkStore } from '~/stores/placemarkStore'
-	const placemark = usePlacemarkStore() */
 
   const { $dayjs } = useNuxtApp()
   const { getAll } = useFetchAll()
@@ -313,7 +320,7 @@
   const email_opened = ref('2')
   const donated = ref('2')
   const marked_for_mail = ref('2')
-  const member_type_id = ref('3')
+  const member_type_id = ref(3)
 
   const loading = ref(false)
 
@@ -333,8 +340,8 @@
 
     temp = temp.filter(
       (d) =>
-        d.member_type_id == member_type_id.value ||
-        d.member_type2_id == member_type_id.value,
+        d.member_type_id === member_type_id.value ||
+        d.member_type2_id === member_type_id.value,
     )
 
     /* **********  yes email ************* */
@@ -446,5 +453,49 @@
   const noEmailOpenedLately = (account_email_opening) => {
     const days = $dayjs().diff($dayjs(account_email_opening), 'days')
     return days >= 90
+  }
+
+  //
+  const tableToCSV = async (filename) => {
+    function jsonToCsv(data) {
+      console.log('data = ', data)
+      if (!Array.isArray(data) || data.length === 0) {
+        return ''
+      }
+
+      const headers = Object.keys(data[0])
+      const csvRows = []
+
+      csvRows.push(headers.join(','))
+
+      for (const row of data) {
+        const values = headers.map((header) => {
+          const value = row[header]
+          return `"${value === null || value === undefined ? '' : value}"`
+        })
+        csvRows.push(values.join(','))
+      }
+      return csvRows.join('\n')
+    }
+
+    function downloadCsv(csvString, filename) {
+      const blob = new Blob([csvString], {
+        type: 'text/csv;charset=utf-8;',
+      })
+      const downloadLink = document.createElement('a')
+      downloadLink.href = URL.createObjectURL(blob)
+      downloadLink.download = filename
+      document.body.appendChild(downloadLink)
+      downloadLink.dispatchEvent(
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        }),
+      )
+      document.body.removeChild(downloadLink)
+    }
+    const csvString = jsonToCsv(filteredData.value)
+    downloadCsv(csvString, filename)
   }
 </script>
