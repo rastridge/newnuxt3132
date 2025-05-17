@@ -197,17 +197,23 @@
             <p class="my-subheader-style">Selected records count {{ rows }}</p>
           </template>
         </Card>
+        <!--     csv download button -->
+        <create-cvs
+          filename="accounts.csv"
+          :filteredData="filteredData"
+        />
       </div>
       <!--     csv download button
- -->
+
       <Button
         id="do-cvs"
         class="p-button-sm"
         label="Download CSV file"
         style="margin: 5px; float: right"
         @click="tableToCSV('accounts.csv')"
-      ></Button>
+      ></Button> -->
     </div>
+
     <div class="renderlist-enclosure">
       <DataTable
         ref="dt"
@@ -455,7 +461,7 @@
     return days >= 90
   }
 
-  //
+  /*  //
   const tableToCSV = async (filename) => {
     function jsonToCsv(data) {
       console.log('data = ', data)
@@ -497,5 +503,5 @@
     }
     const csvString = jsonToCsv(filteredData.value)
     downloadCsv(csvString, filename)
-  }
+  } */
 </script>

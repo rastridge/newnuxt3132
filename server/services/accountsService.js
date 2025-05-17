@@ -77,6 +77,7 @@ async function getAll() {
 									CONCAT(member_firstname," ", member_lastname) as title,
 									member_year,
 									member_prev_club,
+                  member_position,
 									account_email,
 									account_email_opening,
 									account_textmsg_opening,
@@ -155,7 +156,7 @@ async function addOne(info) {
 									account_addr_postal = ?,
 									account_addr_phone = ?,
 									member_prev_club = ?,
-
+                  member_position = ?,
 									member_show_phone = ?,
 									member_show_addr = ?,
 									newsletter_recipient = ?,
@@ -183,7 +184,7 @@ async function addOne(info) {
         account_addr_postal,
         account_addr_phone,
         member_prev_club,
-
+        member_position,
         member_show_phone,
         member_show_addr,
         newsletter_recipient,
@@ -210,7 +211,7 @@ async function addOne(info) {
         account_addr_postal,
         account_addr_phone,
         member_prev_club,
-
+        member_position,
         member_show_phone,
         member_show_addr,
         newsletter_recipient,
@@ -297,7 +298,7 @@ async function editOne(info) {
 									account_addr_postal = ?,
 									account_addr_phone = ?,
 									member_prev_club = ?,
-
+                  member_position = ?,
 									member_show_phone = ?,
 									member_show_addr = ?,
 									newsletter_recipient = ?,
@@ -326,7 +327,7 @@ async function editOne(info) {
         account_addr_postal,
         account_addr_phone,
         member_prev_club,
-
+        member_position,
         member_show_phone,
         member_show_addr,
         newsletter_recipient,
@@ -359,7 +360,7 @@ async function editOne(info) {
         account_addr_postal,
         account_addr_phone,
         member_prev_club,
-
+        member_position,
         member_show_phone,
         member_show_addr,
         newsletter_recipient,

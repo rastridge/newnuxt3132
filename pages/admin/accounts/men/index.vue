@@ -36,15 +36,11 @@
         />
       </div>
     </div>
-    <!--     csv download button
- -->
-    <Button
-      id="do-cvs"
-      class="p-button-sm"
-      label="Download CSV file"
-      style="margin: 5px; float: right"
-      @click="tableToCSV('accounts.csv')"
-    ></Button>
+    <!--     csv download button -->
+    <create-cvs
+      filename="accounts.csv"
+      :filteredData="filteredData"
+    />
 
     <render-list
       :data="filteredData"
@@ -188,7 +184,7 @@
     { label: 'Z', value: 'Z' },
   ]
   //
-  const tableToCSV = async (filename) => {
+  /*   const tableToCSV = async (filename) => {
     function jsonToCsv(data) {
       console.log('data = ', data)
       if (!Array.isArray(data) || data.length === 0) {
@@ -229,7 +225,7 @@
     }
     const csvString = jsonToCsv(filteredData.value)
     downloadCsv(csvString, filename)
-  }
+  } */
   //
 
   //

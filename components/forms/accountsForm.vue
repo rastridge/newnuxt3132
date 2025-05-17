@@ -88,6 +88,12 @@
       />
 
       <FormKit
+        type="text"
+        label="Position(s)"
+        name="member_position"
+      />
+
+      <FormKit
         type="select"
         label="Show phone?"
         name="member_show_phone"

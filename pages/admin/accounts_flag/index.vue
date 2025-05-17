@@ -19,8 +19,15 @@
         />
       </div>
     </div>
+
+    <!--     csv download button -->
+    <create-cvs
+      filename="flag.csv"
+      :filteredData="filteredData"
+    />
+
     <!--     csv download button
- -->
+
     <Button
       id="do-cvs"
       class="p-button-sm"
@@ -28,6 +35,7 @@
       style="margin: 5px; float: right"
       @click="tableToCSV('flag_accounts.csv')"
     ></Button>
+ -->
     <div>
       <render-list
         :data="filteredData"
@@ -204,7 +212,7 @@
     { label: 'Pending Flag', value: 12 },
   ]
 
-  //
+  /*  //
   const tableToCSV = async (filename) => {
     function jsonToCsv(data) {
       console.log('data = ', data)
@@ -247,7 +255,7 @@
     const csvString = jsonToCsv(filteredData.value)
     downloadCsv(csvString, filename)
   }
-
+ */
   //
   // Renderlist actions
   //
