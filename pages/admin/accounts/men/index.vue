@@ -35,12 +35,12 @@
           :options="alphas"
         />
       </div>
+      <!--     csv download button -->
+      <create-cvs
+        filename="accounts.csv"
+        :filteredData="filteredData"
+      />
     </div>
-    <!--     csv download button -->
-    <create-cvs
-      filename="accounts.csv"
-      :filteredData="filteredData"
-    />
 
     <render-list
       :data="filteredData"

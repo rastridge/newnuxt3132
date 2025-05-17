@@ -18,13 +18,12 @@
           placeholder="Select a member type"
         />
       </div>
+      <!--     csv download button -->
+      <create-cvs
+        filename="flag.csv"
+        :filteredData="filteredData"
+      />
     </div>
-
-    <!--     csv download button -->
-    <create-cvs
-      filename="flag.csv"
-      :filteredData="filteredData"
-    />
 
     <!--     csv download button
 

@@ -4,7 +4,9 @@
       id="do-cvs"
       class="p-button-sm"
       label="Download CSV file"
-      style="margin: 5px; float: right"
+      style="margin: 1rem"
+      icon="pi pi-download"
+      iconPos="left"
       @click="tableToCSV()"
     ></Button>
   </div>
