@@ -2,8 +2,9 @@ const { doDBQueryBuffalorugby } = useQuery()
 export const sponsorsService = {
   getAll,
   getAllCurrent,
-  getSponsorIds,
+  // getSponsorIds,
   getOne,
+  getRandom,
   editOne,
   addOne,
   deleteOne,
@@ -78,6 +79,29 @@ async function getOne(id) {
   const sponsor = await doDBQueryBuffalorugby(sql)
   return sponsor[0]
 }
+
+async function getRandom() {
+  const sql = `select
+								ad_client_id,
+								ad_client_id as id,
+								ad_client_name,
+								ad_client_contact,
+								ad_client_email,
+								ad_client_phone,
+								ad_client_website,
+								ad_image_path
+							from
+								inbrc_sponsors
+							WHERE deleted = 0 AND STATUS = 1`
+
+  const sponsors = await doDBQueryBuffalorugby(sql)
+
+  const min = Math.ceil(0)
+  const max = Math.floor(sponsors.length - 1)
+  const adIdIndex = Math.floor(Math.random() * (max - min + 1)) + min
+  return sponsors[adIdIndex]
+}
+/*
 async function getSponsorIds() {
   const sql = `SELECT
 										ad_client_id as id
@@ -90,7 +114,7 @@ async function getSponsorIds() {
 
   const adIds = await doDBQueryBuffalorugby(sql)
   return adIds
-}
+} */
 async function addOne({
   ad_client_name,
   ad_client_contact,

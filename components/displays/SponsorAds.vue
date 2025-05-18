@@ -33,28 +33,9 @@
   })
 
   const showRandomSponsor = async () => {
-    const getRandomInt = (min, max) => {
-      min = Math.ceil(min)
-      max = Math.floor(max)
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-
-    const { data: adIds } = await useFetch('/sponsors/getids', {
+    const { data } = await useFetch(`/sponsors/getrandom/`, {
       method: 'get',
     })
-
-    const adIdIndex = await getRandomInt(0, adIds.value.length - 1)
-
-    item.value = await getOne(adIds.value[adIdIndex].id)
-  }
-
-  const getOne = async (id) => {
-    //
-    // Get one sponsors data
-    //
-    const { data } = await useFetch(`/sponsors/${id}`, {
-      method: 'get',
-    })
-    return data.value
+    item.value = data.value
   }
 </script>
