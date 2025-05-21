@@ -47,12 +47,25 @@ export default function useEmail() {
         padding: 0.5rem;
         padding-left: 2rem;
       }
+      .ql-indent-2{
+        padding-left: 4rem;
+      }
+
+      .ql-indent-3 {
+        padding-left: 6rem;
+      }
+
       .ql-align-center {	text-align: center;	}
       .ql-align-justify {	text-align: justify;}
       .ql-align-right {	text-align: right;}
+
       .ql-font-serif {
-        font-family: serif;
+        font-family: Times, Times New Roman, serif	;
       }
+      .ql-font-monospace {
+        font-family: Courier, monospace;
+      }
+
       .ql-size-huge {
         font-size: xx-large;
       }
