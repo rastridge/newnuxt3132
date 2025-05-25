@@ -72,7 +72,7 @@
   const stats1 = ref(null)
   const stats2 = ref(null)
 
-  const url = `/nuxt3.buffalorugby.org/game_player_stats/getadjacent/${props.direction}`
+  const url = `https://nuxt3.buffalorugby.org/game_player_stats/getadjacent/${props.direction}`
 
   const { data } = await useFetch(url, {
     method: 'get',

@@ -119,7 +119,7 @@
   const total = ref([])
 
   const getRecord = async (gt) => {
-    const url = `/nuxt3.buffalorugby.org/game_player_stats/getteamstats/${gt}`
+    const url = `https://nuxt3.buffalorugby.org/game_player_stats/getteamstats/${gt}`
     const { data } = await useFetch(url, {
       method: 'get',
     })
@@ -127,7 +127,7 @@
   }
 
   const getTotals = async (gt) => {
-    const url = `/nuxt3.buffalorugby.org/game_player_stats/getteamstatstotal/${gt}`
+    const url = `https://nuxt3.buffalorugby.org/game_player_stats/getteamstatstotal/${gt}`
     const { data } = await useFetch(url, {
       method: 'get',
     })

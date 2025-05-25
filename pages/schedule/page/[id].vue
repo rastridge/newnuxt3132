@@ -27,7 +27,7 @@
   const game = ref({})
 
   const getPlayers = async (id) => {
-    const url = `/nuxt3.buffalorugby.org/game_player_stats/players/${id}`
+    const url = `https://nuxt3.buffalorugby.org/game_player_stats/players/${id}`
     const { data } = await useFetch(url, {
       method: 'get',
     })
@@ -35,7 +35,7 @@
   }
 
   const getOne = async (id) => {
-    const url = `/nuxt3.buffalorugby.org/game_player_stats/${id}`
+    const url = `https://nuxt3.buffalorugby.org/game_player_stats/${id}`
     const { data } = await useFetch(url, {
       method: 'get',
     })
