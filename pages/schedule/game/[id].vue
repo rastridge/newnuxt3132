@@ -41,7 +41,7 @@
   const infoLoaded = ref(false)
 
   const getPlayers = async (game_id) => {
-    const url = `/game_player_stats/players/${game_id}`
+    const url = `/nuxt3.buffalorugby.org/game_player_stats/players/${game_id}`
     const { data, error } = await useFetch(url, {
       method: 'get',
     })
@@ -57,7 +57,7 @@
   }
 
   const getOne = async (id) => {
-    const url = `/game_player_stats/${id}`
+    const url = `/nuxt3.buffalorugby.org/game_player_stats/${id}`
     const { data, error } = await useFetch(url, {
       method: 'get',
     })

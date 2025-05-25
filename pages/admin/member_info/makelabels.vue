@@ -119,16 +119,19 @@
   // ////////////////////////
   const labels = ref(null)
   const makeLabels = async (labelType, member_type_id) => {
-    const { data } = await useFetch('/member_info/makelabels', {
-      method: 'POST',
-      body: {
-        labelType,
-        member_type_id,
+    const { data } = await useFetch(
+      'https://nuxt3.buffalorugby.org/member_info/makelabels',
+      {
+        method: 'POST',
+        body: {
+          labelType,
+          member_type_id,
+        },
+        headers: {
+          authorization: auth.user.token,
+        },
       },
-      headers: {
-        authorization: auth.user.token,
-      },
-    })
+    )
     const decoded = atob(data.value)
     const blob = new Blob([decoded], { type: 'application/pdf' })
     const url = URL.createObjectURL(blob)
@@ -140,12 +143,15 @@
   // rturn labels
   // ////////////////////////
   const makeReturnLabels = async () => {
-    const { data } = await useFetch('/member_info/makereturnlabels', {
-      method: 'POST',
-      headers: {
-        authorization: auth.user.token,
+    const { data } = await useFetch(
+      'https://nuxt3.buffalorugby.org/member_info/makereturnlabels',
+      {
+        method: 'POST',
+        headers: {
+          authorization: auth.user.token,
+        },
       },
-    })
+    )
 
     const decoded = atob(data.value)
     const blob = new Blob([decoded], { type: 'application/pdf' })

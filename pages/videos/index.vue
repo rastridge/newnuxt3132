@@ -113,9 +113,12 @@
   //
   // Get all current videos
   //
-  const { data } = await useFetch('/videos/getallcurrent', {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    'https://nuxt3.buffalorugby.org/videos/getallcurrent',
+    {
+      method: 'get',
+    },
+  )
 
   //
   // get selected video
@@ -135,9 +138,12 @@
   }
 
   const getOne = async (id) => {
-    const { data } = await useFetch('/videos/' + id, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      'https://nuxt3.buffalorugby.org/videos/' + id,
+      {
+        method: 'get',
+      },
+    )
     return data.value
   }
 

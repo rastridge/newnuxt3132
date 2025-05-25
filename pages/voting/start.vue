@@ -45,10 +45,13 @@
   const info = ref('')
   const handleSubmit = async (state) => {
     const email = state.email
-    const { data } = await useFetch('/votes/sendballot', {
-      method: 'POST',
-      body: { email },
-    })
+    const { data } = await useFetch(
+      'https://nuxt3.buffalorugby.org/votes/sendballot',
+      {
+        method: 'POST',
+        body: { email },
+      },
+    )
     info.value = ref(data.value)
     navigateTo('/voting/confirm')
   }

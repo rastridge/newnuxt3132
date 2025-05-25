@@ -170,9 +170,12 @@
   //
   // Get current player stats sevens/tens
   //
-  const { data } = await useFetch('/game_player_stats/getplayerstats/7', {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    'https://nuxt3.buffalorugby.org/game_player_stats/getplayerstats/7',
+    {
+      method: 'get',
+    },
+  )
 
   //
   // filter value criteria

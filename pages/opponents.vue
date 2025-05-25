@@ -102,9 +102,12 @@
   //
   // Get opponents
   //
-  const { data: opponents } = await useFetch('/opponents/getallcurrent', {
-    method: 'get',
-  })
+  const { data: opponents } = await useFetch(
+    'https://nuxt3.buffalorugby.org/opponents/getallcurrent',
+    {
+      method: 'get',
+    },
+  )
 
   // const onRowExpand = async (event) => {}
   //

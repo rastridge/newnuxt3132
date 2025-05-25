@@ -27,7 +27,7 @@
   const props = defineProps({
     opponent_id: { type: Number, required: true },
   })
-  const url = `/game_player_stats/streaks/${props.opponent_id}`
+  const url = `/nuxt3.buffalorugby.org/game_player_stats/streaks/${props.opponent_id}`
   const { data, error } = await useFetch(url, {
     method: 'get',
   })

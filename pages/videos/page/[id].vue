@@ -28,9 +28,12 @@
   //
   // Get video
   //
-  const { data } = await useFetch('/videos/' + id, {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    'https://nuxt3.buffalorugby.org/videos/' + id,
+    {
+      method: 'get',
+    },
+  )
 
   if (data.value.video_url.includes('yout')) {
     data.value.video_url =

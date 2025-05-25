@@ -135,9 +135,12 @@
   //
   // Get current news
   //
-  const { data } = await useFetch('/accounts/getshow', {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    'https://nuxt3.buffalorugby.org/accounts/getshow',
+    {
+      method: 'get',
+    },
+  )
 
   // const  checkAccountId = (id) => id === 1
 

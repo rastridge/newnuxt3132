@@ -36,7 +36,10 @@
   //
   // Get current payments
   //
-  const { data: payments } = await useFetch('/payments/getallcurrent', {
-    method: 'get',
-  })
+  const { data: payments } = await useFetch(
+    'https://nuxt3.buffalorugby.org/payments/getallcurrent',
+    {
+      method: 'get',
+    },
+  )
 </script>

@@ -33,9 +33,12 @@
   })
 
   const showRandomSponsor = async () => {
-    const { data } = await useFetch(`/sponsors/getrandom/`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/sponsors/random`,
+      {
+        method: 'get',
+      },
+    )
     item.value = data.value
   }
 </script>
