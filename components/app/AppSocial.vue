@@ -28,6 +28,17 @@
         <Button
           link
           class="my-text-style text-white hover:text-blue-200"
+          @click="redirectToFacebookYouth"
+        >
+          <i class="pi pi-facebook my-text-style" />
+          <span>facebook Youth Rugby</span>
+        </Button>
+      </li>
+
+      <li>
+        <Button
+          link
+          class="my-text-style text-white hover:text-blue-200"
           @click="redirectToYoutube"
         >
           <i class="pi pi-youtube my-text-style" />
@@ -75,9 +86,14 @@
   function redirectToFacebook7(event) {
     window.open('https://www.facebook.com/EastLakeErieHawaiians/', '_blank')
   }
-  function redirectToTwitter(event) {
-    window.open('https://twitter.com/BuffaloRFC', '_blank')
+
+  function redirectToFacebookYouth(event) {
+    window.open('https://www.facebook.com/BuffaloRugbyClubYouth/', '_blank')
   }
+
+  /*   function redirectToTwitter(event) {
+    window.open('https://twitter.com/BuffaloRFC', '_blank')
+  } */
   function redirectToYoutube(event) {
     window.open('https://youtube.com/buffalorugby', '_blank')
   }

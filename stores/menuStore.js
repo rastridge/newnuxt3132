@@ -8,7 +8,6 @@ export const useMenuStore = defineStore('menuitems', {
   actions: {
     async initCustomMenuItems() {
       if (this.items.length === 0) {
-        // const { data } = await useFetch('https://nuxt3.buffalorugby.org/content/custommenuitems')
         const { data } = await useFetch(
           'https://nuxt3.buffalorugby.org/content/menu',
         )
