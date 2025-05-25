@@ -239,9 +239,12 @@
   // Get year contributions
   //
   const getYearContributiions = async (year) => {
-    const { data } = await useFetch(`/contributions/year/${year}`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/contributions/year/${year}`,
+      {
+        method: 'get',
+      },
+    )
     let sum = 0
     for (let i = 0; i < data.value.length; i++) {
       sum += data.value[i].contribution_amount
@@ -262,9 +265,12 @@
   } */
 
   // topcontributors values
-  const { data: topcontributors } = await useFetch(`/contributions/top`, {
-    method: 'get',
-  })
+  const { data: topcontributors } = await useFetch(
+    `https://nuxt3.buffalorugby.org/contributions/top`,
+    {
+      method: 'get',
+    },
+  )
 
   // initial values
   const year = parseInt($dayjs().format('YYYY'))

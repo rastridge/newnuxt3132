@@ -42,7 +42,7 @@
   // Get current sponsors
   //
   const { data: sponsors } = await useFetch(
-    'https://nuxt3.buffalorugby.org/sponsors/getallcurrent',
+    'https://nuxt3.buffalorugby.org/sponsors/current',
     {
       method: 'get',
     },

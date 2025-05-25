@@ -378,7 +378,7 @@
   // Get current news
   //
   const { data } = await useFetch(
-    'https://nuxt3.buffalorugby.org/news/getallcurrent',
+    'https://nuxt3.buffalorugby.org/news/current',
     {
       method: 'get',
     },

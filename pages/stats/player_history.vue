@@ -245,7 +245,7 @@
   //
   const getHistory = async () => {
     const { data } = await useFetch(
-      `/game_player_stats/getplayergames/${selectedItem.value.account_id}`,
+      `https://nuxt3.buffalorugby.org/game_player_stats/playergames/${selectedItem.value.account_id}`,
       {
         method: 'get',
       },

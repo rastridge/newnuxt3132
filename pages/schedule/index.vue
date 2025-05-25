@@ -197,7 +197,7 @@
   //
   const games = ref([])
   const getSeasonGames = async (season_year) => {
-    const url = `https://nuxt3.buffalorugby.org/game_player_stats/getseason/${season_year}`
+    const url = `https://nuxt3.buffalorugby.org/game_player_stats/season/${season_year}`
     const { data, error } = await useFetch(url, {
       method: 'get',
     })

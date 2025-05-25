@@ -41,7 +41,7 @@
     // Get chart data
     //
     const { data } = await useFetch(
-      'https://nuxt3.buffalorugby.org/game_player_stats/getrosterstats',
+      'https://nuxt3.buffalorugby.org/game_player_stats/rosterstats',
       {
         method: 'get',
       },

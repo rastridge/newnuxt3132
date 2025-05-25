@@ -180,7 +180,7 @@
   // Get player stats
   //
   const { data } = await useFetch(
-    'https://nuxt3.buffalorugby.org/game_player_stats/getplayerstats/1',
+    'https://nuxt3.buffalorugby.org/game_player_stats/playerstats/1',
     {
       // 1 = fifteens
       method: 'get',
