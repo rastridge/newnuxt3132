@@ -55,9 +55,12 @@
   const route = useRoute()
   const id = route.params.room
 
-  const { data } = await useFetch(`/clubhouse/room/${id}`, {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    `https://nuxt3.buffalorugby.org/clubhouse/room/${id}`,
+    {
+      method: 'get',
+    },
+  )
 </script>
 
 <style scoped>

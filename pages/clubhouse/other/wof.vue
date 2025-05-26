@@ -40,9 +40,12 @@
     title: 'Buffalo Rugby Clubhouse',
   })
 
-  const { data } = await useFetch(`/accounts/getwof`, {
-    method: 'get',
-  })
+  const { data } = await useFetch(
+    `https://nuxt3.buffalorugby.org/accounts/wof`,
+    {
+      method: 'get',
+    },
+  )
 </script>
 
 <style scoped>

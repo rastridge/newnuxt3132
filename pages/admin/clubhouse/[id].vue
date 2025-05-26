@@ -12,12 +12,15 @@
   //
   const route = useRoute()
   const id = route.params.id
-  const { data: state } = await useFetch(`/clubhouse/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/clubhouse/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: auth.user.token,
+      },
     },
-  })
+  )
 
   //
   // archives form action
