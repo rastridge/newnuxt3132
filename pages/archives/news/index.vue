@@ -92,9 +92,12 @@
   const year_data = ref([])
 
   const getYearOfNews = async (year) => {
-    const { data } = await useFetch(`/news/year/${year}`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/news/year/${year}`,
+      {
+        method: 'get',
+      },
+    )
     year_data.value = data.value
   }
   // getYearOfNewsletters(year.value)
@@ -117,9 +120,12 @@
   // Get news
   //
   const getOne = async (id) => {
-    const { data } = await useFetch(`/news/${id}`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/news/${id}`,
+      {
+        method: 'get',
+      },
+    )
     return data.value
   }
 </script>

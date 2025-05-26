@@ -68,9 +68,12 @@
   await delay(1000) // delay to let mysql query to take place ?
   //
   const getYearOfNewsletters = async (year) => {
-    const { data } = await useFetch(`/newsletters/year/${year}`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/newsletters/year/${year}`,
+      {
+        method: 'get',
+      },
+    )
     year_data.value = data.value
   }
 

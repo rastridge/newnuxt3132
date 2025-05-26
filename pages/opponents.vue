@@ -103,7 +103,7 @@
   // Get opponents
   //
   const { data: opponents } = await useFetch(
-    'https://nuxt3.buffalorugby.org/opponents/getallcurrent',
+    'https://nuxt3.buffalorugby.org/opponents/current',
     {
       method: 'get',
     },

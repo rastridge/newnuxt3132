@@ -123,7 +123,7 @@
   // Get current archives
   //
   const { data: archives } = await useFetch(
-    'https://nuxt3.buffalorugby.org/archive/getallcurrent',
+    'https://nuxt3.buffalorugby.org/archive/current',
     {
       method: 'get',
     },

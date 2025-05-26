@@ -114,7 +114,7 @@
   // Get all current videos
   //
   const { data } = await useFetch(
-    'https://nuxt3.buffalorugby.org/videos/getallcurrent',
+    'https://nuxt3.buffalorugby.org/videos/current',
     {
       method: 'get',
     },
