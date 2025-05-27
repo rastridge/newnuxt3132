@@ -36,10 +36,13 @@ export const useAuthStore = defineStore('auth', {
       const alert = useAlertStore()
       this.status = { loggedIn: false }
       alert.attempt('Logging in . . .')
-      const user = await $fetch('/users/authenticate', {
-        method: 'POST',
-        body: { username, password },
-      })
+      const user = await $fetch(
+        'https://nuxt3.buffalorugby.org/users/authenticate',
+        {
+          method: 'POST',
+          body: { username, password },
+        },
+      )
       console.log('loginRequest user = ', user)
       if (user.match) {
         this.user = user
@@ -70,15 +73,6 @@ export const useAuthStore = defineStore('auth', {
       navigateTo('/')
     },
 
-    /* 		loginFailure() {
-			this.status = { loggedIn: false }
-			this.keep = { keeped: false }
-			this.user = {}
-			const alert = useAlertStore()
-			alert.error('Login failed - try again')
-			navigateTo('/loginpage')
-		}, */
-
     loginFailure() {
       this.status = { loggedIn: false }
       this.user = {}
@@ -86,13 +80,5 @@ export const useAuthStore = defineStore('auth', {
       alert.error('Login failed - try again')
       navigateTo('/loginpage')
     },
-
-    /* 		loginAuto() {
-			this.user = JSON.parse(localStorage.getItem('auth'))
-			this.status = { loggedIn: true }
-			this.keep = { keeped: true }
-			sessionStorage.setItem('auth', JSON.stringify(this.user))
-			navigateTo('/admin')
-		}, */
   },
 })

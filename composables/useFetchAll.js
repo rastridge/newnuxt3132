@@ -1,5 +1,4 @@
 import { useAuthStore } from '~/stores/authStore'
-// import jwt from 'jsonwebtoken'
 
 export default function useFetchAll() {
   const auth = useAuthStore()
@@ -10,14 +9,6 @@ export default function useFetchAll() {
       method: 'get',
       headers: {
         authorization: auth.user.token,
-        /*         authorization: jwt.sign(
-          {
-            userId: '1',
-            email: 'rfa@me.com',
-          },
-          'ronaldfastridgejr',
-          { expiresIn: '1h' },
-        ), */
       },
     })
     return { data }
