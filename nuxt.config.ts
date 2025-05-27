@@ -1,13 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  app: {
+  /*   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-  },
+  }, */
   devtools: { enabled: false },
   ssr: false,
 
   runtimeConfig: {
     API_SECRET: process.env.API_SECRET,
+    JWT_SECRET: process.env.API_SECRET,
     DB_HOST: process.env.DB_HOST,
     DB_USER: process.env.DB_USER,
     DB_PASSWORD: process.env.DB_PASSWORD,

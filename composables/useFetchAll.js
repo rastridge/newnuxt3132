@@ -1,19 +1,25 @@
 import { useAuthStore } from '~/stores/authStore'
+// import jwt from 'jsonwebtoken'
 
 export default function useFetchAll() {
   const auth = useAuthStore()
+  console.log('useFetchAll', auth.user.token)
 
   const getAll = async (app) => {
-    const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/getall`,
-      {
-        method: 'get',
-        headers: {
-          authorization: auth.user.token,
-        },
+    const { data } = await useFetch(`https://nuxt3.buffalorugby.org/${app}`, {
+      method: 'get',
+      headers: {
+        authorization: auth.user.token,
+        /*         authorization: jwt.sign(
+          {
+            userId: '1',
+            email: 'rfa@me.com',
+          },
+          'ronaldfastridgejr',
+          { expiresIn: '1h' },
+        ), */
       },
-    )
-
+    })
     return { data }
   }
 

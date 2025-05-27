@@ -35,12 +35,15 @@
   const id = route.params.id
 
   // get user data for editing
-  const { data: state } = await useFetch(`/users/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/users/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: auth.user.token,
+      },
     },
-  })
+  )
   state.value.password = ''
   //
   // Users form action

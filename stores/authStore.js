@@ -31,16 +31,16 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async loginRequest(username, password) {
+      console.log('loginRequest username = ', username)
+      console.log('loginRequest password = ', password)
       const alert = useAlertStore()
       this.status = { loggedIn: false }
       alert.attempt('Logging in . . .')
-      const user = await $fetch(
-        'https://nuxt3.buffalorugby.org/users/authenticate',
-        {
-          method: 'POST',
-          body: { username, password },
-        },
-      )
+      const user = await $fetch('/users/authenticate', {
+        method: 'POST',
+        body: { username, password },
+      })
+      console.log('loginRequest user = ', user)
       if (user.match) {
         this.user = user
         this.loginSuccess(user)
@@ -49,24 +49,10 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    /* loginSuccess(user, keeploggedin) {
-			this.status = { loggedIn: true }
-			this.user = user
-			this.keep = { keeped: keeploggedin }
-			sessionStorage.removeItem('auth')
-			sessionStorage.setItem('auth', JSON.stringify(this.user))
-
-			if (this.keep.keeped) {
-				localStorage.setItem('auth', JSON.stringify(this.user))
-			}
-			const alert = useAlertStore()
-			alert.success('Login successful')
-			navigateTo('/admin')
-		}, */
-
     loginSuccess(user) {
       this.status = { loggedIn: true }
       this.user = user
+      console.log('loginSuccess this.user.token = ', this.user.token)
       sessionStorage.removeItem('auth')
       sessionStorage.setItem('auth', JSON.stringify(this.user))
 
@@ -75,23 +61,11 @@ export const useAuthStore = defineStore('auth', {
       navigateTo('/admin')
     },
 
-    /* 		logout() {
-			const alert = useAlertStore()
-			alert.clear()
-			this.status = { loggedIn: false }
-			this.keep = { isKeeped: false }
-			this.user = {}
-			localStorage.removeItem('auth')
-			sessionStorage.removeItem('auth')
-			navigateTo('/')
-		}, */
-
     logout() {
       const alert = useAlertStore()
       alert.clear()
       this.status = { loggedIn: false }
       this.user = {}
-      // localStorage.removeItem('auth')
       sessionStorage.removeItem('auth')
       navigateTo('/')
     },
