@@ -28,6 +28,17 @@
         <Button
           link
           class="my-text-style text-white hover:text-blue-200"
+          @click="redirectToFacebookYouth"
+        >
+          <i class="pi pi-facebook my-text-style" />
+          <span>facebook Youth Rugby</span>
+        </Button>
+      </li>
+
+      <li>
+        <Button
+          link
+          class="my-text-style text-white hover:text-blue-200"
           @click="redirectToYoutube"
         >
           <i class="pi pi-youtube my-text-style" />
