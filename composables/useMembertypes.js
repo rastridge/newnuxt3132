@@ -1,7 +1,7 @@
-import { useAuthStore } from '~/stores/authStore'
+// import { useAuthStore } from '~/stores/authStore'
 
 export default function useMembertypes() {
-  const auth = useAuthStore()
+  // const auth = useAuthStore()
   //
   // get member admin types for select
   async function getMemberAdminTypeOptions() {
@@ -9,11 +9,6 @@ export default function useMembertypes() {
       'https://nuxt3.buffalorugby.org/accounts/memberadmintypes',
       {
         method: 'get',
-        headers: {
-          authorization: 'Bearer ' + auth.user.token,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
       },
     )
     if (error.value) {
@@ -40,11 +35,6 @@ export default function useMembertypes() {
       'https://nuxt3.buffalorugby.org/accounts/membertypes',
       {
         method: 'get',
-        headers: {
-          authorization: 'Bearer ' + auth.user.token,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
       },
     )
     // convert for formkit
