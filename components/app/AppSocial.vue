@@ -86,9 +86,10 @@
   function redirectToFacebook7(event) {
     window.open('https://www.facebook.com/EastLakeErieHawaiians/', '_blank')
   }
-  function redirectToTwitter(event) {
-    window.open('https://twitter.com/BuffaloRFC', '_blank')
+  function redirectToFacebookYouth(event) {
+    window.open('https://www.facebook.com/BuffaloRugbyClubYouth/', '_blank')
   }
+
   function redirectToYoutube(event) {
     window.open('https://youtube.com/buffalorugby', '_blank')
   }
