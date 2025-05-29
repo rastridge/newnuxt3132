@@ -258,7 +258,7 @@
   // Get top contributions all time
   //
   /*   const getTopContributors = async () => {
-    const { data } = await useFetch(`/contributions/top`, {
+    const { data } = await useFetch(`https://nuxt3.buffalorugby.org/contributions/top`, {
       method: 'get',
     })
     topcontributors.value = data.value

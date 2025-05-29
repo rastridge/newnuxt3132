@@ -11,13 +11,18 @@
   //
   const route = useRoute()
   const id = route.params.id
-  const { data: state } = await useFetch(`/content/${id}`, {
-    key: id,
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/content/${id}`,
+    {
+      key: id,
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
   //
   // content form action
   //

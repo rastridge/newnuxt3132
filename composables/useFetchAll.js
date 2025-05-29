@@ -2,13 +2,15 @@ import { useAuthStore } from '~/stores/authStore'
 
 export default function useFetchAll() {
   const auth = useAuthStore()
-  console.log('useFetchAll', auth.user.token)
 
   const getAll = async (app) => {
+    // console.log('useFetchAll getAll auth.user.token = ', auth.user.token)
     const { data } = await useFetch(`https://nuxt3.buffalorugby.org/${app}`, {
       method: 'get',
       headers: {
-        authorization: auth.user.token,
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
     return { data }
@@ -20,7 +22,9 @@ export default function useFetchAll() {
       {
         method: 'DELETE',
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     )
@@ -31,7 +35,9 @@ export default function useFetchAll() {
     await useFetch(`https://nuxt3.buffalorugby.org/${app}/status`, {
       method: 'POST',
       headers: {
-        authorization: auth.user.token,
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: { id, status },
     })

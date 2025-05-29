@@ -43,7 +43,10 @@
   }
 
   // get suggestions
-  const { data: suggestions } = await useFetch(`/accounts/suggestions`, {
-    method: 'get',
-  })
+  const { data: suggestions } = await useFetch(
+    `https://nuxt3.buffalorugby.org/accounts/suggestions`,
+    {
+      method: 'get',
+    },
+  )
 </script>

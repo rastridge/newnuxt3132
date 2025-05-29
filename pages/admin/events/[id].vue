@@ -15,12 +15,17 @@
   //
   // Initialize Edit form
   //
-  const { data: state } = await useFetch(`/events/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/events/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   //
   // News form action

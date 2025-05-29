@@ -128,7 +128,9 @@
           member_type_id,
         },
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     )
@@ -148,7 +150,9 @@
       {
         method: 'POST',
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     )

@@ -17,12 +17,17 @@
   //
   // get sms data for id
   //
-  const { data: state } = await useFetch(`/sms/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/sms/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   //
   // SMS form action

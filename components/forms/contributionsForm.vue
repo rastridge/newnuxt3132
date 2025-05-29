@@ -110,12 +110,17 @@
   // get previous donations
   const previous = ref(null)
   const getPrevious = async (id) => {
-    const { data } = await useFetch(`/contributions/previous/${id}`, {
-      method: 'get',
-      headers: {
-        authorization: auth.user.token,
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/contributions/previous/${id}`,
+      {
+        method: 'get',
+        headers: {
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       },
-    })
+    )
     previous.value = data.value
   }
 

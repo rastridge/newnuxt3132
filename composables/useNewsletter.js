@@ -9,7 +9,9 @@ export default function useNewsletter() {
         method: 'post',
         body: state,
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     )
@@ -22,7 +24,9 @@ export default function useNewsletter() {
           method: 'post',
           body: state,
           headers: {
-            authorization: auth.user.token,
+            authorization: 'Bearer ' + auth.user.token,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           },
         },
       )
@@ -34,7 +38,9 @@ export default function useNewsletter() {
       method: 'post',
       body: state,
       headers: {
-        authorization: auth.user.token,
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
 
@@ -45,7 +51,9 @@ export default function useNewsletter() {
           method: 'post',
           body: state,
           headers: {
-            authorization: auth.user.token,
+            authorization: 'Bearer ' + auth.user.token,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
           },
         },
       )

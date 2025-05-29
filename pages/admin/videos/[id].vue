@@ -15,12 +15,17 @@
   const route = useRoute()
   const id = route.params.id
 
-  const { data: state } = await useFetch(`/videos/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/videos/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   // Format for Primevue calendar
   /*   state.value.video_event_dt = $dayjs(data.value.video_event_dt).format(

@@ -337,7 +337,7 @@
         method: 'POST',
         body: formData,
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
         },
       })
       const data = await res.json()

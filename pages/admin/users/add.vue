@@ -32,12 +32,17 @@
   //
   // get app names for access perms
   //
-  const { data: apps_data } = await useFetch(`/users/getapps`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: apps_data } = await useFetch(
+    `https://nuxt3.buffalorugby.org/users/getapps`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   // Init perms for add
   //

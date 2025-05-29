@@ -10,10 +10,13 @@ export default function useSubmit() {
   const alert = useAlertStore()
 
   const onSubmitUpdate = async function (app, form_state) {
-    const { data } = await useFetch(`/${app}/updateone`, {
-      method: 'post',
-      body: form_state,
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/${app}/updateone`,
+      {
+        method: 'post',
+        body: form_state,
+      },
+    )
 
     if (data.value.message) {
       // message if email exists, null if not
@@ -22,13 +25,18 @@ export default function useSubmit() {
   }
 
   const onSubmitEdit = async function (app, form_state) {
-    const { data } = await useFetch(`/${app}/editone`, {
-      method: 'post',
-      body: form_state,
-      headers: {
-        authorization: auth.user.token,
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/${app}/editone`,
+      {
+        method: 'post',
+        body: form_state,
+        headers: {
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       },
-    })
+    )
 
     if (data.value.message) {
       // message if email exists, null if not
@@ -37,13 +45,18 @@ export default function useSubmit() {
   }
 
   const onSubmitAdd = async function (app, form_state) {
-    const { data } = await useFetch(`/${app}/addone`, {
-      method: 'post',
-      body: form_state,
-      headers: {
-        authorization: auth.user.token,
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/${app}/addone`,
+      {
+        method: 'post',
+        body: form_state,
+        headers: {
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       },
-    })
+    )
 
     if (data.value.message) {
       // message if email exists, null if not
@@ -52,10 +65,13 @@ export default function useSubmit() {
   }
 
   const onSubmitAddByGuest = async function (app, form_state) {
-    const { data } = await useFetch(`/${app}/addonebyguest`, {
-      method: 'post',
-      body: form_state,
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/${app}/addonebyguest`,
+      {
+        method: 'post',
+        body: form_state,
+      },
+    )
 
     if (data.value.message) {
       // message if email exists, null if not

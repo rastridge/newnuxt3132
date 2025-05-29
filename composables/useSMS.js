@@ -9,7 +9,9 @@ export default function useSMS() {
         method: 'post',
         body: state,
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       },
     )
@@ -19,7 +21,9 @@ export default function useSMS() {
         method: 'post',
         body: state,
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       })
     }
@@ -31,7 +35,9 @@ export default function useSMS() {
       method: 'post',
       body: state,
       headers: {
-        authorization: auth.user.token,
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
     if (send === 'sendNow') {
@@ -39,7 +45,9 @@ export default function useSMS() {
         method: 'post',
         body: state,
         headers: {
-          authorization: auth.user.token,
+          authorization: 'Bearer ' + auth.user.token,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       })
     }

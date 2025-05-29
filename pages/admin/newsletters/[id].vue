@@ -15,9 +15,12 @@
   //
   // assign existing data to Edit form
   //
-  const { data: state } = await useFetch(`/newsletters/${id}`, {
-    method: 'get',
-  })
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/newsletters/${id}`,
+    {
+      method: 'get',
+    },
+  )
 
   //
   // Newsletters form action

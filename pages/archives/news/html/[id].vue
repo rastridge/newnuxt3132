@@ -23,7 +23,7 @@
   //
   // Get custom page content
   //
-  const { data } = await useFetch(`/news/${id}`, {
+  const { data } = await useFetch(`https://nuxt3.buffalorugby.org/news/${id}`, {
     method: 'get',
   })
 </script>

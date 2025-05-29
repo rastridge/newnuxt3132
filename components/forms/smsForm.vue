@@ -77,7 +77,9 @@
     {
       method: 'get',
       headers: {
-        authorization: auth.user.token,
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     },
   )

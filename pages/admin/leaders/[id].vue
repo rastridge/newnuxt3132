@@ -31,12 +31,17 @@
   const id = route.params.id
 
   // get leaders with id
-  const { data: state } = await useFetch(`/leaders/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/leaders/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
   //
   // leaders form action
   //

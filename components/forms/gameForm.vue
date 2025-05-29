@@ -430,9 +430,12 @@
 
   // player names suggestions
   //
-  const { data: player_suggestions } = await useFetch(`/accounts/suggestions`, {
-    method: 'get',
-  })
+  const { data: player_suggestions } = await useFetch(
+    `https://nuxt3.buffalorugby.org/accounts/suggestions`,
+    {
+      method: 'get',
+    },
+  )
 
   // opponent names suggestions
   //

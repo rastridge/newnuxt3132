@@ -22,9 +22,12 @@
   // if legit get account data
   //
   if (hasOne.value) {
-    const { data } = await useFetch(`/accounts/getupdateinfo/${id}`, {
-      method: 'get',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/accounts/getupdateinfo/${id}`,
+      {
+        method: 'get',
+      },
+    )
 
     // console.log('exists = ', emailExists)
 

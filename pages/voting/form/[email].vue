@@ -84,15 +84,21 @@
   const getQuestions = async (account_email) => {
     // get questions
     const account_email_lc = account_email.value.toLowerCase()
-    const { data } = await useFetch(`/votes/questions/${account_email_lc}`, {
-      method: 'GET',
-    })
+    const { data } = await useFetch(
+      `https://nuxt3.buffalorugby.org/votes/questions/${account_email_lc}`,
+      {
+        method: 'GET',
+      },
+    )
     questions.value = data.value
 
     // get all choices for all questions
-    const { data: ch } = await useFetch(`/votes/getusedchoices`, {
-      method: 'GET',
-    })
+    const { data: ch } = await useFetch(
+      `https://nuxt3.buffalorugby.org/votes/getusedchoices`,
+      {
+        method: 'GET',
+      },
+    )
     choices.value = ch.value
 
     // make choices array in each question
@@ -117,7 +123,7 @@
   getQuestions(account_email)
 
   const handleSubmit = async (account_email, answers) => {
-    await useFetch(`/votes/registerballot`, {
+    await useFetch(`https://nuxt3.buffalorugby.org/votes/registerballot`, {
       method: 'POST',
       body: { account_email, answers },
     })

@@ -29,12 +29,17 @@
   //
   const route = useRoute()
   const id = route.params.id
-  const { data: state } = await useFetch(`/history/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/history/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
   //
   // history form action
   //

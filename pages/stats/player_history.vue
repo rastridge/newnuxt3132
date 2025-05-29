@@ -222,9 +222,12 @@
   //
   const selectedItem = ref('')
   const filteredNames = ref([])
-  const { data: suggestions } = await useFetch(`/accounts/suggestions`, {
-    method: 'get',
-  })
+  const { data: suggestions } = await useFetch(
+    `https://nuxt3.buffalorugby.org/accounts/suggestions`,
+    {
+      method: 'get',
+    },
+  )
   const search = (event) => {
     if (!event.query.trim().length) {
       filteredNames.value = [...suggestions.value]

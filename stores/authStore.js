@@ -36,14 +36,22 @@ export const useAuthStore = defineStore('auth', {
       const alert = useAlertStore()
       this.status = { loggedIn: false }
       alert.attempt('Logging in . . .')
+      const userData = {
+        username: username,
+        password: password,
+      }
       const user = await $fetch(
         'https://nuxt3.buffalorugby.org/users/authenticate',
         {
+          headers: {
+            'Content-Type': 'application/json',
+          },
           method: 'POST',
-          body: { username, password },
+          // body: JSON.stringify(userData),
+          body: userData,
         },
       )
-      console.log('loginRequest user = ', user)
+      // console.log('loginRequest user.match = ', user.match)
       if (user.match) {
         this.user = user
         this.loginSuccess(user)

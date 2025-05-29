@@ -14,12 +14,17 @@
   //
   // Initialize Edit form game info area
   //
-  const { data: state } = await useFetch(`/game_player_stats/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: state } = await useFetch(
+    `https://nuxt3.buffalorugby.org/game_player_stats/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   // convert date and time from unix time for FormKit inputs
   // for a day when date / time fields are dropped from the DB
@@ -31,12 +36,17 @@
   //
   // Initialize Edit form Players area
   //
-  const { data: players } = await useFetch(`/game_player_stats/players/${id}`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: players } = await useFetch(
+    `https://nuxt3.buffalorugby.org/game_player_stats/players/${id}`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 
   //
   // content form action

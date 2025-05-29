@@ -125,10 +125,15 @@
     }
   }
   //
-  const { data: suggestions } = await useFetch(`/opponents/suggestions`, {
-    method: 'get',
-    headers: {
-      authorization: auth.user.token,
+  const { data: suggestions } = await useFetch(
+    `https://nuxt3.buffalorugby.org/opponents/suggestions`,
+    {
+      method: 'get',
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     },
-  })
+  )
 </script>
