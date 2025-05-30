@@ -149,6 +149,8 @@ async function addOne(info) {
       flag_legal,
       flag_photo,
 
+      account_email,
+
       member_firstname,
       member_lastname,
 

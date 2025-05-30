@@ -11,7 +11,7 @@ export default function useSubmit() {
 
   const onSubmitUpdate = async function (app, form_state) {
     const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/updateone`,
+      `https://nuxt3.buffalorugby.org/${app}/update`,
       {
         method: 'post',
         body: form_state,
@@ -25,8 +25,11 @@ export default function useSubmit() {
   }
 
   const onSubmitEdit = async function (app, form_state) {
+    if (!auth.user) {
+      alert.error('You must be logged in to edit this item.')
+    }
     const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/editone`,
+      `https://nuxt3.buffalorugby.org/${app}/edit`,
       {
         method: 'post',
         body: form_state,
@@ -46,7 +49,7 @@ export default function useSubmit() {
 
   const onSubmitAdd = async function (app, form_state) {
     const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/addone`,
+      `https://nuxt3.buffalorugby.org/${app}/add`,
       {
         method: 'post',
         body: form_state,

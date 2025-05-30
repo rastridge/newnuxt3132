@@ -96,13 +96,13 @@
   // Initialize values for Renderlist
   //
   const { getAccess } = useRenderListAccess()
-  const app = 'accounts/men'
+  const app = 'accounts'
   const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
   //
   // Get all accounts
   //
-  const { data: accounts } = await getAll('accounts')
+  const { data: accounts } = await getAll(app)
 
   //
   // Filter accounts by member type

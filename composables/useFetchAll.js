@@ -4,7 +4,6 @@ export default function useFetchAll() {
   const auth = useAuthStore()
 
   const getAll = async (app) => {
-    // console.log('useFetchAll getAll auth.user.token = ', auth.user.token)
     const { data } = await useFetch(`https://nuxt3.buffalorugby.org/${app}`, {
       method: 'get',
       headers: {
@@ -18,9 +17,9 @@ export default function useFetchAll() {
 
   const deleteOne = async (app, id) => {
     const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/${id}`,
+      `https://nuxt3.buffalorugby.org/${app}/delete/${id}`,
       {
-        method: 'DELETE',
+        method: 'get',
         headers: {
           authorization: 'Bearer ' + auth.user.token,
           'Content-Type': 'application/json',
