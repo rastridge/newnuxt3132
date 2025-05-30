@@ -69,7 +69,7 @@ export default function useSubmit() {
 
   const onSubmitAddByGuest = async function (app, form_state) {
     const { data } = await useFetch(
-      `https://nuxt3.buffalorugby.org/${app}/addonebyguest`,
+      `https://nuxt3.buffalorugby.org/${app}/addbyguest`,
       {
         method: 'post',
         body: form_state,

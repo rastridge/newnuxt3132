@@ -56,7 +56,7 @@
     await onSubmitAdd('accounts', form_state)
     // roster check
     if (alert.message === null) {
-      navigateTo(`/admin/accounts/men`)
+      navigateTo(`/admin/accounts`)
     }
   }
 </script>

@@ -40,7 +40,7 @@
     )
 
     if (data.value.length > 0) {
-      navigateTo(`/admin/accounts/men/${data.value[0].id}`)
+      navigateTo(`/admin/accounts/${data.value[0].id}`)
     } else {
       emailStatus.value = false
       setTimeout(() => {

@@ -217,7 +217,7 @@
         </div>
       </div>
       <display-alert />
-      <display-cancelform :destination="'/admin/accounts/men'" />
+      <display-cancelform :destination="'/admin/accounts'" />
     </FormKit>
     <p v-if="saving">
       <ProgressBar
