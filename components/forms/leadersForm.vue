@@ -129,14 +129,9 @@
   // See if year already exists - cant add
   //
   const { data: years } = await useFetch(
-    `https://nuxt3.buffalorugby.org/leaders/getyears`,
+    `https://nuxt3.buffalorugby.org/leaders/years`,
     {
       method: 'get',
-      headers: {
-        authorization: 'Bearer ' + auth.user.token,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
     },
   )
 

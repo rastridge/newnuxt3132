@@ -18,7 +18,14 @@ export default function useUnixtime() {
 
   const formatUnixTime = (ut) => dayjs.unix(ut).format('h:mm A')
 
-  const convertToFormkitDate = (ut) => dayjs.unix(ut).format('YYYY-MM-DD')
+  const convertToFormkitDate = (ut) => {
+    console.log('convertToFormkitDate ut = ', ut)
+    console.log(
+      "dayjs.unix(ut).format('YYYY-MM-DD')} = ",
+      dayjs.unix(ut).format('YYYY-MM-DD'),
+    )
+    return dayjs.unix(ut).format('YYYY-MM-DD')
+  }
 
   const convertToFormkitTime = (ut) => dayjs.unix(ut).format('HH:mm')
 

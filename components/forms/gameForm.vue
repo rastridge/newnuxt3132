@@ -77,7 +77,8 @@
         name="date"
         validation="required"
       />
-
+      {{ state.date }}
+      {{ state.time }}
       <!-- Time input-->
       <FormKit
         type="time"
@@ -341,16 +342,6 @@
   const { convertToFormkitDate } = useUnixtime()
   const { getGameTypeOptions } = useGametypes()
 
-  const gameTypeOptions2 = [
-    {
-      label: 'League',
-      value: '1',
-    },
-    {
-      game_type: 'Playoff',
-      game_type_id: 2,
-    },
-  ]
   //
   // Outgoing
   //

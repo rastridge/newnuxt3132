@@ -890,7 +890,7 @@ async function addOne({
   } catch (e) {
     await conn.query('ROLLBACK')
     await conn.end()
-    return 'rollback' + e
+    return 'rollback' + e.message
   }
 }
 
