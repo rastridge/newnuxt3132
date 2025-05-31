@@ -31,8 +31,8 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async loginRequest(username, password) {
-      console.log('loginRequest username = ', username)
-      console.log('loginRequest password = ', password)
+      // console.log('loginRequest username = ', username)
+      // console.log('loginRequest password = ', password)
       const alert = useAlertStore()
       this.status = { loggedIn: false }
       alert.attempt('Logging in . . .')
@@ -63,7 +63,7 @@ export const useAuthStore = defineStore('auth', {
     loginSuccess(user) {
       this.status = { loggedIn: true }
       this.user = user
-      console.log('loginSuccess this.user.token = ', this.user.token)
+      // console.log('loginSuccess this.user.token = ', this.user.token)
       sessionStorage.removeItem('auth')
       sessionStorage.setItem('auth', JSON.stringify(this.user))
 

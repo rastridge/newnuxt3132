@@ -91,9 +91,11 @@
         label="Game type"
         placeholder="Select game type"
         name="game_type_id"
-        :options="gametypes"
+        :options="gameTypeOptions"
         validation="required"
       />
+      <!--       {{ gameTypeOptions }}
+ -->
       <!-- Game Level input-->
       <FormKit
         type="select"
@@ -337,7 +339,18 @@
   const { $dayjs } = useNuxtApp()
   const saving = ref(false)
   const { convertToFormkitDate } = useUnixtime()
+  const { getGameTypeOptions } = useGametypes()
 
+  const gameTypeOptions2 = [
+    {
+      label: 'League',
+      value: '1',
+    },
+    {
+      game_type: 'Playoff',
+      game_type_id: 2,
+    },
+  ]
   //
   // Outgoing
   //
@@ -376,6 +389,7 @@
       })
     }
   }
+  const gameTypeOptions = await getGameTypeOptions()
 
   //
   // Opponent name autocomplete
@@ -410,24 +424,25 @@
   //
   // Game types
   //
-  const { data: gametypes } = await useFetch(
-    `https://nuxt.buffalorugby.org/game_player_stats/getgametypes`,
-    {
-      method: 'get',
-    },
-  )
-  //
-  // convert game types for formkit
-  //
-  const result = []
-  gametypes.value.map((old) => {
-    const n = {}
-    n.label = old.game_type
-    n.value = old.game_type_id
-    result.push(n)
-  })
-  gametypes.value = result
-
+  /*
+   const { data: gametypes } = await useFetch(
+     `https://nuxt.buffalorugby.org/game_player_stats/gametypes`,
+     {
+       method: 'get',
+     },
+   )
+   //
+   // convert game types for formkit
+   //
+   const result = []
+   gametypes.value.map((old) => {
+     const n = {}
+     n.label = old.game_type
+     n.value = old.game_type_id
+     result.push(n)
+   })
+   gametypes.value = result
+  */
   // player names suggestions
   //
   const { data: player_suggestions } = await useFetch(

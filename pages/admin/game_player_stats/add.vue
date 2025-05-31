@@ -17,6 +17,7 @@
     date_ut: $dayjs().unix(),
     date: convertToFormkitDate($dayjs().unix()),
     time: convertToFormkitTime($dayjs().unix()),
+    game_type_id: '',
     occasion: '',
     ptsFor: '',
     ptsAgn: '',

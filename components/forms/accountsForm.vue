@@ -149,7 +149,8 @@
         :options="memberTypeOptions"
         validation="required"
       />
-
+      <!--       {{ memberTypeOptions }}
+ -->
       <FormKit
         type="select"
         label="2nd Member type"

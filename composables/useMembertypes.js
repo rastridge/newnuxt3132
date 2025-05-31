@@ -37,6 +37,7 @@ export default function useMembertypes() {
         method: 'get',
       },
     )
+    // console.log('member types', data.value)
     // convert for formkit
     let result = []
     data.value.map((old) => {
