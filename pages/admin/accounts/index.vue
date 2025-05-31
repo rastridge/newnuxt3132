@@ -248,6 +248,6 @@
   }
 
   const changeStatus = async ({ id, status }) => {
-    await changeStatusOne(app, { id, status })
+    await changeStatusOne('accounts', { id, status })
   }
 </script>
