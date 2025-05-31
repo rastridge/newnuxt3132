@@ -96,13 +96,13 @@
   // Initialize values for Renderlist
   //
   const { getAccess } = useRenderListAccess()
-  const app = 'accounts/men'
+  const app = 'accounts'
   const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
   //
   // Get all accounts
   //
-  const { data: accounts } = await getAll('accounts')
+  const { data: accounts } = await getAll(app)
 
   //
   // Filter accounts by member type
@@ -239,7 +239,7 @@
   const message = ref('')
 
   const deleteItem = async (id) => {
-    const msg = await deleteOne('accounts', id)
+    const msg = await deleteOne(app, id)
     // will not deleteOne if msg is not null
     if (msg.value) {
       message.value = msg.value
@@ -248,6 +248,6 @@
   }
 
   const changeStatus = async ({ id, status }) => {
-    await changeStatusOne('accounts', { id, status })
+    await changeStatusOne(app, { id, status })
   }
 </script>
