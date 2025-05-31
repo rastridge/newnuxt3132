@@ -254,7 +254,7 @@ export function useNavigationMenu() {
           {
             label: 'Members Men',
             icon: 'pi pi-fw pi-user-edit',
-            route: '/admin/accounts/men',
+            route: '/admin/accounts',
             visible: () => checkPerm('accounts') > 0,
           },
           {
