@@ -411,7 +411,7 @@
   // Game types
   //
   const { data: gametypes } = await useFetch(
-    `/game_player_stats/getgametypes`,
+    `https://nuxt.buffalorugby.org/game_player_stats/getgametypes`,
     {
       method: 'get',
     },
