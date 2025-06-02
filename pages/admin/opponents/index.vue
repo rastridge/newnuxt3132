@@ -95,6 +95,8 @@
     if (msg.value) {
       message.value = msg.value
       visible.value = true
+    } else {
+      navigateTo(`/admin/${app}`)
     }
   }
 

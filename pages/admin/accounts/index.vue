@@ -76,6 +76,7 @@
 </template>
 
 <script setup>
+  import { navigateTo } from 'nuxt/app'
   import { usePlacemarkStore } from '~/stores/placemarkStore'
   definePageMeta({
     middleware: ['auth'],
@@ -87,7 +88,6 @@
   // get initial values
   //
   const placemark = usePlacemarkStore()
-
   const alpha = ref(placemark.getAlpha)
   const member_type_id = ref(placemark.getMemberTypeId)
   const page = ref(placemark.getPage)
@@ -109,13 +109,9 @@
   //
   const filteredData = computed(() => {
     let temp = []
-    // filter by member type
+    // first filter by member type
     temp = accounts.value.filter(function (d) {
-      return (
-        /*         d.member_type_id === member_type_id.value ||
-        d.member_type2_id === member_type_id.value */
-        d.member_type_id === member_type_id.value
-      )
+      return d.member_type_id === member_type_id.value
     })
 
     // filter by initial letter
@@ -184,48 +180,7 @@
     { label: 'Z', value: 'Z' },
   ]
   //
-  /*   const tableToCSV = async (filename) => {
-    function jsonToCsv(data) {
-      console.log('data = ', data)
-      if (!Array.isArray(data) || data.length === 0) {
-        return ''
-      }
 
-      const headers = Object.keys(data[0])
-      const csvRows = []
-
-      csvRows.push(headers.join(','))
-
-      for (const row of data) {
-        const values = headers.map((header) => {
-          const value = row[header]
-          return `"${value === null || value === undefined ? '' : value}"`
-        })
-        csvRows.push(values.join(','))
-      }
-      return csvRows.join('\n')
-    }
-
-    function downloadCsv(csvString, filename) {
-      const blob = new Blob([csvString], {
-        type: 'text/csv;charset=utf-8;',
-      })
-      const downloadLink = document.createElement('a')
-      downloadLink.href = URL.createObjectURL(blob)
-      downloadLink.download = filename
-      document.body.appendChild(downloadLink)
-      downloadLink.dispatchEvent(
-        new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window,
-        }),
-      )
-      document.body.removeChild(downloadLink)
-    }
-    const csvString = jsonToCsv(filteredData.value)
-    downloadCsv(csvString, filename)
-  } */
   //
 
   //
@@ -244,6 +199,8 @@
     if (msg.value) {
       message.value = msg.value
       visible.value = true
+    } else {
+      navigateTo(`/admin/${app}`)
     }
   }
 

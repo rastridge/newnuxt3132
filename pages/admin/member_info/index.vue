@@ -317,7 +317,7 @@
   const { $dayjs } = useNuxtApp()
   const { getAll } = useFetchAll()
 
-  const app = ref('member_info')
+  const app = 'member_info'
   const info = ref([])
 
   const email = ref('2')
@@ -338,7 +338,7 @@
     return filteredData.value.length
   })
 
-  const { data } = await getAll(app.value)
+  const { data } = await getAll(app)
   info.value = data.value
 
   const filteredData = computed(() => {

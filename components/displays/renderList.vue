@@ -222,20 +222,8 @@
     deleteDialog.value = true
   }
 
-  /*   const confirm1 = () => {
-    confirm.require({
-      message: 'Are you sure you want to delete?',
-      icon: 'pi pi-exclamation-triangle',
-      rejectClass: 'p-button-secondary p-button-outlined p-button-sm',
-      acceptClass: 'p-button-sm',
-      rejectLabel: 'Cancel',
-      acceptLabel: 'Delete',
-      accept: () => {},
-      reject: navigateTo('/admin/${app}/'),
-    })
-  } */
   const confirmedDelete = (id) => {
-    data_local.value = data_local.value.filter((u) => u.id !== id)
+    // data_local.value = data_local.value.filter((u) => u.id !== id)
     //
     // confirm deletion
     // confirm1()

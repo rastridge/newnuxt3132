@@ -104,7 +104,7 @@
   //
   // Format for Primevue calendar
   //
-  /*   state.value.news_event_dt = $dayjs(state.value.news_event_dt).format(
+  /*  state.value.news_event_dt = $dayjs(state.value.news_event_dt).format(
     'YYYY-MM-DD',
   )
   state.value.news_release_dt = $dayjs(state.value.news_release_dt).format(

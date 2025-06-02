@@ -103,15 +103,7 @@
   // See if year already exists - cant add
   //
   const { data: years } = await useFetch(
-    `https://nuxt3.buffalorugby.org/history/getyears`,
-    {
-      method: 'get',
-      headers: {
-        authorization: 'Bearer ' + auth.user.token,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    },
+    `https://nuxt3.buffalorugby.org/history/years`,
   )
   const year_exists = computed(() =>
     years.value.find((u) => u.history_year == state.value.history_year),

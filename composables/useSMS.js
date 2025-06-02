@@ -3,18 +3,15 @@ const auth = useAuthStore()
 
 export default function useSMS() {
   const addSMS = async (state, send) => {
-    const { data } = await useFetch(
-      'https://nuxt3.buffalorugby.org/sms/addone',
-      {
-        method: 'post',
-        body: state,
-        headers: {
-          authorization: 'Bearer ' + auth.user.token,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+    const { data } = await useFetch('https://nuxt3.buffalorugby.org/sms/add', {
+      method: 'post',
+      body: state,
+      headers: {
+        authorization: 'Bearer ' + auth.user.token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
-    )
+    })
     state.sms_id = data.value.insertId
     if (send === 'sendNow') {
       await useFetch('https://nuxt3.buffalorugby.org/sms/send', {

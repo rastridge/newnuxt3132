@@ -38,6 +38,24 @@
         @deleteItem="deleteItem"
       />
     </div>
+
+    <!-- player on game roster -->
+    <Dialog
+      v-model:visible="visible"
+      modal
+      header="Can't do that"
+      :style="{ width: '25rem' }"
+    >
+      <span class="p-text-secondary block mb-5">{{ message }}</span>
+
+      <template #footer>
+        <Button
+          label="Continue"
+          autofocus
+          @click="visible = false"
+        />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -126,9 +144,17 @@
   // Renderlist actions
   //
   const { deleteOne, changeStatusOne } = useFetchAll()
+  const message = ref('')
+  const visible = ref(false)
 
   const deleteItem = async (id) => {
-    await deleteOne(app, id)
+    const msg = await deleteOne(app, id)
+    if (msg.value) {
+      message.value = msg.value
+      visible.value = true
+    } else {
+      navigateTo(`/admin/${app}`)
+    }
   }
 
   const changeStatus = async ({ id, status }) => {
