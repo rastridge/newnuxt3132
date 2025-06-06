@@ -98,7 +98,7 @@
   // get newsletter recipient types
   //
   const { data: newsletterRecipientTypes } = await useFetch(
-    '/newsletters/newsletterrecipienttypes',
+    'https://nuxt3.buffalorugby.org/newsletters/newsletterrecipienttypes',
     {
       method: 'get',
       headers: {

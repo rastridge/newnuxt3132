@@ -29,6 +29,7 @@ export default function useSMS() {
 
   const editSMS = async (state, send) => {
     await useFetch('https://nuxt3.buffalorugby.org/sms/edit', {
+      // await useFetch('/sms/edit', {
       method: 'post',
       body: state,
       headers: {
@@ -39,6 +40,7 @@ export default function useSMS() {
     })
     if (send === 'sendNow') {
       await useFetch('https://nuxt3.buffalorugby.org/sms/send', {
+        // await useFetch('/sms/send', {
         method: 'post',
         body: state,
         headers: {

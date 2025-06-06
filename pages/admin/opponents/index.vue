@@ -85,25 +85,6 @@
   const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
   const { data: opponents_data, pending } = await getAll(app)
 
-  //
-  // Renderlist actions
-  //
-  const visible = ref(false)
-  const message = ref('')
-  const deleteItem = async (id) => {
-    const msg = await deleteOne(app, id)
-    if (msg.value) {
-      message.value = msg.value
-      visible.value = true
-    } else {
-      navigateTo(`/admin/${app}`)
-    }
-  }
-
-  const changeStatus = async ({ id, status }) => {
-    await changeStatusOne(app, { id, status })
-  }
-
   // Opponent name autocomplete
   //
   const filteredOpponents = ref([])
@@ -138,4 +119,22 @@
       },
     },
   )
+  //
+  // Renderlist actions
+  //
+  const visible = ref(false)
+  const message = ref('')
+  const deleteItem = async (id) => {
+    const msg = await deleteOne(app, id)
+    if (msg.value) {
+      message.value = msg.value
+      visible.value = true
+    } else {
+      navigateTo(`/admin/${app}`)
+    }
+  }
+
+  const changeStatus = async ({ id, status }) => {
+    await changeStatusOne(app, { id, status })
+  }
 </script>

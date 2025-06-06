@@ -2822,10 +2822,10 @@ aws-ssl-profiles@^1.1.1:
   resolved "https://registry.npmjs.org/aws-ssl-profiles/-/aws-ssl-profiles-1.1.2.tgz"
   integrity sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g==
 
-axios@^1.7.4:
-  version "1.7.7"
-  resolved "https://registry.npmjs.org/axios/-/axios-1.7.7.tgz"
-  integrity sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==
+axios@^1.8.3:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.9.0.tgz#25534e3b72b54540077d33046f77e3b8d7081901"
+  integrity sha512-re4CqKTJaURpzbLHtIi6XpDv20/CnpXOtjRY5/CU32L8gU8ek9UIivcfvSWvmKEngmVbrUtPpdDwWDWL7DNHvg==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -8521,12 +8521,12 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-twilio@^5.0.4:
-  version "5.3.2"
-  resolved "https://registry.npmjs.org/twilio/-/twilio-5.3.2.tgz"
-  integrity sha512-d9qdZBB4ozlBcZz4vqvMq461OfUrhZPLwdGBHlwiPzLPL82gmVwQFkhD7/KGxy9B1j18LfJkL1whI3KmKtWM6w==
+twilio@^5.7.0:
+  version "5.7.0"
+  resolved "https://registry.yarnpkg.com/twilio/-/twilio-5.7.0.tgz#01df3e84c444c884c4115276f233232ba09dbb9e"
+  integrity sha512-AcN9jo/C0sFitprIg2G6CJF+EACvff+8fiTMxf7Puz+6jtmc0NgJTwmyQbPiAnJcpXWOrPdI92Obr3PV4ZKXkw==
   dependencies:
-    axios "^1.7.4"
+    axios "^1.8.3"
     dayjs "^1.11.9"
     https-proxy-agent "^5.0.0"
     jsonwebtoken "^9.0.2"
