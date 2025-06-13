@@ -1,5 +1,6 @@
 <template>
   <div id="schedule">
+    import twilio from 'twilio' // ...existing code...
     <Head>
       <Title>Buffalo Rugby Club Schedule and Results</Title>
     </Head>

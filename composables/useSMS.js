@@ -39,8 +39,8 @@ export default function useSMS() {
       },
     })
     if (send === 'sendNow') {
-      await useFetch('https://nuxt3.buffalorugby.org/sms/send', {
-        // await useFetch('/sms/send', {
+      // await useFetch('https://nuxt3.buffalorugby.org/sms/send', {
+      await useFetch('/sms/send', {
         method: 'post',
         body: state,
         headers: {

@@ -38,7 +38,6 @@ async function lookupByEmail(email) {
 							account_email LIKE '${email}'`
 
   // filename messsage, variable
-  // activityLog('lookupByEmail', 'sql=', sql)
 
   const accounts = await doDBQueryBuffalorugby(sql)
   // return accounts[0].id
