@@ -12,7 +12,7 @@ https://github.com/sfxcode/nuxt3-primevue-starter
 - App server accesses data from mysql database 'buffalorugby' at Dreamhost ISP
 - App uploads and retrieves images from 'media.buffalorugby.org' at Dreamhost
 
-# Project setup and usage
+# Project setup and usage usage
 
 All supporting accounts log in credentials found at buffalorugby.org /admin supporting accounts using username 'rastridge' password ?
 
